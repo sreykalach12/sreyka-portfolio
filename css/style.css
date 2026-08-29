@@ -254,8 +254,10 @@ img { max-width: 100%; display: block; }
 .contact-card {
   border-radius: 20px; color: var(--off-white); padding: 16px;
   display: flex; flex-direction: column; justify-content: flex-end; gap: 16px;
+  background: #BED65B;
 }
 .contact-card:hover { transform: none; box-shadow: 0 10px 30px rgba(31,26,64,0.08); }
+.contact-card .photo-img { object-fit: contain; }
 .contact-scrim {
   position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(180deg, #FFFFFF00, #2A3709);
