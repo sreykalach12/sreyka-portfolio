@@ -63,9 +63,11 @@ img { max-width: 100%; display: block; }
   gap: 10px;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 6px;
   flex-shrink: 0;
-  background: transparent;
+  background: #FFFFFF;
+  border-radius: 999px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 .lang-switch-opt {
   display: flex;
