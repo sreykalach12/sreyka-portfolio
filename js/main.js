@@ -60,60 +60,60 @@
 
   var homeProjectGroups = {
     big: [
-      { name: 'Nomad Coffee App', tag: 'UI/UX Design', tagKm: 'ការរចនា UI/UX', desc: 'Mobile ordering & loyalty experience', descKm: 'បទពិសោធន៍បញ្ជាទិញ និងភាពស្មោះត្រង់លើទូរស័ព្ទ', grad: 'linear-gradient(135deg,#14324a,#2f7a9a)' },
-      { name: 'Finance Dashboard', tag: 'UI/UX Design', tagKm: 'ការរចនា UI/UX', desc: 'Personal budgeting & insights app', descKm: 'កម្មវិធីគ្រប់គ្រងថវិកា និងវិភាគទិន្នន័យផ្ទាល់ខ្លួន', grad: 'linear-gradient(135deg,#1b2a3a,#3a5a7a)' },
-      { name: 'Wellness Tracker', tag: 'UI/UX Design', tagKm: 'ការរចនា UI/UX', desc: 'Daily habits & mindfulness companion', descKm: 'កម្មវិធីដៃគូទម្លាប់ប្រចាំថ្ងៃ និងស្មារតីភ្ញាក់រឿយៗ', grad: 'linear-gradient(135deg,#0d2333,#2aaeae)' },
+      { name: 'Nomad Coffee App', tag: 'UI/UX Design', tagKm: 'ការរចនា UI/UX', desc: 'Mobile ordering & loyalty experience', descKm: 'បទពិសោធន៍បញ្ជាទិញ និងភាពស្មោះត្រង់លើទូរស័ព្ទ', grad: 'linear-gradient(135deg,#141414,#3a3a3a)' },
+      { name: 'Finance Dashboard', tag: 'UI/UX Design', tagKm: 'ការរចនា UI/UX', desc: 'Personal budgeting & insights app', descKm: 'កម្មវិធីគ្រប់គ្រងថវិកា និងវិភាគទិន្នន័យផ្ទាល់ខ្លួន', grad: 'linear-gradient(135deg,#1c1c1c,#454545)' },
+      { name: 'Wellness Tracker', tag: 'UI/UX Design', tagKm: 'ការរចនា UI/UX', desc: 'Daily habits & mindfulness companion', descKm: 'កម្មវិធីដៃគូទម្លាប់ប្រចាំថ្ងៃ និងស្មារតីភ្ញាក់រឿយៗ', grad: 'linear-gradient(135deg,#0f0f0f,#505050)' },
     ],
     small1: [
-      { name: 'Aura Skincare', tag: 'Branding', tagKm: 'ម៉ាកយីហោ', grad: 'linear-gradient(135deg,#4a2f14,#b3792f)' },
-      { name: 'Nomad Coffee Identity', tag: 'Branding', tagKm: 'ម៉ាកយីហោ', grad: 'linear-gradient(135deg,#331f0d,#a86a2a)' },
-      { name: 'Studio Mark', tag: 'Branding', tagKm: 'ម៉ាកយីហោ', grad: 'linear-gradient(135deg,#3a2a1b,#8a5a2a)' },
+      { name: 'Aura Skincare', tag: 'Branding', tagKm: 'ម៉ាកយីហោ', grad: 'linear-gradient(135deg,#242424,#5a5a5a)' },
+      { name: 'Nomad Coffee Identity', tag: 'Branding', tagKm: 'ម៉ាកយីហោ', grad: 'linear-gradient(135deg,#181818,#4d4d4d)' },
+      { name: 'Studio Mark', tag: 'Branding', tagKm: 'ម៉ាកយីហោ', grad: 'linear-gradient(135deg,#1e1e1e,#525252)' },
     ],
     small2: [
-      { name: 'Festival Poster', tag: 'Graphic Design', tagKm: 'ការរចនាក្រាហ្វិក', grad: 'linear-gradient(135deg,#3a144a,#9a2f7a)' },
-      { name: 'Neon Dreams', tag: 'Digital Art', tagKm: 'សិល្បៈឌីជីថល', grad: 'linear-gradient(135deg,#0d2a2a,#1a6a6a)' },
-      { name: 'Album Cover Set', tag: 'Graphic Design', tagKm: 'ការរចនាក្រាហ្វិក', grad: 'linear-gradient(135deg,#240d33,#8e2aae)' },
+      { name: 'Festival Poster', tag: 'Graphic Design', tagKm: 'ការរចនាក្រាហ្វិក', grad: 'linear-gradient(135deg,#202020,#484848)' },
+      { name: 'Neon Dreams', tag: 'Digital Art', tagKm: 'សិល្បៈឌីជីថល', grad: 'linear-gradient(135deg,#101010,#3f3f3f)' },
+      { name: 'Album Cover Set', tag: 'Graphic Design', tagKm: 'ការរចនាក្រាហ្វិក', grad: 'linear-gradient(135deg,#161616,#464646)' },
     ],
   };
 
   var featuredData = [
-    { tag: 'UI/UX Design', tagKm: 'ការរចនា UI/UX', name: 'Finance App Redesign', grad: 'linear-gradient(135deg,#1b2a3a,#3a5a7a)' },
-    { tag: 'Branding & Logo', tagKm: 'ម៉ាកយីហោ និងឡូហ្គោ', name: 'Nomad Coffee Identity', grad: 'linear-gradient(135deg,#3a2a1b,#8a5a2a)' },
-    { tag: 'Creative / Graphic', tagKm: 'ក្រាហ្វិកច្នៃប្រឌិត', name: 'Festival Poster Series', grad: 'linear-gradient(135deg,#2a1b3a,#7a2a5a)' },
-    { tag: 'Digital Art', tagKm: 'សិល្បៈឌីជីថល', name: 'Neon Dreams', grad: 'linear-gradient(135deg,#0d2a2a,#1a6a6a)' },
+    { tag: 'UI/UX Design', tagKm: 'ការរចនា UI/UX', name: 'Finance App Redesign', grad: 'linear-gradient(135deg,#1c1c1c,#454545)' },
+    { tag: 'Branding & Logo', tagKm: 'ម៉ាកយីហោ និងឡូហ្គោ', name: 'Nomad Coffee Identity', grad: 'linear-gradient(135deg,#181818,#4d4d4d)' },
+    { tag: 'Creative / Graphic', tagKm: 'ក្រាហ្វិកច្នៃប្រឌិត', name: 'Festival Poster Series', grad: 'linear-gradient(135deg,#202020,#484848)' },
+    { tag: 'Digital Art', tagKm: 'សិល្បៈឌីជីថល', name: 'Neon Dreams', grad: 'linear-gradient(135deg,#101010,#3f3f3f)' },
   ];
 
   var workCategories = [
     {
       key: 'uiux', title: 'UI/UX Design', titleKm: 'ការរចនា UI/UX', count: 6,
       pieces: [
-        { grad: 'linear-gradient(135deg,#1b2a3a,#3a5a7a)' },
-        { grad: 'linear-gradient(135deg,#14324a,#2f7a9a)' },
-        { grad: 'linear-gradient(135deg,#0d1f33,#4a7fae)' },
+        { grad: 'linear-gradient(135deg,#1c1c1c,#454545)' },
+        { grad: 'linear-gradient(135deg,#141414,#3a3a3a)' },
+        { grad: 'linear-gradient(135deg,#0d0d0d,#4a4a4a)' },
       ],
     },
     {
       key: 'branding', title: 'Branding & Logo', titleKm: 'ម៉ាកយីហោ និងឡូហ្គោ', count: 6,
       pieces: [
-        { grad: 'linear-gradient(135deg,#3a2a1b,#8a5a2a)' },
-        { grad: 'linear-gradient(135deg,#4a2f14,#b3792f)' },
-        { grad: 'linear-gradient(135deg,#331f0d,#a86a2a)' },
+        { grad: 'linear-gradient(135deg,#1e1e1e,#525252)' },
+        { grad: 'linear-gradient(135deg,#242424,#5a5a5a)' },
+        { grad: 'linear-gradient(135deg,#181818,#4d4d4d)' },
       ],
     },
     {
       key: 'graphic', title: 'Creative / Graphic Design', titleKm: 'ការរចនាក្រាហ្វិកច្នៃប្រឌិត', count: 5,
       pieces: [
-        { grad: 'linear-gradient(135deg,#2a1b3a,#7a2a5a)' },
-        { grad: 'linear-gradient(135deg,#3a144a,#9a2f7a)' },
-        { grad: 'linear-gradient(135deg,#240d33,#8e2aae)' },
+        { grad: 'linear-gradient(135deg,#202020,#484848)' },
+        { grad: 'linear-gradient(135deg,#161616,#464646)' },
+        { grad: 'linear-gradient(135deg,#0f0f0f,#505050)' },
       ],
     },
     {
       key: 'art', title: 'Digital Art', titleKm: 'សិល្បៈឌីជីថល', count: 5,
       pieces: [
-        { grad: 'linear-gradient(135deg,#0d2a2a,#1a6a6a)' },
-        { grad: 'linear-gradient(135deg,#14384a,#2f9a8a)' },
-        { grad: 'linear-gradient(135deg,#0d2333,#2aaeae)' },
+        { grad: 'linear-gradient(135deg,#101010,#3f3f3f)' },
+        { grad: 'linear-gradient(135deg,#1a1a1a,#4a4a4a)' },
+        { grad: 'linear-gradient(135deg,#0d0d0d,#4a4a4a)' },
       ],
     },
   ];
@@ -177,7 +177,7 @@
 
   var state = {
     view: 'home',
-    lang: (localStorage.getItem('site-lang') === 'km') ? 'km' : 'en',
+    lang: (localStorage.getItem('site-lang') === 'en') ? 'en' : 'km',
     featuredIndex: 0,
     homeProjIndices: { big: 0, small1: 0, small2: 0 },
     workIndices: { uiux: 0, branding: 0, graphic: 0, art: 0 },
@@ -351,7 +351,7 @@
     skillsWrap.innerHTML = '';
     softSkills.forEach(function (sk) {
       var pill = el('div', 'soft-skill');
-      var svg = el('span', null, '<svg viewBox="0 0 24 24" fill="none" stroke="#2a3a12" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">' + sk.icon + '</svg>');
+      var svg = el('span', null, '<svg viewBox="0 0 24 24" fill="none" stroke="#17181A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">' + sk.icon + '</svg>');
       pill.appendChild(svg);
       pill.appendChild(document.createTextNode(pick(sk, 'nameKm', 'name')));
       skillsWrap.appendChild(pill);
@@ -434,8 +434,11 @@
 
     var langSwitch = document.getElementById('lang-switch');
     langSwitch.setAttribute('data-lang', state.lang);
-    document.getElementById('lang-switch-label').textContent = state.lang === 'km' ? 'ខ្មែរ' : 'English';
-    document.getElementById('lang-switch-code').textContent = state.lang === 'km' ? 'KH' : 'EN';
+    document.getElementById('lang-opt-km').classList.toggle('is-active', state.lang === 'km');
+    document.getElementById('lang-opt-en').classList.toggle('is-active', state.lang === 'en');
+
+    var nameEl = document.getElementById('label-name');
+    if (nameEl) nameEl.textContent = state.lang === 'km' ? 'ឡាចស្រីកា' : 'Sreyka Lach';
   }
 
   function setLang(lang) {
