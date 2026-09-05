@@ -3,36 +3,89 @@
 
   var IMG = 'assets/img/';
 
+  /* ---------------- STATIC STRINGS (EN / KM) ---------------- */
+
+  var STR = {
+    en: {
+      navHome: 'Home', navAbout: 'About me', navWork: 'Work', navContact: 'Contact',
+      openToWork: 'Open to work',
+      role: 'Creative UI/UX Designer',
+      locationCity: 'Phnom Penh', locationCountry: 'Cambodia',
+      tools: 'Tools',
+      projectsCompleted: 'Projects completed',
+      bio: "I design digital products where systemic logic meets bold visual craft. Blending a background in systems, development, and multi-disciplinary creative design, I translate complex technical structures into intuitive UI/UX, distinct brand identities, and refined visual systems. For me, design isn't just interface polish; it's shaping how people experience and remember a product.",
+      personalStory: 'Personal Story',
+      education: 'Education',
+      skills: 'Skills',
+      experience: 'Experience',
+      hobbies: 'Hobbies',
+      works: 'works',
+      sayHello: 'Say hello',
+      letsTalk: "Let's talk",
+      placeholderName: 'Your name',
+      placeholderEmail: 'Your email',
+      placeholderMessage: 'Tell me about your project',
+      sendMessage: 'Send message',
+      sentTitle: 'Message sent!',
+      sentBody: "Thanks for reaching out — I'll get back to you at sreyka.lach12@gmail.com soon.",
+      close: 'Close',
+    },
+    km: {
+      navHome: 'ទំព័រដើម', navAbout: 'អំពីខ្ញុំ', navWork: 'ស្នាដៃ', navContact: 'ទំនាក់ទំនង',
+      openToWork: 'ត្រៀមរួចរាល់សម្រាប់ការងារ',
+      role: 'អ្នករចនា UI/UX ច្នៃប្រឌិត',
+      locationCity: 'ភ្នំពេញ', locationCountry: 'កម្ពុជា',
+      tools: 'ឧបករណ៍',
+      projectsCompleted: 'គម្រោងបានបញ្ចប់',
+      bio: 'ខ្ញុំរចនាផលិតផលឌីជីថល ដែលផ្សំបញ្ចូលគ្នារវាងតក្កវិជ្ជាជាប្រព័ន្ធ និងសិល្បៈរចនាដ៏ក្លាហាន។ ដោយផ្អែកលើមូលដ្ឋានចំណេះដឹងផ្នែកប្រព័ន្ធ ការអភិវឌ្ឍន៍ និងការរចនាច្នៃប្រឌិតចម្រុះមុខជំនាញ ខ្ញុំបំប្លែងរចនាសម្ព័ន្ធបច្ចេកទេសដ៏ស្មុគស្មាញ ទៅជាចំណុចប្រទាក់ UI/UX ដ៏ងាយស្រួលប្រើ អត្តសញ្ញាណម៉ាកយីហោប្លែក និងប្រព័ន្ធរូបភាពដ៏ល្អិតល្អន់។ សម្រាប់ខ្ញុំ ការរចនាមិនមែនគ្រាន់តែជាការតុបតែងចំណុចប្រទាក់ប៉ុណ្ណោះទេ វាគឺជាការកសាងបទពិសោធន៍ និងការចងចាំរបស់មនុស្សចំពោះផលិតផលនោះ។',
+      personalStory: 'រឿងរ៉ាវផ្ទាល់ខ្លួន',
+      education: 'ការសិក្សា',
+      skills: 'ជំនាញ',
+      experience: 'បទពិសោធន៍',
+      hobbies: 'ចំណូលចិត្ត',
+      works: 'ស្នាដៃ',
+      sayHello: 'ជម្រាបសួរ',
+      letsTalk: 'តោះនិយាយគ្នា',
+      placeholderName: 'ឈ្មោះរបស់អ្នក',
+      placeholderEmail: 'អ៊ីមែលរបស់អ្នក',
+      placeholderMessage: 'ប្រាប់ខ្ញុំអំពីគម្រោងរបស់អ្នក',
+      sendMessage: 'ផ្ញើសារ',
+      sentTitle: 'សារបានផ្ញើ!',
+      sentBody: 'អរគុណសម្រាប់ការទាក់ទង — ខ្ញុំនឹងឆ្លើយតបទៅកាន់អ្នកឆាប់ៗនេះតាមរយៈ sreyka.lach12@gmail.com។',
+      close: 'បិទ',
+    },
+  };
+
   /* ---------------- DATA ---------------- */
 
   var homeProjectGroups = {
     big: [
-      { name: 'Nomad Coffee App', tag: 'UI/UX Design', desc: 'Mobile ordering & loyalty experience', grad: 'linear-gradient(135deg,#14324a,#2f7a9a)' },
-      { name: 'Finance Dashboard', tag: 'UI/UX Design', desc: 'Personal budgeting & insights app', grad: 'linear-gradient(135deg,#1b2a3a,#3a5a7a)' },
-      { name: 'Wellness Tracker', tag: 'UI/UX Design', desc: 'Daily habits & mindfulness companion', grad: 'linear-gradient(135deg,#0d2333,#2aaeae)' },
+      { name: 'Nomad Coffee App', tag: 'UI/UX Design', tagKm: 'ការរចនា UI/UX', desc: 'Mobile ordering & loyalty experience', descKm: 'បទពិសោធន៍បញ្ជាទិញ និងភាពស្មោះត្រង់លើទូរស័ព្ទ', grad: 'linear-gradient(135deg,#14324a,#2f7a9a)' },
+      { name: 'Finance Dashboard', tag: 'UI/UX Design', tagKm: 'ការរចនា UI/UX', desc: 'Personal budgeting & insights app', descKm: 'កម្មវិធីគ្រប់គ្រងថវិកា និងវិភាគទិន្នន័យផ្ទាល់ខ្លួន', grad: 'linear-gradient(135deg,#1b2a3a,#3a5a7a)' },
+      { name: 'Wellness Tracker', tag: 'UI/UX Design', tagKm: 'ការរចនា UI/UX', desc: 'Daily habits & mindfulness companion', descKm: 'កម្មវិធីដៃគូទម្លាប់ប្រចាំថ្ងៃ និងស្មារតីភ្ញាក់រឿយៗ', grad: 'linear-gradient(135deg,#0d2333,#2aaeae)' },
     ],
     small1: [
-      { name: 'Aura Skincare', tag: 'Branding', grad: 'linear-gradient(135deg,#4a2f14,#b3792f)' },
-      { name: 'Nomad Coffee Identity', tag: 'Branding', grad: 'linear-gradient(135deg,#331f0d,#a86a2a)' },
-      { name: 'Studio Mark', tag: 'Branding', grad: 'linear-gradient(135deg,#3a2a1b,#8a5a2a)' },
+      { name: 'Aura Skincare', tag: 'Branding', tagKm: 'ម៉ាកយីហោ', grad: 'linear-gradient(135deg,#4a2f14,#b3792f)' },
+      { name: 'Nomad Coffee Identity', tag: 'Branding', tagKm: 'ម៉ាកយីហោ', grad: 'linear-gradient(135deg,#331f0d,#a86a2a)' },
+      { name: 'Studio Mark', tag: 'Branding', tagKm: 'ម៉ាកយីហោ', grad: 'linear-gradient(135deg,#3a2a1b,#8a5a2a)' },
     ],
     small2: [
-      { name: 'Festival Poster', tag: 'Graphic Design', grad: 'linear-gradient(135deg,#3a144a,#9a2f7a)' },
-      { name: 'Neon Dreams', tag: 'Digital Art', grad: 'linear-gradient(135deg,#0d2a2a,#1a6a6a)' },
-      { name: 'Album Cover Set', tag: 'Graphic Design', grad: 'linear-gradient(135deg,#240d33,#8e2aae)' },
+      { name: 'Festival Poster', tag: 'Graphic Design', tagKm: 'ការរចនាក្រាហ្វិក', grad: 'linear-gradient(135deg,#3a144a,#9a2f7a)' },
+      { name: 'Neon Dreams', tag: 'Digital Art', tagKm: 'សិល្បៈឌីជីថល', grad: 'linear-gradient(135deg,#0d2a2a,#1a6a6a)' },
+      { name: 'Album Cover Set', tag: 'Graphic Design', tagKm: 'ការរចនាក្រាហ្វិក', grad: 'linear-gradient(135deg,#240d33,#8e2aae)' },
     ],
   };
 
   var featuredData = [
-    { tag: 'UI/UX Design', name: 'Finance App Redesign', grad: 'linear-gradient(135deg,#1b2a3a,#3a5a7a)' },
-    { tag: 'Branding & Logo', name: 'Nomad Coffee Identity', grad: 'linear-gradient(135deg,#3a2a1b,#8a5a2a)' },
-    { tag: 'Creative / Graphic', name: 'Festival Poster Series', grad: 'linear-gradient(135deg,#2a1b3a,#7a2a5a)' },
-    { tag: 'Digital Art', name: 'Neon Dreams', grad: 'linear-gradient(135deg,#0d2a2a,#1a6a6a)' },
+    { tag: 'UI/UX Design', tagKm: 'ការរចនា UI/UX', name: 'Finance App Redesign', grad: 'linear-gradient(135deg,#1b2a3a,#3a5a7a)' },
+    { tag: 'Branding & Logo', tagKm: 'ម៉ាកយីហោ និងឡូហ្គោ', name: 'Nomad Coffee Identity', grad: 'linear-gradient(135deg,#3a2a1b,#8a5a2a)' },
+    { tag: 'Creative / Graphic', tagKm: 'ក្រាហ្វិកច្នៃប្រឌិត', name: 'Festival Poster Series', grad: 'linear-gradient(135deg,#2a1b3a,#7a2a5a)' },
+    { tag: 'Digital Art', tagKm: 'សិល្បៈឌីជីថល', name: 'Neon Dreams', grad: 'linear-gradient(135deg,#0d2a2a,#1a6a6a)' },
   ];
 
   var workCategories = [
     {
-      key: 'uiux', title: 'UI/UX Design', count: 6,
+      key: 'uiux', title: 'UI/UX Design', titleKm: 'ការរចនា UI/UX', count: 6,
       pieces: [
         { grad: 'linear-gradient(135deg,#1b2a3a,#3a5a7a)' },
         { grad: 'linear-gradient(135deg,#14324a,#2f7a9a)' },
@@ -40,7 +93,7 @@
       ],
     },
     {
-      key: 'branding', title: 'Branding & Logo', count: 6,
+      key: 'branding', title: 'Branding & Logo', titleKm: 'ម៉ាកយីហោ និងឡូហ្គោ', count: 6,
       pieces: [
         { grad: 'linear-gradient(135deg,#3a2a1b,#8a5a2a)' },
         { grad: 'linear-gradient(135deg,#4a2f14,#b3792f)' },
@@ -48,7 +101,7 @@
       ],
     },
     {
-      key: 'graphic', title: 'Creative / Graphic Design', count: 5,
+      key: 'graphic', title: 'Creative / Graphic Design', titleKm: 'ការរចនាក្រាហ្វិកច្នៃប្រឌិត', count: 5,
       pieces: [
         { grad: 'linear-gradient(135deg,#2a1b3a,#7a2a5a)' },
         { grad: 'linear-gradient(135deg,#3a144a,#9a2f7a)' },
@@ -56,7 +109,7 @@
       ],
     },
     {
-      key: 'art', title: 'Digital Art', count: 5,
+      key: 'art', title: 'Digital Art', titleKm: 'សិល្បៈឌីជីថល', count: 5,
       pieces: [
         { grad: 'linear-gradient(135deg,#0d2a2a,#1a6a6a)' },
         { grad: 'linear-gradient(135deg,#14384a,#2f9a8a)' },
@@ -77,34 +130,40 @@
     sketch: '<path d="M4 20l1-4 12-12 3 3-12 12-4 1Z"/><path d="M14 5l3 3"/>',
   };
   var softSkills = [
-    { name: 'Attention to Detail', icon: skillIconSvgs.attention },
-    { name: 'Problem Solving', icon: skillIconSvgs.problem },
-    { name: 'Adaptability', icon: skillIconSvgs.adapt },
-    { name: 'Creativity', icon: skillIconSvgs.creativity },
-    { name: 'Sketching', icon: skillIconSvgs.sketch },
+    { name: 'Attention to Detail', nameKm: 'ការយកចិត្តទុកដាក់ចំពោះព័ត៌មានលម្អិត', icon: skillIconSvgs.attention },
+    { name: 'Problem Solving', nameKm: 'ការដោះស្រាយបញ្ហា', icon: skillIconSvgs.problem },
+    { name: 'Adaptability', nameKm: 'សមត្ថភាពសម្របខ្លួន', icon: skillIconSvgs.adapt },
+    { name: 'Creativity', nameKm: 'ភាពច្នៃប្រឌិត', icon: skillIconSvgs.creativity },
+    { name: 'Sketching', nameKm: 'គូរគំនូរព្រាង', icon: skillIconSvgs.sketch },
   ];
 
   var personalStory = [
-    { title: 'The Spark', text: "Before code, there was the pencil. I grew up bound to sketchbooks, digital art, and the quiet thrill of creating something from nothing. When it came time to choose a path, logic won, and I chose technology, but the creative drive never left. It was simply waiting." },
-    { title: 'The Shift', text: "Technology was a bet on the future. I enrolled in Management Information Systems, driven by a desire to build things that mattered. At the time, I didn't realize it was only the foundation." },
-    { title: 'The Friction', text: "Internships and front-end roles brought an unexpected letdown. The work felt less like building and more like assembling: patching together CMS platforms, off-the-shelf templates, and minor customizations. Every project felt pre-boxed. My constant thought: If this were mine, I'd rebuild it from scratch." },
-    { title: 'The Craft', text: "That frustration became my leverage. I dove into UI/UX design, pairing rigorous self-study with formal training and high-growth roles. Today, I operate as a creative UI/UX designer, seamlessly bridging product design, brand identity, digital art, and graphic systems." },
+    { title: 'The Spark', titleKm: 'ចំណុចចាប់ផ្តើម', text: "Before code, there was the pencil. I grew up bound to sketchbooks, digital art, and the quiet thrill of creating something from nothing. When it came time to choose a path, logic won, and I chose technology, but the creative drive never left. It was simply waiting.", textKm: 'មុននឹងមានកូដ មានខ្មៅដៃជាមុនសិន។ ខ្ញុំធំឡើងជាប់នឹងសៀវភៅគូរគំនូរ សិល្បៈឌីជីថល និងអារម្មណ៍រំភើបស្ងាត់ស្ងៀមនៃការបង្កើតអ្វីមួយពីភាពទទេ។ នៅពេលដល់ពេលត្រូវជ្រើសរើសផ្លូវមួយ តក្កវិជ្ជាឈ្នះ ហើយខ្ញុំបានជ្រើសរើសបច្ចេកវិទ្យា ប៉ុន្តែកម្លាំងចិត្តច្នៃប្រឌិតមិនដែលបាត់ទៅណាឡើយ។ វាគ្រាន់តែកំពុងរង់ចាំប៉ុណ្ណោះ។' },
+    { title: 'The Shift', titleKm: 'ការផ្លាស់ប្តូរ', text: "Technology was a bet on the future. I enrolled in Management Information Systems, driven by a desire to build things that mattered. At the time, I didn't realize it was only the foundation.", textKm: 'បច្ចេកវិទ្យាគឺជាការភ្នាល់មួយលើអនាគត។ ខ្ញុំបានចូលរៀនផ្នែកប្រព័ន្ធព័ត៌មានវិទ្យាគ្រប់គ្រង ព្រោះមានបំណងចង់កសាងអ្វីៗដែលមានតម្លៃ។ ពេលនោះ ខ្ញុំមិនបានដឹងទេថា វាគ្រាន់តែជាគ្រឹះមួយប៉ុណ្ណោះ។' },
+    { title: 'The Friction', titleKm: 'ឧបសគ្គ', text: "Internships and front-end roles brought an unexpected letdown. The work felt less like building and more like assembling: patching together CMS platforms, off-the-shelf templates, and minor customizations. Every project felt pre-boxed. My constant thought: If this were mine, I'd rebuild it from scratch.", textKm: 'កម្មសិក្សា និងតួនាទីជា Front-end បាននាំមកនូវការខកចិត្តដោយមិននឹកស្មានដល់។ ការងារមានអារម្មណ៍ថាមិនមែនជាការកសាងទេ គឺដូចជាការផ្គុំបន្ថែម៖ ផ្គុំវេទិកា CMS គំរូដែលមានស្រាប់ និងការកែសម្រួលបន្តិចបន្តួច។ គម្រោងនីមួយៗមានអារម្មណ៍ថាត្រូវបានកំណត់ស្រាប់រួចហើយ។ គំនិតដដែលៗរបស់ខ្ញុំគឺ៖ បើវាជារបស់ខ្ញុំ ខ្ញុំនឹងកសាងវាឡើងវិញពីដំបូង។' },
+    { title: 'The Craft', titleKm: 'សិប្បកម្ម', text: "That frustration became my leverage. I dove into UI/UX design, pairing rigorous self-study with formal training and high-growth roles. Today, I operate as a creative UI/UX designer, seamlessly bridging product design, brand identity, digital art, and graphic systems.", textKm: 'ភាពខកចិត្តនោះបានក្លាយជាកម្លាំងចលករបស់ខ្ញុំ។ ខ្ញុំបានចាប់ផ្តើមស្វែងយល់ស៊ីជម្រៅផ្នែករចនា UI/UX ដោយផ្សំការសិក្សាដោយខ្លួនឯងយ៉ាងម៉ត់ចត់ជាមួយនឹងការបណ្តុះបណ្តាលជាផ្លូវការ និងតួនាទីការងារកំណើនខ្ពស់។ សព្វថ្ងៃនេះ ខ្ញុំបម្រើការជាអ្នករចនា UI/UX ច្នៃប្រឌិត ដោយភ្ជាប់គ្នារវាងការរចនាផលិតផល អត្តសញ្ញាណម៉ាកយីហោ សិល្បៈឌីជីថល និងប្រព័ន្ធក្រាហ្វិកយ៉ាងរលូន។' },
   ];
 
   var education = [
-    { school: 'SETEC Institute', line: "Bachelor's degree, Management Information Systems", years: 'Oct 2019 – Present' },
-    { school: 'Australian Centre for Education (ACE)', line: 'English', years: '2016 – Present' },
-    { school: 'Future.bit Academy', line: 'UI/UX Design Course, Design and Visual Communications', years: 'Apr 2024 – Jun 2024' },
-    { school: 'American University of Phnom Penh', line: 'Soft Skill Program', years: '2017' },
-    { school: "Toutes à l'école", line: 'Khmer, English', years: '2007 – 2019' },
+    { school: 'SETEC Institute', line: "Bachelor's degree, Management Information Systems", lineKm: 'សញ្ញាបត្របរិញ្ញាបត្រ ផ្នែកប្រព័ន្ធព័ត៌មានវិទ្យាគ្រប់គ្រង', years: 'Oct 2019 – Present' },
+    { school: 'Australian Centre for Education (ACE)', line: 'English', lineKm: 'ភាសាអង់គ្លេស', years: '2016 – Present' },
+    { school: 'Future.bit Academy', line: 'UI/UX Design Course, Design and Visual Communications', lineKm: 'វគ្គសិក្សារចនា UI/UX ការរចនា និងទំនាក់ទំនងដោយរូបភាព', years: 'Apr 2024 – Jun 2024' },
+    { school: 'American University of Phnom Penh', line: 'Soft Skill Program', lineKm: 'កម្មវិធីជំនាញទន់', years: '2017' },
+    { school: "Toutes à l'école", line: 'Khmer, English', lineKm: 'ភាសាខ្មែរ ភាសាអង់គ្លេស', years: '2007 – 2019' },
   ];
 
   var experience = [
-    { role: 'Creative UI/UX Designer', place: 'Thortok', url: 'https://thortok.com/', years: 'Mar 2025 – Present' },
-    { role: 'Visual | Web | Branding Designer', place: 'Vector Studio · Freelance', years: 'Aug 2024 – Present' },
-    { role: 'Web Designer | UX/UI', place: 'Apsara Media Services · Full-time', years: 'Feb 2024 – Mar 2025' },
-    { role: 'Web designer | Digital Marketing Executive', place: 'Nafih Digital Marketing Agent Co., Ltd · Part-time', years: 'Nov 2021 – Jan 2024' },
-    { role: 'Home Monitor', place: "Toutes à l'école · Part-time", years: 'Nov 2020 – Oct 2021' },
+    { role: 'Creative UI/UX Designer', roleKm: 'អ្នករចនា UI/UX ច្នៃប្រឌិត', place: 'Thortok', url: 'https://thortok.com/', years: 'Mar 2025 – Present' },
+    { role: 'Visual | Web | Branding Designer', roleKm: 'អ្នករចនាចក្ខុវិស័យ | គេហទំព័រ | ម៉ាកយីហោ', place: 'Vector Studio · Freelance', years: 'Aug 2024 – Present' },
+    { role: 'Web Designer | UX/UI', roleKm: 'អ្នករចនាគេហទំព័រ | UX/UI', place: 'Apsara Media Services · Full-time', years: 'Feb 2024 – Mar 2025' },
+    { role: 'Web designer | Digital Marketing Executive', roleKm: 'អ្នករចនាគេហទំព័រ | ថ្នាក់គ្រប់គ្រងទីផ្សារឌីជីថល', place: 'Nafih Digital Marketing Agent Co., Ltd · Part-time', years: 'Nov 2021 – Jan 2024' },
+    { role: 'Home Monitor', roleKm: 'អ្នកត្រួតពិនិត្យផ្ទះ', place: "Toutes à l'école · Part-time", years: 'Nov 2020 – Oct 2021' },
+  ];
+
+  var hobbies = [
+    { name: 'Watch anime and manga', nameKm: 'មើលអានីម៉េ និងម៉ង្គា' },
+    { name: 'Technology researching', nameKm: 'ស្រាវជ្រាវបច្ចេកវិទ្យា' },
+    { name: 'Read design/creative books', nameKm: 'អានសៀវភៅរចនា/ច្នៃប្រឌិត' },
   ];
 
   var contactSocials = [
@@ -118,11 +177,15 @@
 
   var state = {
     view: 'home',
+    lang: (localStorage.getItem('site-lang') === 'km') ? 'km' : 'en',
     featuredIndex: 0,
     homeProjIndices: { big: 0, small1: 0, small2: 0 },
     workIndices: { uiux: 0, branding: 0, graphic: 0, art: 0 },
     contactFormOpen: false,
   };
+
+  function t(key) { return STR[state.lang][key]; }
+  function pick(item, kmField, enField) { return state.lang === 'km' ? (item[kmField] || item[enField]) : item[enField]; }
 
   /* ---------------- HELPERS ---------------- */
 
@@ -151,7 +214,7 @@
   function renderFeatured() {
     var f = featuredData[state.featuredIndex];
     document.getElementById('featured-bg').style.background = f.grad;
-    document.getElementById('featured-tag').textContent = f.tag;
+    document.getElementById('featured-tag').textContent = pick(f, 'tagKm', 'tag');
     document.getElementById('featured-name').textContent = f.name;
     renderDots(document.getElementById('featured-dots'), featuredData.length, state.featuredIndex, function (i) {
       state.featuredIndex = i;
@@ -166,12 +229,12 @@
     var bg = document.getElementById(prefix + '-bg');
     bg.style.background = item.grad;
     if (isBig) {
-      document.getElementById(prefix + '-tag').textContent = item.tag;
+      document.getElementById(prefix + '-tag').textContent = pick(item, 'tagKm', 'tag');
       document.getElementById(prefix + '-name').textContent = item.name;
-      document.getElementById(prefix + '-desc').textContent = item.desc || '';
+      document.getElementById(prefix + '-desc').textContent = pick(item, 'descKm', 'desc') || '';
     } else {
       document.getElementById(prefix + '-name').textContent = item.name;
-      document.getElementById(prefix + '-tag').textContent = item.tag;
+      document.getElementById(prefix + '-tag').textContent = pick(item, 'tagKm', 'tag');
     }
     renderDots(document.getElementById(prefix + '-dots'), items.length, idx, function (i) {
       state.homeProjIndices[key] = i;
@@ -182,8 +245,8 @@
   function renderHomeTools() {
     var row = document.getElementById('home-tools');
     row.innerHTML = '';
-    tools.forEach(function (t) {
-      row.appendChild(el('div', 'chip', t));
+    tools.forEach(function (tName) {
+      row.appendChild(el('div', 'chip', tName));
     });
   }
 
@@ -211,10 +274,11 @@
 
       card.appendChild(el('div', 'photo-scrim photo-scrim--soft'));
 
+      var title = pick(c, 'titleKm', 'title');
       var content = el('div', 'photo-content');
       var top = el('div');
-      top.appendChild(el('div', 'proj-title', c.title));
-      top.appendChild(el('div', 'proj-desc', c.title + ' — ' + c.count + ' works'));
+      top.appendChild(el('div', 'proj-title', title));
+      top.appendChild(el('div', 'proj-desc', title + ' — ' + c.count + ' ' + t('works')));
       content.appendChild(top);
 
       var dotsWrap = el('div', 'dots');
@@ -249,21 +313,21 @@
   function renderAbout() {
     renderTimeline(document.getElementById('personal-story'), personalStory, function (ps) {
       var body = el('div', 'timeline-body');
-      body.appendChild(el('div', 'timeline-title', ps.title));
-      body.appendChild(el('div', 'timeline-text', ps.text));
+      body.appendChild(el('div', 'timeline-title', pick(ps, 'titleKm', 'title')));
+      body.appendChild(el('div', 'timeline-text', pick(ps, 'textKm', 'text')));
       return body;
     });
 
     renderTimeline(document.getElementById('education'), education, function (e) {
       var body = el('div', 'timeline-body');
       body.appendChild(el('div', 'timeline-title', e.school));
-      body.appendChild(el('div', 'timeline-sub', e.line + ' · ' + e.years));
+      body.appendChild(el('div', 'timeline-sub', pick(e, 'lineKm', 'line') + ' · ' + e.years));
       return body;
     });
 
     renderTimeline(document.getElementById('experience'), experience, function (ex) {
       var body = el('div', 'timeline-body');
-      body.appendChild(el('div', 'timeline-title', ex.role));
+      body.appendChild(el('div', 'timeline-title', pick(ex, 'roleKm', 'role')));
       var sub = el('div', 'timeline-sub');
       if (ex.url) {
         var a = el('a', null, ex.place);
@@ -281,7 +345,7 @@
 
     var toolsRow = document.getElementById('about-tools');
     toolsRow.innerHTML = '';
-    tools.forEach(function (t) { toolsRow.appendChild(el('div', 'chip', t)); });
+    tools.forEach(function (tName) { toolsRow.appendChild(el('div', 'chip', tName)); });
 
     var skillsWrap = document.getElementById('soft-skills');
     skillsWrap.innerHTML = '';
@@ -289,8 +353,14 @@
       var pill = el('div', 'soft-skill');
       var svg = el('span', null, '<svg viewBox="0 0 24 24" fill="none" stroke="#2a3a12" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">' + sk.icon + '</svg>');
       pill.appendChild(svg);
-      pill.appendChild(document.createTextNode(sk.name));
+      pill.appendChild(document.createTextNode(pick(sk, 'nameKm', 'name')));
       skillsWrap.appendChild(pill);
+    });
+
+    var hobbiesRow = document.getElementById('hobbies-row');
+    hobbiesRow.innerHTML = '';
+    hobbies.forEach(function (h) {
+      hobbiesRow.appendChild(el('div', 'chip', pick(h, 'nameKm', 'name')));
     });
   }
 
@@ -325,10 +395,57 @@
     locBadge.appendChild(locImg);
     loc.appendChild(locBadge);
     var locText = el('div');
-    locText.appendChild(el('div', 'social-name', 'Phnom Penh'));
-    locText.appendChild(el('div', 'social-handle', 'Cambodia'));
+    locText.appendChild(el('div', 'social-name', t('locationCity')));
+    locText.appendChild(el('div', 'social-handle', t('locationCountry')));
     loc.appendChild(locText);
     row.appendChild(loc);
+  }
+
+  /* ---------------- STATIC LABELS / LANGUAGE ---------------- */
+
+  function applyStaticLabels() {
+    document.documentElement.setAttribute('lang', state.lang);
+
+    document.querySelector('.nav-btn[data-view="home"]').textContent = t('navHome');
+    document.querySelector('.nav-btn[data-view="about"]').textContent = t('navAbout');
+    document.querySelector('.nav-btn[data-view="work"]').textContent = t('navWork');
+    document.querySelector('.nav-btn[data-view="contact"]').textContent = t('navContact');
+
+    document.getElementById('label-open-to-work').textContent = t('openToWork');
+    document.getElementById('label-role').textContent = t('role');
+    document.getElementById('label-home-location').textContent = t('locationCity') + ', ' + t('locationCountry');
+    document.getElementById('label-tools-home').textContent = t('tools');
+    document.getElementById('label-projects-completed').textContent = t('projectsCompleted');
+    document.getElementById('label-bio').textContent = t('bio');
+
+    document.getElementById('label-personal-story').textContent = t('personalStory');
+    document.getElementById('label-education').textContent = t('education');
+    document.getElementById('label-skills').textContent = t('skills');
+    document.getElementById('label-experience').textContent = t('experience');
+    document.getElementById('label-hobbies').textContent = t('hobbies');
+
+    document.getElementById('label-say-hello').textContent = t('sayHello');
+    document.getElementById('label-lets-talk').textContent = t('letsTalk');
+    document.getElementById('input-name').placeholder = t('placeholderName');
+    document.getElementById('input-email').placeholder = t('placeholderEmail');
+    document.getElementById('input-message').placeholder = t('placeholderMessage');
+    var sendBtn = document.getElementById('send-btn');
+    if (sendBtn) sendBtn.textContent = t('sendMessage');
+
+    var langSwitch = document.getElementById('lang-switch');
+    langSwitch.setAttribute('data-lang', state.lang);
+    document.getElementById('lang-switch-label').textContent = state.lang === 'km' ? 'ខ្មែរ' : 'English';
+    document.getElementById('lang-switch-code').textContent = state.lang === 'km' ? 'KH' : 'EN';
+  }
+
+  function setLang(lang) {
+    state.lang = lang;
+    localStorage.setItem('site-lang', lang);
+    applyStaticLabels();
+    renderHome();
+    renderWork();
+    renderAbout();
+    renderContact();
   }
 
   /* ---------------- VIEW SWITCHING ---------------- */
@@ -374,6 +491,10 @@
       });
     });
 
+    document.getElementById('lang-switch').addEventListener('click', function () {
+      setLang(state.lang === 'km' ? 'en' : 'km');
+    });
+
     document.getElementById('say-hello-btn').addEventListener('click', openContactForm);
     document.getElementById('close-form-btn').addEventListener('click', closeContactForm);
     document.getElementById('contact-form-overlay').addEventListener('click', closeContactForm);
@@ -383,10 +504,10 @@
       var form = evt.target;
       var inner = document.querySelector('.contact-form-inner');
       inner.innerHTML = '';
-      var title = el('div', 'form-title', "Message sent!");
+      var title = el('div', 'form-title', t('sentTitle'));
       inner.appendChild(title);
-      inner.appendChild(el('div', 'form-sent-msg', "Thanks for reaching out — I'll get back to you at sreyka.lach12@gmail.com soon."));
-      var closeAgain = el('button', 'send-btn', 'Close');
+      inner.appendChild(el('div', 'form-sent-msg', t('sentBody')));
+      var closeAgain = el('button', 'send-btn', t('close'));
       closeAgain.type = 'button';
       closeAgain.addEventListener('click', closeContactForm);
       inner.appendChild(closeAgain);
@@ -394,6 +515,7 @@
     });
 
     setView('home');
+    applyStaticLabels();
     renderHome();
     renderWork();
     renderAbout();
