@@ -93,6 +93,7 @@ img { max-width: 100%; display: block; }
 
 #nav-pill {
   display: inline-flex;
+  flex: 1;
   gap: 6px;
   background: #FFFFFF;
   border: none;
