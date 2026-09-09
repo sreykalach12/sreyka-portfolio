@@ -388,8 +388,8 @@ img { max-width: 100%; display: block; }
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   overflow: hidden;
 }
-.social-icon-badge img { width: 20px; height: 20px; object-fit: contain; filter: grayscale(100%); }
-.location-pill .social-icon-badge img { width: 26px; height: 26px; }
+.social-icon-badge img { width: 22px; height: 22px; object-fit: contain; filter: grayscale(100%); }
+.location-pill .social-icon-badge img { width: 24px; height: 24px; }
 .social-name { font-size: 11px; font-weight: 700; color: #F5F5F5; }
 .social-handle { font-family: monospace; font-size: 9px; color: rgba(245,245,245,0.7); letter-spacing: -0.01em; }
 

@@ -178,10 +178,10 @@
   ];
 
   var contactSocials = [
-    { name: 'Behance', icon: IMG + 'icon-behance.png', handle: 'behance.net/sreyka', url: 'https://behance.net/sreyka-lach' },
-    { name: 'LinkedIn', icon: IMG + 'icon-linkedin.png', handle: 'linkedin.com/in/sreykalach', url: 'https://www.linkedin.com/in/sreykalach?utm_source=share_via&utm_content=profile&utm_medium=member_ios' },
-    { name: 'Instagram', icon: IMG + 'icon-instagram.png', handle: '@hi_iam_meee', url: 'https://www.instagram.com/hi_iam_meee?igsh=MWR1M3RmcTQ3ejlpdA%3D%3D&utm_source=qr' },
-    { name: 'Telegram', icon: IMG + 'icon-telegram.png', handle: 't.me/sreykalach', url: 'https://t.me/sreykalach' },
+    { name: 'Behance', icon: IMG + 'icon-behance-v2.png', handle: 'behance.net/sreyka', url: 'https://behance.net/sreyka-lach' },
+    { name: 'LinkedIn', icon: IMG + 'icon-linkedin-v2.png', handle: 'linkedin.com/in/sreykalach', url: 'https://www.linkedin.com/in/sreykalach?utm_source=share_via&utm_content=profile&utm_medium=member_ios' },
+    { name: 'Instagram', icon: IMG + 'icon-instagram-v2.png', handle: '@hi_iam_meee', url: 'https://www.instagram.com/hi_iam_meee?igsh=MWR1M3RmcTQ3ejlpdA%3D%3D&utm_source=qr' },
+    { name: 'Telegram', icon: IMG + 'icon-telegram-v2.png', handle: 't.me/sreykalach', url: 'https://t.me/sreykalach' },
   ];
 
   /* ---------------- STATE ---------------- */
@@ -406,7 +406,7 @@
     var loc = el('div', 'location-pill');
     var locBadge = el('div', 'social-icon-badge');
     var locImg = document.createElement('img');
-    locImg.src = IMG + 'icon-location.png';
+    locImg.src = IMG + 'icon-location-v2.png';
     locImg.alt = 'Location icon';
     locBadge.appendChild(locImg);
     loc.appendChild(locBadge);
