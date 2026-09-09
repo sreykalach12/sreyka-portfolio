@@ -148,7 +148,7 @@ img { max-width: 100%; display: block; }
 
 .card-white {
   border-radius: 0;
-  padding: 10px 12px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -182,7 +182,7 @@ img { max-width: 100%; display: block; }
 .photo-content {
   position: relative; z-index: 1; height: 100%;
   display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 16px; gap: 4px; color: var(--off-white);
+  padding: 24px; gap: 4px; color: var(--off-white);
 }
 .photo-content--between { justify-content: space-between; }
 
@@ -324,7 +324,7 @@ img { max-width: 100%; display: block; }
 /* ---------- CONTACT ---------- */
 .contact-grid { grid-template-columns: 1fr; grid-template-rows: 1fr; }
 .contact-card {
-  border-radius: 20px; color: var(--off-white); padding: 16px;
+  border-radius: 20px; color: var(--off-white); padding: 24px;
   display: flex; flex-direction: column; justify-content: flex-end; gap: 16px;
   background: #F5F5F5;
 }
