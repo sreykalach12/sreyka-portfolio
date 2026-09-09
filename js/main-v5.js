@@ -479,6 +479,20 @@
     document.querySelectorAll('.nav-btn').forEach(function (b) {
       b.classList.toggle('is-active', b.getAttribute('data-view') === view);
     });
+    closeMobileNav();
+  }
+
+  /* ---------------- MOBILE NAV ---------------- */
+
+  function closeMobileNav() {
+    document.getElementById('nav-pill').classList.remove('is-open');
+    document.getElementById('nav-hamburger').setAttribute('aria-expanded', 'false');
+  }
+
+  function toggleMobileNav() {
+    var pill = document.getElementById('nav-pill');
+    var isOpen = pill.classList.toggle('is-open');
+    document.getElementById('nav-hamburger').setAttribute('aria-expanded', String(isOpen));
   }
 
   /* ---------------- CONTACT FORM ---------------- */
@@ -508,6 +522,8 @@
         setView(btn.getAttribute('data-view'));
       });
     });
+
+    document.getElementById('nav-hamburger').addEventListener('click', toggleMobileNav);
 
     document.getElementById('lang-switch').addEventListener('click', function () {
       setLang(state.lang === 'km' ? 'en' : 'km');
