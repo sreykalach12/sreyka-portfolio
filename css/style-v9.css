@@ -280,8 +280,7 @@ img { max-width: 100%; display: block; }
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr 1fr minmax(300px, auto);
 }
-.about-portrait { position: relative; background: #17181A; }
-.about-portrait .photo-img { object-fit: contain; }
+.about-portrait { position: relative; }
 .about-col { overflow: hidden; }
 
 .timeline { display: flex; flex-direction: column; gap: 2px; }
@@ -480,26 +479,20 @@ img { max-width: 100%; display: block; }
   #nav-pill.is-open { display: flex !important; border-radius: 18px !important; }
   #nav-pill .nav-btn { text-align: left; padding: 10px 14px !important; border-radius: 12px !important; }
 
-  /* 4: cards swap into a single swipeable row instead of stacking in 2 lines */
+  /* 4: one card per row, stacked vertically (no side-by-side pairs, no horizontal swipe) */
   #home-grid, .work-grid, .about-grid {
-    display: flex !important;
-    grid-template-columns: none !important;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    -webkit-overflow-scrolling: touch;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-auto-flow: row !important;
+    grid-auto-rows: minmax(280px,auto) !important;
     height: auto !important;
     gap: 12px !important;
-    padding-bottom: 6px;
   }
   #home-grid > div, .work-grid > div, .about-grid > div {
-    flex: 0 0 82vw !important;
-    scroll-snap-align: center;
-    min-height: 380px !important;
-    max-height: 480px !important;
-    border-radius: 20px !important;
-    grid-column: auto !important;
+    grid-column: 1/2 !important;
     grid-row: auto !important;
+    min-height: 300px !important;
+    border-radius: 20px !important;
   }
 
   /* 3: cards hug at 16px on mobile */
@@ -519,16 +512,23 @@ img { max-width: 100%; display: block; }
 
   #page-root { padding: 14px 14px 20px !important; gap: 10px !important; }
 
-  /* contact: icon-only social pills on mobile */
+  /* contact: icon-only social pills on mobile, no glass background */
   .social-pill .social-name, .social-pill .social-handle,
   .location-pill .social-name, .location-pill .social-handle { display: none !important; }
-  .social-pill, .location-pill { padding: 8px !important; }
+  .social-pill, .location-pill {
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
   .social-row { justify-content: center !important; }
 }
 
 @media (max-width: 480px) {
   .nav-btn { padding: 6px 12px !important; font-size: 12px !important; }
-  #home-grid > div, .work-grid > div, .about-grid > div { flex-basis: 88vw !important; min-height: 340px !important; }
+  #home-grid > div, .work-grid > div, .about-grid > div { min-height: 260px !important; }
   .display-name { font-size: 21px !important; }
   .stat-card .stat-num { font-size: 38px !important; }
 }
