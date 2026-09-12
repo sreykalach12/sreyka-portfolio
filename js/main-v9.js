@@ -32,12 +32,12 @@
     },
     km: {
       navHome: 'ទំព័រដើម', navAbout: 'អំពីខ្ញុំ', navWork: 'ស្នាដៃ', navContact: 'ទំនាក់ទំនង',
-      openToWork: 'ត្រៀមរួចរាល់សម្រាប់ការងារ',
+      openToWork: 'ទទួលធ្វើការរចនាផ្សេងៗ',
       role: 'អ្នករចនា UI/UX ច្នៃប្រឌិត',
       locationCity: 'រាជធានីភ្នំពេញ', locationCountry: 'ប្រទេសកម្ពុជា',
       tools: 'ឧបករណ៍',
       projectsCompleted: 'គម្រោងបានបញ្ចប់',
-      bio: 'ខ្ញុំរចនាផលិតផលឌីជីថល ដែលផ្សំបញ្ចូលគ្នារវាងតក្កវិជ្ជាជាប្រព័ន្ធ និងសិល្បៈរចនាដ៏ក្លាហាន។ ដោយផ្អែកលើមូលដ្ឋានចំណេះដឹងផ្នែកប្រព័ន្ធ ការអភិវឌ្ឍន៍ និងការរចនាច្នៃប្រឌិតចម្រុះមុខជំនាញ ខ្ញុំបំប្លែងរចនាសម្ព័ន្ធបច្ចេកទេសដ៏ស្មុគស្មាញ ទៅជាចំណុចប្រទាក់ UI/UX ដ៏ងាយស្រួលប្រើ អត្តសញ្ញាណម៉ាកយីហោប្លែក និងប្រព័ន្ធរូបភាពដ៏ល្អិតល្អន់។ សម្រាប់ខ្ញុំ ការរចនាមិនមែនគ្រាន់តែជាការតុបតែងចំណុចប្រទាក់ប៉ុណ្ណោះទេ វាគឺជាការកសាងបទពិសោធន៍ និងការចងចាំរបស់មនុស្សចំពោះផលិតផលនោះ។',
+      bio: 'ខ្ញុំច្នៃប្រឌិតផលិតផលឌីជីថលដោយផ្អែកលើការរួមបញ្ចូលគ្នារវាងតក្កវិជ្ជានិងសិល្បៈច្នៃប្រឌិត។ ដោយមានមូលដ្ឋានគ្រឹះផ្នែកការអភិវឌ្ឍប្រព័ន្ធ និងការច្នៃប្រឌិតចម្រុះជំនាញ ខ្ញុំបម្លែងរចនាសម្ព័ន្ធបច្ចេកទេសដ៏ស្មុគស្មាញទៅជា UI/UX ដែលងាយស្រួលយល់ អត្តសញ្ញាណម៉ាកសញ្ញាច្បាស់លាស់ និងប្រព័ន្ធរូបភាពប្រកបដោយប្រណីតភាព។ សម្រាប់ខ្ញុំ ការច្នៃប្រឌិតមិនមែនត្រឹមតែជាការតុបតែងផ្ទៃមុខកម្មវិធីនោះទេ ប៉ុន្តែវាជាការបង្កើតបទពិសោធន៍ និងការចងចាំរបស់អ្នកប្រើប្រាស់ចំពោះផលិតផល។',
       personalStory: 'រឿងរ៉ាវផ្ទាល់ខ្លួន',
       education: 'ការសិក្សា',
       skills: 'ជំនាញ',
@@ -141,18 +141,18 @@
     sketch: '<path d="M4 20l1-4 12-12 3 3-12 12-4 1Z"/><path d="M14 5l3 3"/>',
   };
   var softSkills = [
-    { name: 'Attention to Detail', nameKm: 'ការយកចិត្តទុកដាក់ចំពោះព័ត៌មានលម្អិត', icon: skillIconSvgs.attention },
-    { name: 'Problem Solving', nameKm: 'ការដោះស្រាយបញ្ហា', icon: skillIconSvgs.problem },
-    { name: 'Adaptability', nameKm: 'សមត្ថភាពសម្របខ្លួន', icon: skillIconSvgs.adapt },
-    { name: 'Creativity', nameKm: 'ភាពច្នៃប្រឌិត', icon: skillIconSvgs.creativity },
-    { name: 'Sketching', nameKm: 'គូរគំនូរព្រាង', icon: skillIconSvgs.sketch },
+    { name: 'Attention to Detail', nameKm: 'ផ្ចិតផ្ចង់រាល់ចំណុចតូចៗ', icon: skillIconSvgs.attention },
+    { name: 'Problem Solving', nameKm: 'ចេះដោះស្រាយបញ្ហា / រកដំណោះស្រាយ', icon: skillIconSvgs.problem },
+    { name: 'Adaptability', nameKm: 'សម្របខ្លួនលឿន / បត់បែនបាន', icon: skillIconSvgs.adapt },
+    { name: 'Creativity', nameKm: 'មានគំនិតច្នៃប្រឌិត', icon: skillIconSvgs.creativity },
+    { name: 'Sketching', nameKm: 'គូររូបព្រាង', icon: skillIconSvgs.sketch },
   ];
 
   var personalStory = [
-    { title: 'The Spark', titleKm: 'ចំណុចចាប់ផ្តើម', text: "Before code, there was the pencil. I grew up bound to sketchbooks, digital art, and the quiet thrill of creating something from nothing. When it came time to choose a path, logic won, and I chose technology, but the creative drive never left. It was simply waiting.", textKm: 'មុននឹងមានកូដ មានខ្មៅដៃជាមុនសិន។ ខ្ញុំធំឡើងជាប់នឹងសៀវភៅគូរគំនូរ សិល្បៈឌីជីថល និងអារម្មណ៍រំភើបស្ងាត់ស្ងៀមនៃការបង្កើតអ្វីមួយពីភាពទទេ។ នៅពេលដល់ពេលត្រូវជ្រើសរើសផ្លូវមួយ តក្កវិជ្ជាឈ្នះ ហើយខ្ញុំបានជ្រើសរើសបច្ចេកវិទ្យា ប៉ុន្តែកម្លាំងចិត្តច្នៃប្រឌិតមិនដែលបាត់ទៅណាឡើយ។ វាគ្រាន់តែកំពុងរង់ចាំប៉ុណ្ណោះ។' },
-    { title: 'The Shift', titleKm: 'ការផ្លាស់ប្តូរ', text: "Technology was a bet on the future. I enrolled in Management Information Systems, driven by a desire to build things that mattered. At the time, I didn't realize it was only the foundation.", textKm: 'បច្ចេកវិទ្យាគឺជាការភ្នាល់មួយលើអនាគត។ ខ្ញុំបានចូលរៀនផ្នែកប្រព័ន្ធព័ត៌មានវិទ្យាគ្រប់គ្រង ព្រោះមានបំណងចង់កសាងអ្វីៗដែលមានតម្លៃ។ ពេលនោះ ខ្ញុំមិនបានដឹងទេថា វាគ្រាន់តែជាគ្រឹះមួយប៉ុណ្ណោះ។' },
-    { title: 'The Friction', titleKm: 'ឧបសគ្គ', text: "Internships and front-end roles brought an unexpected letdown. The work felt less like building and more like assembling: patching together CMS platforms, off-the-shelf templates, and minor customizations. Every project felt pre-boxed. My constant thought: If this were mine, I'd rebuild it from scratch.", textKm: 'កម្មសិក្សា និងតួនាទីជា Front-end បាននាំមកនូវការខកចិត្តដោយមិននឹកស្មានដល់។ ការងារមានអារម្មណ៍ថាមិនមែនជាការកសាងទេ គឺដូចជាការផ្គុំបន្ថែម៖ ផ្គុំវេទិកា CMS គំរូដែលមានស្រាប់ និងការកែសម្រួលបន្តិចបន្តួច។ គម្រោងនីមួយៗមានអារម្មណ៍ថាត្រូវបានកំណត់ស្រាប់រួចហើយ។ គំនិតដដែលៗរបស់ខ្ញុំគឺ៖ បើវាជារបស់ខ្ញុំ ខ្ញុំនឹងកសាងវាឡើងវិញពីដំបូង។' },
-    { title: 'The Craft', titleKm: 'សិប្បកម្ម', text: "That frustration became my leverage. I dove into UI/UX design, pairing rigorous self-study with formal training and high-growth roles. Today, I operate as a creative UI/UX designer, seamlessly bridging product design, brand identity, digital art, and graphic systems.", textKm: 'ភាពខកចិត្តនោះបានក្លាយជាកម្លាំងចលករបស់ខ្ញុំ។ ខ្ញុំបានចាប់ផ្តើមស្វែងយល់ស៊ីជម្រៅផ្នែករចនា UI/UX ដោយផ្សំការសិក្សាដោយខ្លួនឯងយ៉ាងម៉ត់ចត់ជាមួយនឹងការបណ្តុះបណ្តាលជាផ្លូវការ និងតួនាទីការងារកំណើនខ្ពស់។ សព្វថ្ងៃនេះ ខ្ញុំបម្រើការជាអ្នករចនា UI/UX ច្នៃប្រឌិត ដោយភ្ជាប់គ្នារវាងការរចនាផលិតផល អត្តសញ្ញាណម៉ាកយីហោ សិល្បៈឌីជីថល និងប្រព័ន្ធក្រាហ្វិកយ៉ាងរលូន។' },
+    { title: 'The Spark', titleKm: 'ចំណុចចាប់ផ្តើម', text: "Before code, there was the pencil. I grew up bound to sketchbooks, digital art, and the quiet thrill of creating something from nothing. When it came time to choose a path, logic won, and I chose technology, but the creative drive never left. It was simply waiting.", textKm: 'មុនស្គាល់និងប្រលូកចូលការសរសេរកូដ ខ្ញុំធំឡើងជាមួយការគូរគំនូរលើសៀវភៅ គូរលើកុំព្យូទ័រ និងចូលចិត្តអារម្មណ៍ពេលបង្កើតអ្វីមួយថ្មី។ ដល់ពេលត្រូវជ្រើសរើសរៀន ខ្ញុំជ្រើសរើសបច្ចេកវិទ្យា ប៉ុន្តែចិត្តស្រឡាញ់ការច្នៃប្រឌិតនៅតែមានជានិច្ច។' },
+    { title: 'The Shift', titleKm: 'ការផ្លាស់ប្តូរ', text: "Technology was a bet on the future. I enrolled in Management Information Systems, driven by a desire to build things that mattered. At the time, I didn't realize it was only the foundation.", textKm: 'បច្ចេកវិទ្យាជាជម្រើសសម្រាប់អនាគត។ ខ្ញុំបានសម្រេចចិត្តរៀនជំនាញគ្រប់គ្រងប្រព័ន្ធព័ត៌មានវិទ្យា (MIS) ព្រោះចង់បង្កើតអ្វីដែលមានប្រយោជន៍។ កាលហ្នឹង ខ្ញុំមិនទាន់ដឹងថាវាគ្រាន់តែជាជំហានដំបូងឡើយ។' },
+    { title: 'The Friction', titleKm: 'ឧបសគ្គ / បញ្ហាជួបប្រទះ', text: "Internships and front-end roles brought an unexpected letdown. The work felt less like building and more like assembling: patching together CMS platforms, off-the-shelf templates, and minor customizations. Every project felt pre-boxed. My constant thought: If this were mine, I'd rebuild it from scratch.", textKm: 'ការចុះកម្មសិក្សា និងការងារផ្នែក Front-end បាននាំមកនូវការខកចិត្តដែលស្មានមិនដល់។ ការងារហាក់ដូចជាមិនមែនជាការបង្កើត តែជាការយករបស់មកតផ្គុំគ្នា៖ ការបិទភ្ជាប់ប្រព័ន្ធ CMS, ពុម្ពគំរូស្រាប់ និងការកែប្រែបន្តិចបន្តួច។ រាល់គម្រោងទាំងអស់ហាក់ដូចជាត្រូវគេកំណត់ក្នុងប្រអប់ស្រាប់។ គំនិតក្នុងចិត្តខ្ញុំជានិច្ចគឺ៖ ប្រសិនបើវាជាស្នាដៃខ្ញុំ ខ្ញុំនឹងបង្កើតវាឡើងវិញពីចំណុចសូន្យ។' },
+    { title: 'The Craft', titleKm: 'ជំនាញ និងការច្នៃប្រឌិត', text: "That frustration became my leverage. I dove into UI/UX design, pairing rigorous self-study with formal training and high-growth roles. Today, I operate as a creative UI/UX designer, seamlessly bridging product design, brand identity, digital art, and graphic systems.", textKm: 'ការខកចិត្តនោះបានក្លាយជាកម្លាំងរុញច្រាន។ ខ្ញុំបានប្រលូកចូលទៅក្នុងវិស័យ UI/UX design ដោយផ្គួបផ្សំការស្រាវជ្រាវស្វ័យសិក្សាយ៉ាងបន្ថែម ជាមួយនឹងការបណ្តុះបណ្តាលផ្សេងៗ។ បច្ចុប្បន្ន ខ្ញុំធ្វើការជាអ្នកច្នៃប្រឌិត UI/UX ដោយតភ្ជាប់យ៉ាងរលូនរវាងការរចនាផលិតផល អត្តសញ្ញាណម៉ាកសញ្ញា សិល្បៈឌីជីថល និងប្រព័ន្ធក្រាហ្វិក។' },
   ];
 
   var education = [
@@ -165,16 +165,16 @@
 
   var experience = [
     { role: 'Creative UI/UX Designer', roleKm: 'អ្នករចនា UI/UX ច្នៃប្រឌិត', place: 'Thortok', url: 'https://thortok.com/', years: 'Mar 2025 – Present' },
-    { role: 'Visual | Web | Branding Designer', roleKm: 'អ្នករចនាចក្ខុវិស័យ | គេហទំព័រ | ម៉ាកយីហោ', place: 'Vector Studio · Freelance', years: 'Aug 2024 – Present' },
+    { role: 'Visual | Web | Branding Designer', roleKm: 'អ្នករចនាច្នៃប្រឌិត | គេហទំព័រ | ម៉ាកយីហោ', place: 'Vector Studio · Freelance', years: 'Aug 2024 – Present' },
     { role: 'Web Designer | UX/UI', roleKm: 'អ្នករចនាគេហទំព័រ | UX/UI', place: 'Apsara Media Services · Full-time', years: 'Feb 2024 – Mar 2025' },
     { role: 'Web designer | Digital Marketing Executive', roleKm: 'អ្នករចនាគេហទំព័រ | ថ្នាក់គ្រប់គ្រងទីផ្សារឌីជីថល', place: 'Nafih Digital Marketing Agent Co., Ltd · Part-time', years: 'Nov 2021 – Jan 2024' },
     { role: 'Home Monitor', roleKm: 'អ្នកត្រួតពិនិត្យផ្ទះ', place: "Toutes à l'école · Part-time", years: 'Nov 2020 – Oct 2021' },
   ];
 
   var hobbies = [
-    { name: 'Watch anime and manga', nameKm: 'មើលអានីម៉េ និងម៉ង្គា' },
+    { name: 'Watch anime and manga', nameKm: 'មើល Anime និងអាន Manga' },
     { name: 'Technology researching', nameKm: 'ស្រាវជ្រាវបច្ចេកវិទ្យា' },
-    { name: 'Read design/creative books', nameKm: 'អានសៀវភៅរចនា/ច្នៃប្រឌិត' },
+    { name: 'Read design/creative books', nameKm: 'អានសៀវភៅរចនា និងគំនិតច្នៃប្រឌិត' },
   ];
 
   var contactSocials = [
