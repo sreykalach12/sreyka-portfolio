@@ -429,7 +429,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ---------- RESPONSIVE ---------- */
-@media (max-width: 1100px) {
+@media (max-width: 1100px) and (min-width: 901px) {
   #home-grid, .work-grid {
     grid-template-columns: repeat(2,1fr) !important;
     grid-template-rows: none !important;
@@ -452,15 +452,22 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 900px) {
-  .about-grid {
-    grid-template-columns: repeat(2,1fr) !important;
+  /* one card per row, stacked vertically, no side-by-side pairs at any narrower-than-tablet width */
+  #home-grid, .work-grid, .about-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
     grid-template-rows: none !important;
-    grid-auto-rows: minmax(160px,auto) !important;
     grid-auto-flow: row !important;
+    grid-auto-rows: minmax(280px,auto) !important;
     height: auto !important;
+    gap: 12px !important;
   }
-  .about-grid > div { grid-row: auto !important; grid-column: span 1 !important; }
-  .about-grid > div:first-child { grid-column: 1/3 !important; min-height: 260px !important; }
+  #home-grid > div, .work-grid > div, .about-grid > div {
+    grid-column: 1/2 !important;
+    grid-row: auto !important;
+    min-height: 300px !important;
+    border-radius: 20px !important;
+  }
   .contact-grid { height: auto !important; min-height: calc(100vh - 100px) !important; }
 }
 
@@ -478,22 +485,6 @@ img { max-width: 100%; display: block; }
   }
   #nav-pill.is-open { display: flex !important; border-radius: 18px !important; }
   #nav-pill .nav-btn { text-align: left; padding: 10px 14px !important; border-radius: 12px !important; }
-
-  /* 4: one card per row, stacked vertically (no side-by-side pairs, no horizontal swipe) */
-  #home-grid, .work-grid, .about-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    grid-auto-flow: row !important;
-    grid-auto-rows: minmax(280px,auto) !important;
-    height: auto !important;
-    gap: 12px !important;
-  }
-  #home-grid > div, .work-grid > div, .about-grid > div {
-    grid-column: 1/2 !important;
-    grid-row: auto !important;
-    min-height: 300px !important;
-    border-radius: 20px !important;
-  }
 
   /* 3: cards hug at 16px on mobile */
   .card-white, .photo-content, .contact-card { padding: 16px !important; }
