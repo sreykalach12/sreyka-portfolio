@@ -157,7 +157,7 @@
 
   var education = [
     { school: 'SETEC Institute', line: "Bachelor's degree, Management Information Systems", lineKm: 'សញ្ញាបត្របរិញ្ញាបត្រ ផ្នែកប្រព័ន្ធព័ត៌មានវិទ្យាគ្រប់គ្រង', years: 'Oct 2019 – Present' },
-    { school: 'Australian Centre for Education (ACE)', line: 'English', lineKm: 'ភាសាអង់គ្លេស', years: '2016 – Present' },
+    { school: 'Australian Centre for Education (ACE)', line: 'English', lineKm: 'ភាសាអង់គ្លេស', years: '2016' },
     { school: 'Future.bit Academy', line: 'UI/UX Design Course, Design and Visual Communications', lineKm: 'វគ្គសិក្សារចនា UI/UX ការរចនា និងទំនាក់ទំនងដោយរូបភាព', years: 'Apr 2024 – Jun 2024' },
     { school: 'American University of Phnom Penh', line: 'Soft Skill Program', lineKm: 'កម្មវិធីជំនាញទន់', years: '2017' },
     { school: "Toutes à l'école", line: 'Khmer, English', lineKm: 'ភាសាខ្មែរ ភាសាអង់គ្លេស', years: '2007 – 2019' },
