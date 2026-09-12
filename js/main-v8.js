@@ -34,7 +34,7 @@
       navHome: 'ទំព័រដើម', navAbout: 'អំពីខ្ញុំ', navWork: 'ស្នាដៃ', navContact: 'ទំនាក់ទំនង',
       openToWork: 'ត្រៀមរួចរាល់សម្រាប់ការងារ',
       role: 'អ្នករចនា UI/UX ច្នៃប្រឌិត',
-      locationCity: 'ភ្នំពេញ', locationCountry: 'កម្ពុជា',
+      locationCity: 'រាជធានីភ្នំពេញ', locationCountry: 'ប្រទេសកម្ពុជា',
       tools: 'ឧបករណ៍',
       projectsCompleted: 'គម្រោងបានបញ្ចប់',
       bio: 'ខ្ញុំរចនាផលិតផលឌីជីថល ដែលផ្សំបញ្ចូលគ្នារវាងតក្កវិជ្ជាជាប្រព័ន្ធ និងសិល្បៈរចនាដ៏ក្លាហាន។ ដោយផ្អែកលើមូលដ្ឋានចំណេះដឹងផ្នែកប្រព័ន្ធ ការអភិវឌ្ឍន៍ និងការរចនាច្នៃប្រឌិតចម្រុះមុខជំនាញ ខ្ញុំបំប្លែងរចនាសម្ព័ន្ធបច្ចេកទេសដ៏ស្មុគស្មាញ ទៅជាចំណុចប្រទាក់ UI/UX ដ៏ងាយស្រួលប្រើ អត្តសញ្ញាណម៉ាកយីហោប្លែក និងប្រព័ន្ធរូបភាពដ៏ល្អិតល្អន់។ សម្រាប់ខ្ញុំ ការរចនាមិនមែនគ្រាន់តែជាការតុបតែងចំណុចប្រទាក់ប៉ុណ្ណោះទេ វាគឺជាការកសាងបទពិសោធន៍ និងការចងចាំរបស់មនុស្សចំពោះផលិតផលនោះ។',
@@ -44,7 +44,7 @@
       experience: 'បទពិសោធន៍',
       hobbies: 'ចំណូលចិត្ត',
       works: 'ស្នាដៃ',
-      sayHello: 'ជម្រាបសួរ',
+      sayHello: 'ទំនាក់ទំនង',
       letsTalk: 'តោះនិយាយគ្នា',
       placeholderName: 'ឈ្មោះរបស់អ្នក',
       placeholderEmail: 'អ៊ីមែលរបស់អ្នក',
@@ -453,7 +453,7 @@
     document.getElementById('lang-opt-en').classList.toggle('is-active', state.lang === 'en');
 
     var nameEl = document.getElementById('label-name');
-    if (nameEl) nameEl.textContent = state.lang === 'km' ? 'ឡាចស្រីកា' : 'Sreyka Lach';
+    if (nameEl) nameEl.textContent = state.lang === 'km' ? 'ឡាច ស្រីកា' : 'Sreyka Lach';
   }
 
   function setLang(lang) {
