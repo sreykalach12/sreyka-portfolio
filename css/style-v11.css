@@ -468,7 +468,9 @@ img { max-width: 100%; display: block; }
     min-height: 300px !important;
     border-radius: 20px !important;
   }
-  .contact-grid { height: auto !important; min-height: calc(100vh - 100px) !important; }
+  .bio-card { min-height: 0 !important; height: auto !important; }
+  .contact-grid { height: auto !important; min-height: 0 !important; grid-template-rows: auto !important; }
+  .contact-card { min-height: 420px !important; }
 }
 
 @media (max-width: 640px) {
