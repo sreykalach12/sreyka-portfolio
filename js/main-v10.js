@@ -477,9 +477,20 @@
       v.hidden = v.getAttribute('data-view-panel') !== view;
     });
     document.querySelectorAll('.nav-btn').forEach(function (b) {
-      b.classList.toggle('is-active', b.getAttribute('data-view') === view);
+      var isActive = b.getAttribute('data-view') === view;
+      b.classList.toggle('is-active', isActive);
+      b.setAttribute('aria-selected', String(isActive));
+      b.setAttribute('tabindex', isActive ? '0' : '-1');
     });
     closeMobileNav();
+  }
+
+  function focusAdjacentTab(current, delta) {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.nav-btn'));
+    var i = tabs.indexOf(current);
+    var next = tabs[(i + delta + tabs.length) % tabs.length];
+    next.focus();
+    setView(next.getAttribute('data-view'));
   }
 
   /* ---------------- MOBILE NAV ---------------- */
@@ -520,6 +531,10 @@
     document.querySelectorAll('.nav-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
         setView(btn.getAttribute('data-view'));
+      });
+      btn.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); focusAdjacentTab(btn, 1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); focusAdjacentTab(btn, -1); }
       });
     });
 

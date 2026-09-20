@@ -7,13 +7,29 @@
   --card-bg: #FFFFFF;
   --page-bg: #FAFAFA;
   --chip-bg: #F0F0F0;
+
+  /* ---- folder-tab nav: tweak these to retune the whole component ---- */
+  --tab-height: 66px;
+  --tab-slant: 39px;          /* horizontal run of the outward-leaning right edge */
+  --tab-corner-radius: 29px;  /* rounded top-left corner of each tab */
+  --tab-curve-radius: 17px;   /* smooth curve where the slant meets the top edge */
+  --tab-active-bg: #FFFFFF;
+  --tab-active-color: #000000;
+  --tab-inactive-bg: #D9D9D9;
+  --tab-inactive-color: #999999;
+  --tab-hover-bg: #CFCFCF;
+  --tab-hover-color: #333333;
+  --tab-transition: 300ms ease-in-out;
+  --page-black: #000000;
+  --panel-radius-tl: 36px;
+  --panel-radius-other: 60px;
 }
 
 * { box-sizing: border-box; }
 
 html, body {
   margin: 0;
-  background: #0D0D0D;
+  background: var(--page-black);
   font-family: 'Montserrat Alternates', sans-serif;
   color: var(--ink);
 }
@@ -45,7 +61,7 @@ img { max-width: 100%; display: block; }
 #page-root {
   min-height: 100vh;
   box-sizing: border-box;
-  background: #0D0D0D;
+  background: var(--page-black);
   padding: 26px 26px 22px;
   display: flex;
   flex-direction: column;
@@ -56,8 +72,8 @@ img { max-width: 100%; display: block; }
 .folder-panel {
   flex: 1;
   min-height: 0;
-  background: #FAFAFA;
-  border-radius: 0 0 28px 28px;
+  background: var(--tab-active-bg);
+  border-radius: var(--panel-radius-tl) var(--panel-radius-other) var(--panel-radius-other) var(--panel-radius-other);
   box-shadow: 0 24px 60px rgba(0,0,0,0.45);
   padding: 20px 24px 18px;
   display: flex;
@@ -137,28 +153,42 @@ img { max-width: 100%; display: block; }
   background: #17181A;
 }
 
+/* Tab silhouette: rounded top-left corner, flat bottom, and a right edge that
+   leans outward with a smooth curve where it meets the top edge. Computed
+   for --tab-height:66px / --tab-slant:39px / --tab-corner-radius:29px /
+   --tab-curve-radius:17px - regenerate the point list if you change those. */
 .nav-btn {
   appearance: none;
   border: none;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 28px 28px 30px;
-  background: #E4E4E4;
-  color: rgba(23,24,26,0.6);
-  border-radius: 30px 30px 0 0;
-  transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease, top .2s ease;
+  font-family: 'Inter', 'Montserrat Alternates', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  height: var(--tab-height);
+  padding: 0 calc(var(--tab-slant) + 24px) 0 28px;
+  background: var(--tab-inactive-bg);
+  color: var(--tab-inactive-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  clip-path: polygon(
+    0 29px, 2.21px 17.9px, 8.49px 8.49px, 17.9px 2.21px, 29px 0,
+    calc(100% - 56px) 0,
+    calc(100% - 48.02px) 0.91px,
+    calc(100% - 41.09px) 3.66px,
+    calc(100% - 35.2px) 8.23px,
+    calc(100% - 30.35px) 14.64px,
+    100% 66px, 0 66px
+  );
+  transition: background var(--tab-transition), color var(--tab-transition),
+              transform var(--tab-transition), box-shadow var(--tab-transition);
   position: relative;
-  top: 7px;
   min-width: 0;
-  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-left: -20px;
-  padding-left: 40px;
   box-shadow: -6px 0 12px rgba(0,0,0,0.08);
-  transform-origin: bottom center;
-  transform: scale(1);
 }
 .nav-btn:first-child { margin-left: 0; box-shadow: none; }
 .nav-btn:nth-of-type(1) { z-index: 1; }
@@ -166,25 +196,39 @@ img { max-width: 100%; display: block; }
 .nav-btn:nth-of-type(3) { z-index: 3; }
 .nav-btn:nth-of-type(4) { z-index: 4; }
 
-.nav-btn:hover {
-  background: #F0F0F0;
-  color: #17181A;
-  top: 3px;
-  transform: scale(1.08);
-  z-index: 10 !important;
-  box-shadow: -6px 0 14px rgba(0,0,0,0.1), 0 10px 24px rgba(0,0,0,0.16);
+.nav-btn:not(.is-active):hover {
+  background: var(--tab-hover-bg);
+  color: var(--tab-hover-color);
+  transform: translateY(-2px);
 }
 .nav-btn.is-active {
-  background: #FAFAFA;
-  color: #0D0D0D;
-  font-weight: 800;
-  top: 0;
+  background: var(--tab-active-bg);
+  color: var(--tab-active-color);
+  font-weight: 500;
   z-index: 5;
-  --stack-scale: 1;
 }
-.nav-btn.is-active:hover {
-  transform: scale(1.05);
-  z-index: 10 !important;
+.nav-btn:focus-visible {
+  outline: 3px solid #4C9EFF;
+  outline-offset: -3px;
+  z-index: 10;
+}
+
+/* small concave (inverted) corners where the active tab meets the panel,
+   so the two shapes read as one continuous flow with no seam */
+/* only on the very first tab, where the concave notch meets the panel's own
+   rounded top-left corner - when a later tab is active, its left neighbor(s)
+   already cover that corner, so the notch isn't needed there */
+.nav-btn.is-active:first-child::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--page-black);
+  pointer-events: none;
+  transform: translate(-50%, 50%);
 }
 
 /* ---------- VIEW STAGE ---------- */
@@ -532,22 +576,20 @@ img { max-width: 100%; display: block; }
     box-shadow: none;
   }
   .nav-btn {
+    clip-path: none !important;
+    border-radius: 14px 14px 0 0 !important;
+    height: auto !important;
     flex: 0 1 auto;
     min-width: 0;
     max-width: 32px;
     padding: 9px 8px 10px !important;
     font-size: 11px !important;
     margin-left: -6px !important;
-    top: 3px !important;
-    transform: scale(1) !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .nav-btn:not(.is-active)::before { display: none; }
+  .nav-btn.is-active:first-child::before { display: none; }
   .nav-btn:first-child { margin-left: 0 !important; }
-  .nav-btn:not(.is-active):nth-of-type(2),
-  .nav-btn:not(.is-active):nth-of-type(3),
-  .nav-btn:not(.is-active):nth-of-type(4) {
-    top: 3px !important;
-  }
   .nav-btn.is-active {
     flex: 1 1 auto;
     max-width: 160px;
