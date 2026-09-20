@@ -165,14 +165,16 @@ img { max-width: 100%; display: block; }
   margin-right: 12px;
 }
 
-/* the rest sit together as one grey segmented capsule */
+/* the rest sit together as one segmented capsule, each with its own color */
 .nav-btn:not(.is-active) {
   background: #DCDCE1;
 }
 .nav-btn:not(.is-active):hover {
-  background: #CFCFD6;
-  color: #17181A;
+  filter: brightness(1.08);
 }
+.nav-btn[data-view="about"]:not(.is-active) { background: #30A8FF; color: #0D0D0D; }
+.nav-btn[data-view="work"]:not(.is-active) { background: #213C67; color: #FFFFFF; }
+.nav-btn[data-view="contact"]:not(.is-active) { background: #C9FF32; color: #0D0D0D; }
 .nav-btn:not(.is-active):first-child,
 .nav-btn.is-active + .nav-btn:not(.is-active) {
   border-radius: 999px 0 0 999px;
