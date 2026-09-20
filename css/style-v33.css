@@ -138,6 +138,7 @@ img { max-width: 100%; display: block; }
 }
 
 .nav-btn {
+  --stack-scale: 1;
   appearance: none;
   border: none;
   cursor: pointer;
@@ -147,7 +148,7 @@ img { max-width: 100%; display: block; }
   background: #E4E4E4;
   color: rgba(23,24,26,0.6);
   border-radius: 30px 30px 0 0;
-  transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+  transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease, top .2s ease;
   position: relative;
   top: 7px;
   min-width: 0;
@@ -156,22 +157,25 @@ img { max-width: 100%; display: block; }
   text-overflow: ellipsis;
   margin-left: -20px;
   padding-left: 40px;
-  box-shadow: -6px 0 12px rgba(0,0,0,0.08);
+  box-shadow: -6px 6px 16px rgba(0,0,0,0.12);
   transform-origin: bottom center;
-  transform: scale(1);
+  transform: scale(var(--stack-scale));
 }
 .nav-btn:first-child { margin-left: 0; box-shadow: none; }
-.nav-btn:nth-of-type(1) { z-index: 1; }
-.nav-btn:nth-of-type(2) { z-index: 2; }
-.nav-btn:nth-of-type(3) { z-index: 3; }
-.nav-btn:nth-of-type(4) { z-index: 4; }
+
+/* stacked-deck look: tabs further from the front recede - higher, smaller, lighter */
+.nav-btn:nth-of-type(1) { z-index: 4; }
+.nav-btn:not(.is-active):nth-of-type(2) { z-index: 3; top: 15px; --stack-scale: 0.97; background: #E9E9E9; }
+.nav-btn:not(.is-active):nth-of-type(3) { z-index: 2; top: 22px; --stack-scale: 0.94; background: #EEEEEE; }
+.nav-btn:not(.is-active):nth-of-type(4) { z-index: 1; top: 29px; --stack-scale: 0.91; background: #F2F2F2; }
+
 .nav-btn:hover {
   background: #F0F0F0;
   color: #17181A;
   top: 3px;
-  transform: scale(1.08);
+  transform: scale(calc(var(--stack-scale) * 1.08));
   z-index: 10 !important;
-  box-shadow: -6px 0 14px rgba(0,0,0,0.1), 0 10px 24px rgba(0,0,0,0.16);
+  box-shadow: -6px 6px 18px rgba(0,0,0,0.16), 0 10px 24px rgba(0,0,0,0.16);
 }
 .nav-btn.is-active {
   background: #FAFAFA;
@@ -179,6 +183,7 @@ img { max-width: 100%; display: block; }
   font-weight: 800;
   top: 0;
   z-index: 5;
+  --stack-scale: 1;
 }
 .nav-btn.is-active:hover {
   transform: scale(1.05);
@@ -536,8 +541,15 @@ img { max-width: 100%; display: block; }
     padding: 9px 8px 10px !important;
     font-size: 11px !important;
     margin-left: -6px !important;
+    top: 3px !important;
+    transform: scale(1) !important;
   }
   .nav-btn:first-child { margin-left: 0 !important; }
+  .nav-btn:not(.is-active):nth-of-type(2),
+  .nav-btn:not(.is-active):nth-of-type(3),
+  .nav-btn:not(.is-active):nth-of-type(4) {
+    top: 3px !important;
+  }
   .nav-btn.is-active {
     flex: 1 1 auto;
     max-width: 160px;
