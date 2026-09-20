@@ -182,13 +182,7 @@ img { max-width: 100%; display: block; }
   padding-left: 24px;
   padding-right: 34px;
   clip-path: polygon(
-    0 0,
-    calc(100% - 16px) 0,
-    100% 22%,
-    calc(100% - 11px) 50%,
-    100% 78%,
-    calc(100% - 16px) 100%,
-    0 100%
+    0 0, calc(100% - 14.0px) 0.0%, calc(100% - 11.92px) 4.17%, calc(100% - 9.83px) 8.33%, calc(100% - 7.75px) 12.5%, calc(100% - 5.67px) 16.67%, calc(100% - 3.58px) 20.83%, calc(100% - 1.5px) 25.0%, calc(100% - 1.12px) 29.17%, calc(100% - 5.14px) 33.33%, calc(100% - 9.15px) 37.5%, calc(100% - 13.16px) 41.67%, calc(100% - 17.17px) 45.83%, calc(100% - 21.19px) 50.0%, calc(100% - 25.2px) 54.17%, calc(100% - 22.23px) 58.33%, calc(100% - 17.52px) 62.5%, calc(100% - 12.81px) 66.67%, calc(100% - 8.1px) 70.83%, calc(100% - 3.39px) 75.0%, calc(100% - 0.74px) 79.17%, calc(100% - 3.39px) 83.33%, calc(100% - 6.05px) 87.5%, calc(100% - 8.7px) 91.67%, calc(100% - 11.35px) 95.83%, calc(100% - 14.0px) 100.0%, 0 100%
   );
 }
 .nav-btn:not(.is-active):first-child,
@@ -548,13 +542,7 @@ img { max-width: 100%; display: block; }
     padding-left: 12px !important;
     padding-right: 16px !important;
     clip-path: polygon(
-      0 0,
-      calc(100% - 7px) 0,
-      100% 22%,
-      calc(100% - 5px) 50%,
-      100% 78%,
-      calc(100% - 7px) 100%,
-      0 100%
+      0 0, calc(100% - 6.0px) 0.0%, calc(100% - 4.66px) 6.25%, calc(100% - 3.32px) 12.5%, calc(100% - 1.98px) 18.75%, calc(100% - 0.64px) 25.0%, calc(100% - 1.32px) 31.25%, calc(100% - 3.87px) 37.5%, calc(100% - 6.42px) 43.75%, calc(100% - 8.96px) 50.0%, calc(100% - 10.4px) 56.25%, calc(100% - 7.41px) 62.5%, calc(100% - 4.42px) 68.75%, calc(100% - 1.43px) 75.0%, calc(100% - 0.89px) 81.25%, calc(100% - 2.59px) 87.5%, calc(100% - 4.3px) 93.75%, calc(100% - 6.0px) 100.0%, 0 100%
     );
   }
   .nav-btn.is-active {
