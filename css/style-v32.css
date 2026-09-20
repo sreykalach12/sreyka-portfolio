@@ -82,6 +82,7 @@ img { max-width: 100%; display: block; }
   background: #FFFFFF;
   border-radius: 999px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
 }
 .lang-switch-opt {
   display: flex;
