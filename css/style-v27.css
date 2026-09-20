@@ -175,24 +175,25 @@ img { max-width: 100%; display: block; }
 .nav-btn[data-view="about"]:not(.is-active) { background: #30A8FF; color: #0D0D0D; }
 .nav-btn[data-view="work"]:not(.is-active) { background: #213C67; color: #FFFFFF; }
 .nav-btn[data-view="contact"]:not(.is-active) { background: #C9FF32; color: #0D0D0D; }
+
+/* ribbon/flag tab shape: flat left edge, concave-then-convex wave cut into the right edge */
+.nav-btn:not(.is-active) {
+  border-radius: 0;
+  padding-left: 24px;
+  padding-right: 34px;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 16px) 0,
+    100% 22%,
+    calc(100% - 11px) 50%,
+    100% 78%,
+    calc(100% - 16px) 100%,
+    0 100%
+  );
+}
 .nav-btn:not(.is-active):first-child,
 .nav-btn.is-active + .nav-btn:not(.is-active) {
-  border-radius: 999px 0 0 999px;
-  padding-left: 22px;
-}
-.nav-btn:not(.is-active):last-child,
-.nav-btn:not(.is-active):has(+ .nav-btn.is-active) {
-  border-radius: 0 999px 999px 0;
-  padding-right: 22px;
-}
-/* diagonal divider between adjacent segmented tabs */
-.nav-btn:not(.is-active):not(:last-child):not(:has(+ .nav-btn.is-active))::after {
-  content: '';
-  position: absolute;
-  top: 4px; bottom: 4px; right: -1px;
-  width: 1px;
-  background: rgba(23,24,26,0.18);
-  transform: skewX(-18deg);
+  padding-left: 26px;
 }
 
 /* ---------- VIEW STAGE ---------- */
@@ -543,10 +544,19 @@ img { max-width: 100%; display: block; }
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .nav-btn:not(.is-active):first-child,
-  .nav-btn.is-active + .nav-btn:not(.is-active) { padding-left: 14px !important; }
-  .nav-btn:not(.is-active):last-child,
-  .nav-btn:not(.is-active):has(+ .nav-btn.is-active) { padding-right: 14px !important; }
+  .nav-btn:not(.is-active) {
+    padding-left: 12px !important;
+    padding-right: 16px !important;
+    clip-path: polygon(
+      0 0,
+      calc(100% - 7px) 0,
+      100% 22%,
+      calc(100% - 5px) 50%,
+      100% 78%,
+      calc(100% - 7px) 100%,
+      0 100%
+    );
+  }
   .nav-btn.is-active {
     flex: 1 1 auto;
     max-width: 140px;
@@ -587,6 +597,7 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 480px) {
   .nav-btn { padding: 8px 6px 9px !important; font-size: 10px !important; max-width: 26px; }
+  .nav-btn:not(.is-active) { padding-left: 8px !important; padding-right: 12px !important; }
   .nav-btn.is-active { max-width: 130px; }
   #home-grid > div, .work-grid > div, .about-grid > div { min-height: 260px !important; }
   .display-name { font-size: 21px !important; }
