@@ -74,13 +74,13 @@ img { max-width: 100%; display: block; }
 .lang-switch {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 4px;
   flex-shrink: 0;
-  background: transparent;
-  border-radius: 0;
+  background: #F0F0F1;
+  border-radius: 999px;
   box-shadow: none;
 }
 .lang-switch-opt {
@@ -92,8 +92,8 @@ img { max-width: 100%; display: block; }
   color: rgba(23,24,26,0.5);
   width: auto;
   height: auto;
-  padding: 4px 2px;
-  border-radius: 0;
+  padding: 6px 10px;
+  border-radius: 999px;
   transition: all .25s ease;
 }
 .lang-switch-opt.is-active {
