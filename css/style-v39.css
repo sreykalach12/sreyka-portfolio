@@ -90,24 +90,25 @@ img { max-width: 100%; display: block; }
 .lang-switch {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   border: none;
   cursor: pointer;
-  padding: 6px;
+  padding: 5px;
   flex-shrink: 0;
   background: #FFFFFF;
   border-radius: 999px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  margin-bottom: 10px;
 }
 .lang-switch-opt {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: #17181A;
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   border-radius: 50%;
   transition: all .25s ease;
 }
@@ -219,23 +220,6 @@ img { max-width: 100%; display: block; }
   z-index: 10;
 }
 
-/* small concave (inverted) corners where the active tab meets the panel,
-   so the two shapes read as one continuous flow with no seam */
-/* only on the very first tab, where the concave notch meets the panel's own
-   rounded top-left corner - when a later tab is active, its left neighbor(s)
-   already cover that corner, so the notch isn't needed there */
-.nav-btn.is-active:first-child::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--page-black);
-  pointer-events: none;
-  transform: translate(-50%, 50%);
-}
 
 /* ---------- VIEW STAGE ---------- */
 .view-stage { flex: 1; min-height: 0; }
@@ -594,7 +578,6 @@ img { max-width: 100%; display: block; }
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .nav-btn.is-active:first-child::before { display: none; }
   .nav-btn:first-child { margin-left: 0 !important; }
   .nav-btn.is-active {
     flex: 1 1 auto;
