@@ -138,9 +138,6 @@ img { max-width: 100%; display: block; }
 }
 
 .nav-btn {
-  --stack-scale: 1;
-  --stack-rotate: 0deg;
-  --stack-x: 0px;
   appearance: none;
   border: none;
   cursor: pointer;
@@ -159,37 +156,23 @@ img { max-width: 100%; display: block; }
   text-overflow: ellipsis;
   margin-left: -20px;
   padding-left: 40px;
-  box-shadow: -6px 6px 16px rgba(0,0,0,0.12);
-  transform-origin: bottom left;
-  transform: translateX(var(--stack-x)) rotate(var(--stack-rotate)) scale(var(--stack-scale));
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  box-shadow: -6px 0 12px rgba(0,0,0,0.08);
+  transform-origin: bottom center;
+  transform: scale(1);
 }
 .nav-btn:first-child { margin-left: 0; box-shadow: none; }
-.nav-btn:not(.is-active)::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #17181A;
-  flex-shrink: 0;
-}
-
-/* stacked-deck look, cloned from the reference: tabs fan out diagonally -
-   further back = higher, further right, rotated, smaller, lighter */
-.nav-btn:nth-of-type(1) { z-index: 4; }
-.nav-btn:not(.is-active):nth-of-type(2) { z-index: 3; top: 14px; --stack-x: 6px; --stack-rotate: 2deg; --stack-scale: 0.97; background: #E9E9E9; }
-.nav-btn:not(.is-active):nth-of-type(3) { z-index: 2; top: 22px; --stack-x: 12px; --stack-rotate: 4deg; --stack-scale: 0.94; background: #EEEEEE; }
-.nav-btn:not(.is-active):nth-of-type(4) { z-index: 1; top: 30px; --stack-x: 18px; --stack-rotate: 6deg; --stack-scale: 0.91; background: #F2F2F2; }
+.nav-btn:nth-of-type(1) { z-index: 1; }
+.nav-btn:nth-of-type(2) { z-index: 2; }
+.nav-btn:nth-of-type(3) { z-index: 3; }
+.nav-btn:nth-of-type(4) { z-index: 4; }
 
 .nav-btn:hover {
   background: #F0F0F0;
   color: #17181A;
   top: 3px;
-  transform: translateX(var(--stack-x)) rotate(var(--stack-rotate)) scale(calc(var(--stack-scale) * 1.08));
+  transform: scale(1.08);
   z-index: 10 !important;
-  box-shadow: -6px 6px 18px rgba(0,0,0,0.16), 0 10px 24px rgba(0,0,0,0.16);
+  box-shadow: -6px 0 14px rgba(0,0,0,0.1), 0 10px 24px rgba(0,0,0,0.16);
 }
 .nav-btn.is-active {
   background: #FAFAFA;
