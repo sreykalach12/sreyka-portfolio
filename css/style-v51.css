@@ -1,0 +1,657 @@
+:root {
+  --accent: #FFFFFF;
+  --accent-soft: #E5E5E5;
+  --ink: #17181A;
+  --ink-soft: rgba(23,24,26,0.55);
+  --off-white: #F2F2F2;
+  --card-bg: #FFFFFF;
+  --page-bg: #FAFAFA;
+  --chip-bg: #F0F0F0;
+
+  /* ---- folder-tab nav: tweak these to retune the whole component ---- */
+  --tab-height: 44px;
+  --tab-slant: 26px;          /* horizontal run of the outward-leaning right edge */
+  --tab-corner-radius: 18px;  /* rounded top-left corner of each tab */
+  --tab-curve-radius: 16px;   /* smooth curve where the slant meets the top edge */
+  --tab-active-bg: #FFFFFF;
+  --tab-active-color: #000000;
+  --tab-inactive-bg: #D9D9D9;
+  --tab-inactive-color: #999999;
+  --tab-hover-bg: #CFCFCF;
+  --tab-hover-color: #333333;
+  --tab-transition: 300ms ease-in-out;
+  --page-black: #000000;
+  --panel-radius-tl: 0px;
+  --panel-radius-other: 40px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--page-black);
+  font-family: 'Montserrat Alternates', sans-serif;
+  color: var(--ink);
+}
+
+html[lang="km"], html[lang="km"] body {
+  font-family: 'Noto Sans Khmer', sans-serif;
+}
+
+a { color: #17181A; text-decoration: underline; }
+a:hover { color: #555555; }
+
+button { font-family: inherit; }
+
+img { max-width: 100%; display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUpForm {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#page-root {
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: var(--page-black);
+  padding: 26px 26px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ---------- FOLDER COVER PANEL ---------- */
+.folder-panel {
+  flex: 1;
+  min-height: 0;
+  background: var(--tab-active-bg);
+  border-radius: var(--panel-radius-tl) var(--panel-radius-other) var(--panel-radius-other) var(--panel-radius-other);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  padding: 20px 24px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- NAV (folder tabs) ---------- */
+.nav-wrap {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 10px;
+  flex-shrink: 0; flex-wrap: wrap; width: 100%; position: relative;
+  padding: 0;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  flex-shrink: 0;
+  background: #FFFFFF;
+  border-radius: 999px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  /* Lifts the pill clear of the panel so there's visible breathing room
+     underneath it. Safe to do now that nav-wrap's right inset (below)
+     keeps the pill entirely within the panel's flat top edge, clear of
+     the rounded corner - so this gap stays a uniform strip instead of
+     the tapering diagonal gap it made before that inset existed. */
+  margin-bottom: 10px;
+}
+.lang-switch-opt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #17181A;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  transition: all .25s ease;
+}
+.lang-switch-opt.is-active {
+  background: #0D0D0D;
+  color: #FFFFFF;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+}
+
+#nav-pill {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+  background: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.nav-hamburger span {
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 2px;
+  background: #17181A;
+}
+
+/* Tab silhouette: rounded top-left corner, flat bottom, and a right edge that
+   leans outward with a smooth curve where it meets the top edge. Computed
+   for --tab-height:44px / --tab-slant:26px / --tab-corner-radius:18px /
+   --tab-curve-radius:16px - regenerate the point list if you change those. */
+.nav-btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  /* No explicit font-family here on purpose - inherit the same
+     Montserrat Alternates / Noto Sans Khmer switch the rest of the page
+     uses (via html[lang] on body), so the nav matches the content font
+     instead of silently falling back to a generic system font for Khmer. */
+  font-size: 15px;
+  font-weight: 500;
+  height: var(--tab-height);
+  padding: 0 calc(var(--tab-slant) + 30px) 0 34px;
+  background: var(--tab-inactive-bg);
+  color: var(--tab-inactive-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  clip-path: polygon(
+    0 18px, 1.37px 11.11px, 5.27px 5.27px, 11.11px 1.37px, 18px 0,
+    calc(100% - 42px) 0,
+    calc(100% - 35.91px) 0.55px,
+    calc(100% - 30.46px) 2.2px,
+    calc(100% - 25.63px) 4.96px,
+    calc(100% - 21.43px) 8.82px,
+    calc(100% - 17.86px) 13.77px,
+    100% 44px, 0 44px
+  );
+  transition: background var(--tab-transition), color var(--tab-transition),
+              transform var(--tab-transition);
+  position: relative;
+  min-width: 0;
+  white-space: nowrap;
+  margin-left: -14px;
+}
+.nav-btn:first-child { margin-left: 0; }
+.nav-btn:nth-of-type(1) { z-index: 1; }
+.nav-btn:nth-of-type(2) { z-index: 2; }
+.nav-btn:nth-of-type(3) { z-index: 3; }
+.nav-btn:nth-of-type(4) { z-index: 4; }
+
+.nav-btn:not(.is-active):hover {
+  background: var(--tab-hover-bg);
+  color: var(--tab-hover-color);
+}
+.nav-btn:not(.is-active):hover .nav-btn-label {
+  transform: scale(1.08);
+}
+.nav-btn:not(.is-active) {
+  max-width: 220px;
+}
+.nav-btn.is-active {
+  background: var(--tab-active-bg);
+  color: var(--tab-active-color);
+  font-weight: 600;
+  z-index: 5;
+  max-width: none;
+}
+.nav-btn:focus-visible {
+  outline: 3px solid #4C9EFF;
+  outline-offset: -3px;
+  z-index: 10;
+}
+.nav-btn-label {
+  display: inline-block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: transform var(--tab-transition);
+}
+
+
+/* ---------- VIEW STAGE ---------- */
+.view-stage { flex: 1; min-height: 0; height: 100%; }
+.view { animation: fadeUp .4s ease both; height: 100%; }
+
+/* ---------- BENTO GRID BASE ---------- */
+/* Height is a percentage of the flex-computed .view-stage size (not a
+   vh-based guess) so it always exactly fills whatever room is actually
+   left below the nav on desktop, with no scrollbar. Overridden back to
+   auto-height/scrollable at tablet and mobile widths further down. */
+.bento-grid {
+  display: grid;
+  gap: 16px;
+  height: 100%;
+  min-height: 0;
+}
+
+.card {
+  position: relative;
+  border: none;
+  background: var(--card-bg);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform .3s ease, box-shadow .3s ease;
+  animation: fadeUp .5s ease both;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.14);
+}
+
+.card-white {
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-photo {
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.photo-underlay { position: absolute; inset: 0; transition: background-image .6s ease; }
+.photo-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, transparent 40%, rgba(13,13,13,0.85) 100%);
+}
+.photo-scrim--soft {
+  background: linear-gradient(180deg, rgba(13,13,13,0.15) 0%, rgba(13,13,13,0.85) 100%);
+}
+.corner-dot {
+  position: absolute; width: 10px; height: 10px; background: #FFFFFF;
+  pointer-events: none; z-index: 2;
+}
+
+.photo-content {
+  position: relative; z-index: 1; height: 100%;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 24px; gap: 4px; color: var(--off-white);
+}
+.photo-content--between { justify-content: space-between; }
+
+.pill-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 999px; padding: 4px 10px; width: fit-content;
+  font-size: 11px; font-weight: 600; color: #FFFFFF;
+}
+.dot-lime { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+.display-name {
+  font-size: clamp(24px, 4.5vh, 40px); font-weight: 700; letter-spacing: -0.02em;
+  line-height: 1; color: #FFFFFF;
+}
+.role-line { font-size: 13px; color: rgba(245,245,245,0.75); font-weight: 500; }
+.loc-line { font-size: 11px; color: rgba(245,245,245,0.6); }
+
+.tag-chip {
+  display: inline-flex; width: fit-content; font-size: 10px; font-weight: 600;
+  padding: 4px 10px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent);
+}
+.row-between { display: flex; justify-content: space-between; align-items: flex-end; }
+.row-start { display: flex; justify-content: space-between; align-items: flex-start; }
+.proj-title { font-size: 16px; font-weight: 600; color: var(--off-white); }
+.proj-title--lg { font-size: clamp(18px, 3.2vh, 24px); font-weight: 700; }
+.proj-title--sm { font-size: 13px; font-weight: 600; }
+.proj-desc { font-size: 11px; color: rgba(245,245,245,0.7); margin-top: 2px; }
+.proj-tag-sm { font-size: 10px; color: rgba(245,245,245,0.65); }
+
+.dots { display: flex; gap: 5px; }
+.dots--end { justify-content: flex-end; gap: 4px; }
+.dot {
+  width: 6px; height: 6px; border-radius: 50%; cursor: pointer; border: none; padding: 0;
+  background: rgba(255,255,255,0.3);
+}
+.dot.is-active { background: var(--accent); }
+.dots--end .dot { width: 5px; height: 5px; }
+
+.label-sm { font-size: 11px; font-weight: 600; color: var(--ink-soft); }
+.chip-row { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip {
+  font-size: 10px; font-weight: 600; padding: 4px 8px; border-radius: 9px;
+  background: var(--chip-bg); border: 1px solid rgba(13,13,13,0.05); color: var(--ink);
+}
+.stat-num { font-size: clamp(20px, 3.5vh, 32px); font-weight: 700; line-height: 1.1; }
+.stat-label { font-size: 11px; color: var(--ink-soft); }
+.stat-card .stat-num { font-size: clamp(56px, 10vh, 108px); }
+.stat-card .stat-label { font-size: 13px; }
+.bio-text { font-size: 11px; line-height: 1.4; color: rgba(23,24,26,0.7); padding: 16px; }
+
+/* ---------- HOME GRID ---------- */
+#home-grid {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: minmax(70px,1.15fr) minmax(70px,0.95fr) minmax(70px,0.95fr) minmax(60px,0.65fr);
+}
+
+/* ---------- WORK GRID ---------- */
+.work-grid {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 18px;
+}
+.work-card { position: relative; overflow: hidden; border: none; background: var(--card-bg); }
+.work-card .photo-content { justify-content: space-between; }
+.work-card .proj-title { font-size: clamp(14px, 2.4vh, 20px); font-weight: 600; }
+.work-card .proj-desc { margin-top: 2px; }
+.work-card .dots { justify-content: flex-end; }
+
+/* ---------- ABOUT GRID ---------- */
+.about-grid {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr 1fr minmax(300px, auto);
+}
+.about-portrait { position: relative; }
+.about-col { overflow: hidden; }
+
+.timeline { display: flex; flex-direction: column; gap: 2px; }
+.timeline-item { display: flex; gap: 10px; }
+.timeline-dot-col { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 10px; }
+.timeline-dot { width: 10px; height: 10px; border-radius: 50%; background: #0D0D0D; flex-shrink: 0; }
+.timeline-line { width: 2px; flex: 1; background: #D8D8D8; margin-top: 2px; }
+.timeline-body { padding-bottom: 16px; }
+.timeline-title { font-size: 12px; font-weight: 700; color: var(--ink); }
+.timeline-text { font-size: 10px; line-height: 1.6; color: rgba(23,24,26,0.6); margin-top: 4px; }
+
+.timeline--sm .timeline-item { gap: 8px; }
+.timeline--sm .timeline-dot-col { width: 8px; }
+.timeline--sm .timeline-dot { width: 8px; height: 8px; }
+.timeline--sm .timeline-body { padding-bottom: 10px; }
+.timeline--sm .timeline-title { font-size: 12px; font-weight: 600; }
+.timeline--sm .timeline-sub { font-size: 10px; color: var(--ink-soft); }
+.timeline--sm .timeline-sub a { color: #17181A; font-weight: 600; }
+
+.chip-row--sm .chip { font-size: 9px; padding: 3px 7px; border-radius: 8px; }
+
+.tools-card { position: relative; }
+.select-frame {
+  position: absolute; inset: 2px; border: 1.5px dashed #D9D9D9;
+  pointer-events: none; z-index: 2;
+}
+.select-dot {
+  position: absolute; width: 10px; height: 10px; background: #0D0D0D;
+  z-index: 3;
+}
+.tools-scatter {
+  position: relative; z-index: 1; flex: 1;
+  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);
+  align-items: center; justify-items: center; margin-top: 6px;
+}
+.tool-badge {
+  width: 46px; height: 46px; border-radius: 13px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.14);
+  flex-shrink: 0;
+}
+.tool-badge--0 { grid-column: 1; grid-row: 1; width: 58px; height: 44px; transform: translate(2px, 4px); }
+.tool-badge--1 { grid-column: 3; grid-row: 1; width: 58px; height: 44px; transform: translate(-2px, 2px); }
+.tool-badge--2 { grid-column: 2; grid-row: 1/3; width: 48px; height: 54px; }
+.tool-badge--3 { grid-column: 1; grid-row: 2; width: 58px; height: 44px; transform: translate(3px, -3px); }
+.tool-badge--4 { grid-column: 3; grid-row: 2; width: 50px; height: 50px; transform: translate(-3px, -2px); }
+.soft-skills { display: flex; flex-direction: column; gap: 3px; margin-top: 18px; }
+.soft-skill {
+  display: flex; align-items: center; gap: 6px; font-size: 9px; font-weight: 600;
+  padding: 4px 8px; border-radius: 999px;
+  background: linear-gradient(180deg, #F3F3F3, #E2E2E2); color: #17181A;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 2px 4px rgba(0,0,0,0.12);
+}
+.soft-skill svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* ---------- CONTACT ---------- */
+.contact-grid { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+.contact-card {
+  border-radius: 20px; color: var(--off-white); padding: 24px;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 16px;
+  background: #F5F5F5;
+}
+.contact-card:hover { transform: none; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+.contact-card .photo-img { object-fit: contain; object-position: center bottom; }
+.contact-scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, #FFFFFF00, #0D0D0D);
+}
+.contact-content {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.say-hello-btn {
+  appearance: none; border: 1px solid var(--accent-soft); cursor: pointer;
+  background: var(--accent); color: #0D0D0D; font-size: 15px; font-weight: 700;
+  padding: 16px 30px; border-radius: 999px; width: fit-content;
+  display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25); transition: transform .3s ease;
+}
+.say-hello-btn:hover { transform: translateY(-3px); }
+.say-hello-btn span { font-size: 15px; line-height: 1; }
+
+.social-row { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+.social-pill, .location-pill {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border-radius: 999px; padding: 8px 14px 8px 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  transition: transform .3s ease, background .3s ease;
+  text-decoration: none;
+}
+.social-pill:hover { transform: translateY(-3px); background: rgba(255,255,255,0.22); }
+.social-icon-badge {
+  width: 34px; height: 34px; border-radius: 50%; background: #FFFFFF;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  overflow: hidden;
+}
+.social-icon-badge img { width: 22px; height: 22px; object-fit: contain; filter: grayscale(100%); }
+.location-pill .social-icon-badge img { width: 24px; height: 24px; }
+.social-name { font-size: 11px; font-weight: 700; color: #F5F5F5; }
+.social-handle { font-family: monospace; font-size: 9px; color: rgba(245,245,245,0.7); letter-spacing: -0.01em; }
+
+.contact-form-overlay {
+  position: absolute; inset: 0; background: rgba(13,13,13,0.5); z-index: 50;
+  animation: fadeInOverlay .25s ease both;
+}
+.contact-form-sheet {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 51;
+  animation: slideUpForm .35s cubic-bezier(.2,.8,.2,1) both;
+}
+.contact-form-inner {
+  width: 100%; background: linear-gradient(160deg, #0D0D0D, #2E2E2E); color: #F5F5F5;
+  border-radius: 20px 20px 0 0; padding: 22px 22px 24px;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.form-title { font-size: 24px; font-weight: 700; }
+.close-btn {
+  appearance: none; border: none; background: rgba(255,255,255,0.15); color: #F5F5F5;
+  width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 14px; line-height: 1;
+}
+.form-email { font-size: 12px; opacity: 0.75; margin-top: -8px; }
+#contact-form { display: flex; flex-direction: column; gap: 12px; }
+.contact-form-field {
+  appearance: none; border: 1px solid rgba(255,255,255,0.3); background: #FFFFFF; color: #17181A;
+  border-radius: 12px; padding: 12px 14px; font-family: inherit; font-size: 13px; outline: none; resize: none;
+}
+.contact-form-field::placeholder { color: rgba(23,24,26,0.45); }
+.send-btn {
+  appearance: none; border: none; cursor: pointer; background: var(--accent); color: #0D0D0D;
+  font-size: 14px; font-weight: 700; padding: 13px 20px; border-radius: 999px; margin-top: 4px;
+}
+
+.form-sent-msg {
+  font-size: 13px; font-weight: 600; color: #F5F5F5; background: rgba(255,255,255,0.12);
+  border-radius: 12px; padding: 12px 14px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+/* Below desktop width the grid reflows into extra rows (tablet) or a
+   single stacked column (mobile) and genuinely needs to scroll - only
+   the full desktop layout above is required to fit in one screen. */
+@media (max-width: 1100px) {
+  #page-root { height: auto; min-height: 100vh; overflow: visible; }
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  #home-grid, .work-grid {
+    grid-template-columns: repeat(2,1fr) !important;
+    grid-template-rows: none !important;
+    grid-auto-rows: minmax(150px,320px) !important;
+    grid-auto-flow: row !important;
+    height: auto !important;
+  }
+  #home-grid > div, .work-grid > div { grid-row: auto !important; }
+  #home-grid [data-span="2"] { grid-column: 1/3 !important; }
+  #home-grid [data-span="1"] { grid-column: span 1 !important; }
+  #home-grid > div:first-child { min-height: 320px !important; }
+  .bio-card, .stat-card { min-height: 0 !important; height: auto !important; align-self: start !important; }
+
+  /* text scale: tablet */
+  .display-name { font-size: clamp(22px, 4vh, 32px) !important; }
+  .stat-card .stat-num { font-size: clamp(42px, 8vh, 76px) !important; }
+  .proj-title--lg { font-size: clamp(16px, 2.6vh, 20px) !important; }
+  .role-line { font-size: 12px !important; }
+  .bio-text { font-size: 11px !important; }
+  .form-title { font-size: 20px !important; }
+}
+
+@media (max-width: 900px) {
+  /* one card per row, stacked vertically, no side-by-side pairs at any narrower-than-tablet width */
+  #home-grid, .work-grid, .about-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: none !important;
+    grid-auto-flow: row !important;
+    grid-auto-rows: minmax(280px,auto) !important;
+    height: auto !important;
+    gap: 12px !important;
+  }
+  #home-grid > div, .work-grid > div, .about-grid > div {
+    grid-column: 1/2 !important;
+    grid-row: auto !important;
+    min-height: 300px !important;
+    border-radius: 20px !important;
+  }
+  .bio-card, .stat-card { min-height: 0 !important; height: auto !important; align-self: start !important; }
+  .corner-dot { display: none !important; }
+  .contact-grid { height: auto !important; min-height: calc(100vh - 100px) !important; }
+  .contact-card .photo-img { object-fit: cover !important; }
+}
+
+/* Widened from 640px: at desktop tab sizing, the nav row (tabs + lang
+   switch) stops fitting on one line as low as ~780px (Khmer labels are
+   the worst case), and flex-wrap:wrap was pushing the switch onto its
+   own second line - leaving a tall gap between the tabs and the panel
+   below them. 800px keeps this compact/one-line nav active well above
+   that wrap point, with margin to spare. */
+@media (max-width: 800px) {
+  /* 1: nav stays folder-tab style on mobile, left-aligned; language switch stays put.
+     Active tab shows its full label; inactive tabs truncate so the row always fits
+     without horizontal scroll. */
+  .nav-hamburger { display: none !important; }
+  .nav-wrap { flex-wrap: nowrap !important; }
+  #nav-pill {
+    display: inline-flex !important;
+    position: static;
+    flex-direction: row !important;
+    align-items: flex-end;
+    flex-wrap: nowrap !important;
+    width: auto;
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 2px;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none;
+  }
+  .nav-btn {
+    clip-path: none !important;
+    border-radius: 14px 14px 0 0 !important;
+    height: auto !important;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 32px;
+    padding: 9px 8px 10px !important;
+    font-size: 11px !important;
+    margin-left: -6px !important;
+  }
+  .nav-btn:first-child { margin-left: 0 !important; }
+  .nav-btn.is-active {
+    flex: 1 1 auto;
+    max-width: 160px;
+  }
+  .nav-btn:hover .nav-btn-label, .nav-btn:active .nav-btn-label { transform: scale(1.08); }
+
+  /* 3: cards hug at 16px on mobile */
+  .card-white, .photo-content, .contact-card { padding: 16px !important; }
+
+  /* 5: mobile text scale, smaller than tablet */
+  .display-name { font-size: 24px !important; }
+  .role-line { font-size: 11px !important; }
+  .loc-line { font-size: 10px !important; }
+  .stat-card .stat-num { font-size: 44px !important; }
+  .proj-title--lg { font-size: 16px !important; }
+  .proj-title { font-size: 14px !important; }
+  .proj-desc { font-size: 10px !important; }
+  .bio-text { font-size: 11px !important; padding: 14px !important; }
+  .timeline-title { font-size: 11px !important; }
+  .timeline-text { font-size: 9px !important; }
+
+  #page-root { padding: 14px 14px 20px !important; gap: 10px !important; }
+
+  /* contact: icon-only social pills on mobile, no glass background */
+  .social-pill .social-name, .social-pill .social-handle,
+  .location-pill .social-name, .location-pill .social-handle { display: none !important; }
+  .social-pill, .location-pill {
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+  .social-row { justify-content: center !important; }
+}
+
+@media (max-width: 480px) {
+  .nav-btn { padding: 8px 6px 9px !important; font-size: 10px !important; max-width: 26px; }
+  .nav-btn.is-active { max-width: 130px; }
+  #home-grid > div, .work-grid > div, .about-grid > div { min-height: 260px !important; }
+  .display-name { font-size: 21px !important; }
+  .stat-card .stat-num { font-size: 38px !important; }
+}
