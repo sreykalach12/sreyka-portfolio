@@ -16,13 +16,11 @@
                    overviewKm; it falls back to English when missing).
      category      Small label on the folder tab and the detail page.
      client, role, year
-     fill          Folder look:
-                     'plain'  white folder, black text
-                     'photo'  coverImage fills the folder (white text);
-                              dark gradient placeholder if no image
-                     '#RRGGBB' solid accent colour (white text)
-     coverImage    Cover photo: fills 'photo' folders, and is the
-                   detail-page hero for every fill type.
+     fill          Detail-page hero colour when there's no coverImage:
+                     'plain' light grey, 'photo' dark grey,
+                     '#RRGGBB' that colour. (Folders in the drawer are
+                     always white line-art.)
+     coverImage    Cover photo, shown as the detail-page hero.
      detailImages  Images for the "Key screens & deliverables" grid.
                    Empty = 4 labelled placeholder blocks.
      overview, problem, process, outcome   Detail-page text sections.
