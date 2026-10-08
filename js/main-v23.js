@@ -223,9 +223,9 @@
 
   var projects = window.WORK_PROJECTS || [];
   var toolIcons = window.WORK_TOOL_ICONS || {};
-  // Where each tab sits along its folder (0 = left, 1 = right), cycled per
-  // folder unless a project sets its own tabPosition.
-  var TAB_POSITIONS = [0.1, 0.5, 0.9, 0.3, 0.75, 0, 0.6, 0.2, 1, 0.42, 0.85, 0.05];
+  // Where each tab sits along its folder (0 = left, 1 = right): a
+  // repeating left-to-right staircase, unless a project sets tabPosition.
+  var TAB_POSITIONS = [0, 1 / 3, 2 / 3, 1];
   var MORPH_MS = 520;
   var MORPH_EASE = 'cubic-bezier(0.65, 0, 0.35, 1)';
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -236,8 +236,6 @@
     for (var i = 0; i < projects.length; i++) if (projects[i].id === id) return projects[i];
     return null;
   }
-  // Absolute, because url() inside the --fill custom property resolves
-  // against the stylesheet's folder (css/), not the page.
   function cssUrl(path) { return 'url("' + new URL(path, document.baseURI).href + '")'; }
   function isColorFill(p) { return p.fill !== 'plain' && p.fill !== 'photo'; }
 
@@ -262,12 +260,9 @@
     var pos = typeof p.tabPosition === 'number' ? p.tabPosition : TAB_POSITIONS[i % TAB_POSITIONS.length];
     a.style.setProperty('--p-d', String(pos));
     a.style.setProperty('--p-m', i % 2 ? '1' : '0');
-    a.style.setProperty('--fill', folderBg(p));
 
     var body = el('span', 'folder-body');
-    body.appendChild(el('span', 'folder-fill'));
     var tab = el('span', 'folder-tab');
-    tab.appendChild(el('span', 'folder-fill'));
     var title = el('span', 'folder-title');
     title.textContent = txt(p, 'title');
     var tag = el('span', 'folder-tag');
