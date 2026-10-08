@@ -241,10 +241,9 @@
   function cssUrl(path) { return 'url("' + new URL(path, document.baseURI).href + '")'; }
   function isColorFill(p) { return p.fill !== 'plain' && p.fill !== 'photo'; }
 
-  // Folders in the drawer are black and white only: 'plain' projects are
-  // white, everything else black. Colours and cover photos show once the
-  // project opens.
-  function folderBg(p) { return p.fill === 'plain' ? '#FFFFFF' : '#111111'; }
+  // Folders in the drawer are always plain white; a project's colour and
+  // cover photo show once it opens.
+  function folderBg() { return '#FFFFFF'; }
   function heroBg(p) {
     if (p.coverImage) return 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55)), ' + cssUrl(p.coverImage);
     if (p.fill === 'plain') return '#F2F2F2';
@@ -260,7 +259,6 @@
     a.className = 'folder';
     a.href = '#work/' + p.id;
     a.setAttribute('data-id', p.id);
-    a.setAttribute('data-tone', p.fill === 'plain' ? 'light' : 'dark');
     var pos = typeof p.tabPosition === 'number' ? p.tabPosition : TAB_POSITIONS[i % TAB_POSITIONS.length];
     a.style.setProperty('--p-d', String(pos));
     a.style.setProperty('--p-m', i % 2 ? '1' : '0');

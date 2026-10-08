@@ -16,11 +16,10 @@
                    overviewKm; it falls back to English when missing).
      category      Small label on the folder tab and the detail page.
      client, role, year
-     fill          'plain' = white folder in the drawer; anything else
-                   ('photo' or '#RRGGBB') = black folder. Without a
-                     coverImage it also sets the detail-page hero:
+     fill          Detail-page hero colour when there's no coverImage:
                      'plain' light grey, 'photo' dark grey, '#RRGGBB'
-                     that colour.
+                     that colour. (Folders in the drawer are always
+                     white.)
      coverImage    Cover photo, shown as the detail-page hero.
      detailImages  Images for the "Key screens & deliverables" grid.
                    Empty = 4 labelled placeholder blocks.
@@ -259,38 +258,6 @@ window.WORK_PROJECTS = [
       tools: ['Illustrator'],
     },
     {
-      id: 'market-day-illustrations',
-      title: 'Market Day Illustrations', titleKm: 'គំនូរថ្ងៃផ្សារ',
-      category: 'Digital Art', categoryKm: 'សិល្បៈឌីជីថល',
-      client: 'City Magazine',
-      role: 'Illustrator',
-      year: '2023',
-      fill: 'photo',
-      coverImage: 'assets/work/market-day-illustrations/cover.jpg',
-      detailImages: ['assets/work/market-day-illustrations/shot-1.jpg', 'assets/work/market-day-illustrations/shot-2.jpg', 'assets/work/market-day-illustrations/shot-3.jpg'],
-      overview: 'Editorial illustrations for a magazine feature about morning markets across the city.',
-      problem: 'The feature needed one opening spread and six spot illustrations that felt busy and alive without crowding the text.',
-      process: 'Sketched on location at three markets, simplified scenes into bold colour blocks, and left calm areas for headlines.',
-      outcome: 'A double-page opener, six spot illustrations and a cover variant used for the issue\'s social posts.',
-      tools: ['Procreate'],
-    },
-    {
-      id: 'tuk-tuk-ride-booking',
-      title: 'Tuk Tuk Ride Booking', titleKm: 'កម្មវិធីកក់តុកតុក',
-      category: 'UI/UX Design', categoryKm: 'ការរចនា UI/UX',
-      client: 'RideKH',
-      role: 'UI/UX Designer',
-      year: '2024',
-      fill: 'plain',
-      coverImage: 'assets/work/tuk-tuk-ride-booking/cover.jpg',
-      detailImages: ['assets/work/tuk-tuk-ride-booking/shot-1.jpg', 'assets/work/tuk-tuk-ride-booking/shot-2.jpg', 'assets/work/tuk-tuk-ride-booking/shot-3.jpg'],
-      overview: 'A ride-booking flow designed for tuk tuks, with fixed prices and Khmer-English drivers\' notes.',
-      problem: 'Riders, especially visitors, struggled to explain destinations and agree on prices with drivers.',
-      process: 'Rode with drivers to learn their pain points, designed a pin-and-landmark destination picker, and tested price confirmation screens with tourists.',
-      outcome: 'A three-step booking flow, a driver view with bilingual directions, and an in-ride share screen.',
-      tools: ['Figma', 'Adobe XD'],
-    },
-    {
       id: 'lotus-tea-house-identity',
       title: 'Lotus Tea House Identity', titleKm: 'អត្តសញ្ញាណម៉ាក Lotus Tea House',
       category: 'Branding', categoryKm: 'ម៉ាកយីហោ',
@@ -305,54 +272,6 @@ window.WORK_PROJECTS = [
       process: 'Drew a lotus from simple overlapping curves, chose a deep garden green with a soft pink accent, and designed menus around tea rituals.',
       outcome: 'Logo, menu system, tea tins, cup sleeves and garden signage.',
       tools: ['Illustrator', 'Photoshop'],
-    },
-    {
-      id: 'rainy-season-zine',
-      title: 'Rainy Season Zine', titleKm: 'ទស្សនាវដ្ដីរដូវវស្សា',
-      category: 'Graphic Design', categoryKm: 'ការរចនាក្រាហ្វិក',
-      client: 'Personal project',
-      role: 'Editorial Designer',
-      year: '2023',
-      fill: 'plain',
-      coverImage: 'assets/work/rainy-season-zine/cover.jpg',
-      detailImages: ['assets/work/rainy-season-zine/shot-1.jpg', 'assets/work/rainy-season-zine/shot-2.jpg', 'assets/work/rainy-season-zine/shot-3.jpg'],
-      overview: 'A small risograph-style zine of photos, notes and drawings from one rainy season.',
-      problem: 'I wanted to practise editorial layout and print production on a real, finished object.',
-      process: 'Collected material over four months, designed a loose grid that let photos bleed, and limited the zine to two ink colours.',
-      outcome: 'A 24-page zine, printed in a run of 100 and swapped at a local zine fair.',
-      tools: ['Illustrator', 'Photoshop'],
-    },
-    {
-      id: 'portfolio-design-system',
-      title: 'Portfolio Design System', titleKm: 'ប្រព័ន្ធរចនា Portfolio',
-      category: 'UI/UX Design', categoryKm: 'ការរចនា UI/UX',
-      client: 'Personal project',
-      role: 'UI/UX Designer',
-      year: '2025',
-      fill: 'plain',
-      coverImage: 'assets/work/portfolio-design-system/cover.jpg',
-      detailImages: ['assets/work/portfolio-design-system/shot-1.jpg', 'assets/work/portfolio-design-system/shot-2.jpg', 'assets/work/portfolio-design-system/shot-3.jpg'],
-      overview: 'The design system behind this portfolio: folder tabs, bento cards and a bilingual type scale.',
-      problem: 'The site needed to feel consistent in both Khmer and English, across desktop, tablet and phone.',
-      process: 'Defined tokens for colour, radius and spacing, built a paired Latin/Khmer type scale, and documented each component with states.',
-      outcome: 'A Figma library of tokens and components that this website is built from.',
-      tools: ['Figma'],
-    },
-    {
-      id: 'night-market-posters',
-      title: 'Night Market Posters', titleKm: 'ផ្ទាំងផ្សព្វផ្សាយផ្សាររាត្រី',
-      category: 'Graphic Design', categoryKm: 'ការរចនាក្រាហ្វិក',
-      client: 'Riverside Night Market',
-      role: 'Graphic Designer',
-      year: '2024',
-      fill: 'photo',
-      coverImage: 'assets/work/night-market-posters/cover.jpg',
-      detailImages: ['assets/work/night-market-posters/shot-1.jpg', 'assets/work/night-market-posters/shot-2.jpg', 'assets/work/night-market-posters/shot-3.jpg'],
-      overview: 'Weekly event posters for a riverside night market\'s music stage and food stalls.',
-      problem: 'A new poster was needed every week, fast, but they still had to look like one market.',
-      process: 'Built a modular template with a fixed header and date block, then swapped illustrations and colours for each week\'s theme.',
-      outcome: 'Twelve weekly posters, a stall map and story-sized versions for social media.',
-      tools: ['Illustrator', 'Procreate'],
     },
 ];
 
