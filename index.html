@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style-v77.css">
+<link rel="stylesheet" href="css/style-v78.css">
 </head>
 <body>
 
@@ -126,9 +126,8 @@
 
     <!-- ============ WORK VIEW ============ -->
     <section id="view-work" class="view" data-view-panel="work" hidden>
-      <div id="work-grid" class="bento-grid work-grid">
-        <!-- 4 work category cards injected by JS -->
-      </div>
+      <!-- Folder drawer: built by js/main-v19.js from the projects in js/work-projects-v1.js -->
+      <div id="work-stage" class="drawer-stage"></div>
     </section>
 
     <!-- ============ ABOUT VIEW ============ -->
@@ -208,6 +207,7 @@
   </div>
 </div>
 
-<script src="js/main-v18.js"></script>
+<script src="js/work-projects-v1.js"></script>
+<script src="js/main-v19.js"></script>
 </body>
 </html>
