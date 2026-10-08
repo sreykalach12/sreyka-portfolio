@@ -236,12 +236,15 @@
     for (var i = 0; i < projects.length; i++) if (projects[i].id === id) return projects[i];
     return null;
   }
-  function cssUrl(path) { return 'url("' + encodeURI(path) + '")'; }
+  // Absolute, because url() inside the --fill custom property resolves
+  // against the stylesheet's folder (css/), not the page.
+  function cssUrl(path) { return 'url("' + new URL(path, document.baseURI).href + '")'; }
   function isColorFill(p) { return p.fill !== 'plain' && p.fill !== 'photo'; }
 
   function folderBg(p) {
     if (p.fill === 'plain') return '#FFFFFF';
-    if (p.fill === 'photo') return p.coverImage ? cssUrl(p.coverImage) : 'linear-gradient(135deg, #161616, #5a5a5a)';
+    // dimmed so the white tab title stays readable over busy photos
+    if (p.fill === 'photo') return p.coverImage ? 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), ' + cssUrl(p.coverImage) : 'linear-gradient(135deg, #161616, #5a5a5a)';
     return p.fill;
   }
   function heroBg(p) {
