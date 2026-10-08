@@ -389,7 +389,7 @@ img { max-width: 100%; display: block; }
    the next folder (or the shelf). On desktop the bands share the panel's
    height, so every folder always fits without scrolling - more projects
    just means thinner bands and smaller tab text. Content comes from
-   js/work-projects-v5.js. */
+   the js/work-projects-v*.js data file. */
 .drawer-stage { height: 100%; }
 .folder-stack {
   --band-max: 68px;    /* tallest a folder band gets when there's room */
