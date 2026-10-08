@@ -409,12 +409,11 @@ img { max-width: 100%; display: block; }
   position: relative; display: block;
   flex: 1 1 0; min-height: 0; max-height: var(--band-max);
   color: #111; text-decoration: none; outline: none; cursor: pointer;
-  transition: transform 220ms ease, filter 220ms ease;
 }
-.folder:hover, .folder:focus-visible {
-  transform: translateY(-6px);
-  filter: drop-shadow(0 10px 14px rgba(0,0,0,0.28));
-}
+/* Hover stays in place (a lift would break the lines joining the
+   folders) - just a light grey tint on the tab and its visible strip. */
+.folder-fill { transition: background-color 180ms ease; }
+.folder:hover .folder-fill, .folder:focus-visible .folder-fill { background: #EFEFEF; }
 .folder.is-lifted { visibility: hidden; }
 .folder-body, .folder-tab {
   position: absolute; overflow: hidden;
@@ -570,8 +569,7 @@ html.wd-lock, html.wd-lock body { overflow: hidden; }
 .wd-ghost-fill { position: absolute; inset: 0; background-size: cover; background-position: center; }
 .wd-ghost-title { position: absolute; font-weight: 700; line-height: 1.05; white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) {
-  .folder, .wd-backdrop, .wd-sheet, .wd-body { transition: none; }
-  .folder:hover, .folder:focus-visible { transform: none; }
+  .folder-fill, .wd-backdrop, .wd-sheet, .wd-body { transition: none; }
 }
 
 /* ---------- ABOUT GRID ---------- */
