@@ -239,9 +239,14 @@
   function cssUrl(path) { return 'url("' + new URL(path, document.baseURI).href + '")'; }
   function isColorFill(p) { return p.fill !== 'plain' && p.fill !== 'photo'; }
 
-  // Folders in the drawer are always plain white; a project's colour and
-  // cover photo show once it opens.
-  function folderBg() { return '#FFFFFF'; }
+  // Folder greys, lightest at the back (top of the stack) to darkest at
+  // the front, spanning the menu tabs' range (#DBDBDB -> #8A8A8A). A
+  // project's own colour and cover photo show once it opens.
+  function shadeLightness(i) {
+    var n = Math.max(projects.length - 1, 1);
+    return 86 - (86 - 54) * (i / n);
+  }
+  function folderBg(p) { return 'hsl(0 0% ' + shadeLightness(projects.indexOf(p)).toFixed(1) + '%)'; }
   function heroBg(p) {
     if (p.coverImage) return 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55)), ' + cssUrl(p.coverImage);
     if (p.fill === 'plain') return '#F2F2F2';
@@ -260,6 +265,8 @@
     var pos = typeof p.tabPosition === 'number' ? p.tabPosition : TAB_POSITIONS[i % TAB_POSITIONS.length];
     a.style.setProperty('--p-d', String(pos));
     a.style.setProperty('--p-m', i % 2 ? '1' : '0');
+    a.style.setProperty('--base-shade', folderBg(p));
+    a.style.setProperty('--base-ink', shadeLightness(i) >= 58 ? '#2E2E2E' : '#FFFFFF');
 
     var body = el('span', 'folder-body');
     var tab = el('span', 'folder-tab');
@@ -430,7 +437,9 @@
   function morph(p, from, to, toHero) {
     var ghost = el('div', 'wd-ghost');
     var folderFill = el('div', 'wd-ghost-fill');
-    folderFill.style.background = folderBg(p);
+    // start/end on the colour the tab actually shows (white while hovered)
+    var liveTab = folderEl(p.id) && folderEl(p.id).querySelector('.folder-tab');
+    folderFill.style.background = liveTab ? getComputedStyle(liveTab).backgroundColor : folderBg(p);
     var heroFill = el('div', 'wd-ghost-fill');
     heroFill.style.background = heroBg(p);
     heroFill.style.backgroundSize = 'cover';

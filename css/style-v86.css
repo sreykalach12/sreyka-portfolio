@@ -384,95 +384,122 @@ img { max-width: 100%; display: block; }
 }
 
 /* ---------- WORK: FOLDER DRAWER ---------- */
-/* Each .folder box is only its visible band; its tab and body are drawn
-   from that band, and the body runs just far enough down to tuck under
-   the next folder (or the shelf). On desktop the bands share the panel's
-   height, so every folder always fits without scrolling - more projects
-   just means thinner bands and smaller tab text. Content comes from
-   the js/work-projects-v*.js data file. */
+/* Folders styled like the top menu tabs: the same silhouette (rounded
+   top-left, slanted curved right edge, scaled to the tab height), no
+   outlines - each tab runs straight into its own body in one solid
+   grey - and the menu's grey range, lightest at the back (top) to
+   darkest at the front. Hover turns a folder white, like the active
+   menu tab. Each .folder box is only its visible band; its body runs
+   just far enough down to tuck under the next folder (or the shelf).
+   On desktop the bands share the panel's height so everything fits
+   without scrolling. Content comes from the js/work-projects-v*.js
+   data file; shades are set per folder by js/main-v*.js. */
 .drawer-stage { height: 100%; }
 .folder-stack {
   --band-max: 64px;    /* tallest a folder band gets when there's room */
   --stack-inset: 40px; /* folders sit this far inside the shelf's ends */
-  --tab-w: 0.32;       /* tab width, as a fraction of folder width */
-  --line-w: 1.5px;
-  --line: var(--line-w) solid #111;
+  --tab-w: 0.34;       /* tab width, as a fraction of folder width */
   height: 100%;
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 6px var(--stack-inset) 0;
 }
 .folder {
   --p: var(--p-d);
+  --shade: var(--base-shade, #D9D9D9);
+  --ink: var(--base-ink, #3D3D3D);
   /* cqw/cqh = this folder's band, used to size the tab and its text */
   container-type: size;
   --th: min(46px, 100cqh * 0.74);   /* tab height */
-  --r: calc(var(--th) * 0.3);       /* tab corner + shoulder curve radius */
-  --tab-bg: #FFFFFF;
+  --r: calc(var(--th) * 0.3);       /* edge inset unit */
   position: relative; display: block;
   flex: 1 1 0; min-height: 0; max-height: var(--band-max);
-  color: #111; text-decoration: none; outline: none; cursor: pointer;
+  color: var(--ink); text-decoration: none; outline: none; cursor: pointer;
+  /* soft shadow along the folder's top edge so neighbouring greys read
+     as separate sheets */
+  filter: drop-shadow(0 -2px 3px rgba(0,0,0,0.09));
 }
-/* Hover stays in place (a lift would break the lines joining the
-   folders) - the tab and its visible strip just tint light grey. */
-.folder:hover, .folder:focus-visible { --tab-bg: #EFEFEF; }
+.folder:hover, .folder:focus-visible { --shade: #FFFFFF; --ink: #111111; }
 .folder.is-lifted { visibility: hidden; }
-/* Square corners, so the folders' sides stack into one straight edge. */
+.folder-body, .folder-tab { background: var(--shade); transition: background-color 200ms ease, color 200ms ease; }
 .folder-body {
   position: absolute; top: var(--th); left: 0; right: 0;
   /* reaches one tab-height past the band: down to where the next
      folder's own body begins */
   bottom: calc(-1 * var(--th));
-  background: var(--tab-bg); border: var(--line); border-bottom: 0;
 }
 .folder-tab {
   position: absolute; z-index: 1;
-  /* tall enough to cover the body's top line where they join */
-  top: 0; height: calc(var(--th) + var(--line-w));
+  /* +1px overlaps the body so no hairline shows between them */
+  top: 0; height: calc(var(--th) + 1px);
   /* Same width for every tab; --p places it along the folder (0 = left,
-     1 = right), kept two curve-radii inside the edges. */
+     1 = right), kept two inset units inside the edges. */
   width: calc(var(--tab-w) * 100cqw);
   left: calc(2 * var(--r) + var(--p) * (100% - 4 * var(--r)));
   transform: translateX(calc(var(--p) * -100%));
   display: flex; align-items: center; justify-content: space-between;
-  gap: calc(var(--th) * 0.3); padding: 0 calc(var(--th) * 0.38);
-  background: var(--tab-bg); border: var(--line); border-bottom: 0;
-  border-radius: var(--r) var(--r) 0 0;
+  gap: calc(var(--th) * 0.3);
+  /* right padding clears the slanted edge */
+  padding: 0 calc(var(--th) * 0.75) 0 calc(var(--th) * 0.45);
+  clip-path: polygon(
+    0 calc(var(--th) * 0.4091),
+    calc(var(--th) * 0.0030) calc(var(--th) * 0.3598),
+    calc(var(--th) * 0.0118) calc(var(--th) * 0.3111),
+    calc(var(--th) * 0.0266) calc(var(--th) * 0.2641),
+    calc(var(--th) * 0.0468) calc(var(--th) * 0.2189),
+    calc(var(--th) * 0.0725) calc(var(--th) * 0.1766),
+    calc(var(--th) * 0.1030) calc(var(--th) * 0.1377),
+    calc(var(--th) * 0.1377) calc(var(--th) * 0.1030),
+    calc(var(--th) * 0.1766) calc(var(--th) * 0.0725),
+    calc(var(--th) * 0.2189) calc(var(--th) * 0.0468),
+    calc(var(--th) * 0.2641) calc(var(--th) * 0.0266),
+    calc(var(--th) * 0.3111) calc(var(--th) * 0.0118),
+    calc(var(--th) * 0.3598) calc(var(--th) * 0.0030),
+    calc(var(--th) * 0.4091) 0,
+    calc(100% - var(--th) * 0.9545) 0,
+    calc(100% - var(--th) * 0.9123) calc(var(--th) * 0.0011),
+    calc(100% - var(--th) * 0.8714) calc(var(--th) * 0.0043),
+    calc(100% - var(--th) * 0.8318) calc(var(--th) * 0.0098),
+    calc(100% - var(--th) * 0.7934) calc(var(--th) * 0.0173),
+    calc(100% - var(--th) * 0.7561) calc(var(--th) * 0.0270),
+    calc(100% - var(--th) * 0.7200) calc(var(--th) * 0.0391),
+    calc(100% - var(--th) * 0.6855) calc(var(--th) * 0.0530),
+    calc(100% - var(--th) * 0.6518) calc(var(--th) * 0.0693),
+    calc(100% - var(--th) * 0.6195) calc(var(--th) * 0.0877),
+    calc(100% - var(--th) * 0.5886) calc(var(--th) * 0.1082),
+    calc(100% - var(--th) * 0.5586) calc(var(--th) * 0.1311),
+    calc(100% - var(--th) * 0.5302) calc(var(--th) * 0.1559),
+    calc(100% - var(--th) * 0.5030) calc(var(--th) * 0.1830),
+    calc(100% - var(--th) * 0.4768) calc(var(--th) * 0.2123),
+    calc(100% - var(--th) * 0.4518) calc(var(--th) * 0.2436),
+    calc(100% - var(--th) * 0.4282) calc(var(--th) * 0.2773),
+    calc(100% - var(--th) * 0.4059) calc(var(--th) * 0.3130),
+    100% 100%,
+    0 100%
+  );
 }
-/* Shoulders: a concave quarter-ring each side curves the tab's outline
-   into the body's top line (ring = the outline; tab colour outside it
-   covers the lines beneath). The +1px covers anti-aliasing slivers. */
-.folder-tab::before, .folder-tab::after {
-  content: ""; position: absolute; pointer-events: none;
-  top: calc(var(--th) - var(--r) - var(--line-w));
-  width: calc(var(--r) + var(--line-w) + 1px); height: calc(var(--r) + var(--line-w) + 1px);
-  --ring: transparent calc(var(--r) - 0.4px), #111 calc(var(--r) + 0.3px), #111 calc(var(--r) + var(--line-w) - 0.3px), var(--tab-bg) calc(var(--r) + var(--line-w) + 0.4px);
-}
-.folder-tab::before { left: calc(-1 * var(--r) - var(--line-w)); background: radial-gradient(circle at 0 0, var(--ring)); }
-.folder-tab::after { right: calc(-1 * var(--r) - var(--line-w)); background: radial-gradient(circle at 100% 0, var(--ring)); }
 .folder-title {
   position: relative; min-width: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  font-size: clamp(11px, var(--th) * 0.4, 19px); font-weight: 600; line-height: 1.3;
+  font-size: clamp(11px, var(--th) * 0.38, 18px); font-weight: 600; line-height: 1.3;
 }
 .folder-tag {
   position: relative; flex: none;
-  font-size: clamp(9px, var(--th) * 0.26, 12px); font-weight: 500; line-height: 1.3;
-  color: #7A7A7A; white-space: nowrap;
+  font-size: clamp(9px, var(--th) * 0.25, 12px); font-weight: 500; line-height: 1.3;
+  opacity: 0.7; white-space: nowrap;
 }
-.folder:focus-visible .folder-tab { outline: 2px solid #4C9EFF; outline-offset: -5px; }
+.folder:focus-visible .folder-title { text-decoration: underline; text-underline-offset: 3px; }
 /* Drawer front: full panel width, flush with the panel's bottom edge
    (cancels the panel's 24px side / 18px bottom padding). */
 .drawer-shelf {
   position: relative; flex: none; z-index: 1;
   height: clamp(56px, 9vh, 96px);
   margin: 0 calc(-1 * (var(--stack-inset) + 24px)) -18px;
-  background: #FFFFFF; border-top: var(--line);
+  background: #FFFFFF; box-shadow: 0 -6px 16px rgba(0,0,0,0.08);
   border-radius: 0 0 var(--panel-radius-other) var(--panel-radius-other);
 }
-.drawer-shelf::before { content: ""; position: absolute; left: 0; right: 0; top: 14px; border-top: var(--line); }
 .drawer-handle {
-  position: absolute; left: 50%; top: 55%; width: 20%; height: clamp(14px, 2.2vh, 22px);
-  border-radius: 999px; background: #111; transform: translate(-50%, -50%);
+  position: absolute; left: 50%; top: 50%; width: 20%; height: clamp(12px, 2vh, 20px);
+  border-radius: 999px; background: #D9D9D9; transform: translate(-50%, -50%);
 }
 
 /* ---------- WORK: PROJECT DETAIL ---------- */
@@ -745,7 +772,8 @@ html.wd-lock, html.wd-lock body { overflow: hidden; }
      long titles fit on narrow screens */
   .folder-tab {
     width: max-content; min-width: calc(var(--tab-w) * 100cqw); max-width: calc(100cqw - 4 * var(--r));
-    flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; padding: 0 14px;
+    flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px;
+    padding: 0 calc(var(--th) * 0.75) 0 14px;
   }
   .folder-title { align-self: stretch; font-size: 15px; }
   .folder-tag { order: -1; font-size: 10px; }
@@ -767,7 +795,7 @@ html.wd-lock, html.wd-lock body { overflow: hidden; }
   .folder { --r: 9px; }
   /* one radius from the edges instead of two, for a little more width */
   .folder-tab {
-    padding: 0 9px; max-width: calc(100cqw - 2 * var(--r));
+    padding: 0 calc(var(--th) * 0.7) 0 10px; max-width: calc(100cqw - 2 * var(--r));
     left: calc(var(--r) + var(--p) * (100% - 2 * var(--r)));
   }
   .folder-title { font-size: 14px; }
