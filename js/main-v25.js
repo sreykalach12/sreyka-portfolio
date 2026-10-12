@@ -239,14 +239,11 @@
   function cssUrl(path) { return 'url("' + new URL(path, document.baseURI).href + '")'; }
   function isColorFill(p) { return p.fill !== 'plain' && p.fill !== 'photo'; }
 
-  // Folder greys, lightest at the back (top of the stack) to darkest at
-  // the front, spanning the menu tabs' range (#DBDBDB -> #8A8A8A). A
-  // project's own colour and cover photo show once it opens.
-  function shadeLightness(i) {
-    var n = Math.max(projects.length - 1, 1);
-    return 86 - (86 - 54) * (i / n);
-  }
-  function folderBg(p) { return 'hsl(0 0% ' + shadeLightness(projects.indexOf(p)).toFixed(1) + '%)'; }
+  // Folders alternate black and white down the stack, starting black so
+  // the top tab stands out on the white panel. A project's own colour and
+  // cover photo show once it opens.
+  function isDarkFolder(i) { return i % 2 === 0; }
+  function folderBg(p) { return isDarkFolder(projects.indexOf(p)) ? '#111111' : '#FFFFFF'; }
   function heroBg(p) {
     if (p.coverImage) return 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55)), ' + cssUrl(p.coverImage);
     if (p.fill === 'plain') return '#F2F2F2';
@@ -265,8 +262,7 @@
     var pos = typeof p.tabPosition === 'number' ? p.tabPosition : TAB_POSITIONS[i % TAB_POSITIONS.length];
     a.style.setProperty('--p-d', String(pos));
     a.style.setProperty('--p-m', i % 2 ? '1' : '0');
-    a.style.setProperty('--base-shade', folderBg(p));
-    a.style.setProperty('--base-ink', shadeLightness(i) >= 58 ? '#2E2E2E' : '#FFFFFF');
+    a.setAttribute('data-tone', isDarkFolder(i) ? 'dark' : 'light');
 
     var body = el('span', 'folder-body');
     var tab = el('span', 'folder-tab');
