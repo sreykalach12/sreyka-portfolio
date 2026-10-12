@@ -26,6 +26,9 @@
       sentTitle: 'Message sent!',
       sentBody: "Thanks for reaching out — I'll get back to you at sreyka.lach12@gmail.com soon.",
       close: 'Close',
+      chLets: "Let's", chWork: 'Work', chTogether: 'Together',
+      chYou: 'You', chMe: 'Sreyka', chNote: "Don't hesitate,<br>drop me a line",
+      chOpen: 'Open contact form', chClose: 'Close contact form',
       backToFolders: 'Back to folders',
       client: 'Client', role: 'Role', year: 'Year', category: 'Category',
       problem: 'Problem / Goal', process: 'Process', keyScreens: 'Key screens & deliverables',
@@ -52,6 +55,9 @@
       sentTitle: 'សារបានផ្ញើ!',
       sentBody: 'អរគុណសម្រាប់ការទាក់ទង — ខ្ញុំនឹងឆ្លើយតបទៅកាន់អ្នកឆាប់ៗនេះតាមរយៈ sreyka.lach12@gmail.com។',
       close: 'បិទ',
+      chLets: 'តោះ', chWork: 'ធ្វើការ', chTogether: 'ជាមួយគ្នា',
+      chYou: 'អ្នក', chMe: 'ស្រីកា', chNote: 'កុំស្ទាក់ស្ទើរ<br>ផ្ញើសារមកខ្ញុំបាន',
+      chOpen: 'បើកទម្រង់ទំនាក់ទំនង', chClose: 'បិទទម្រង់ទំនាក់ទំនង',
       backToFolders: 'ត្រឡប់ទៅថតឯកសារ',
       client: 'អតិថិជន', role: 'តួនាទី', year: 'ឆ្នាំ', category: 'ប្រភេទ',
       problem: 'បញ្ហា / គោលដៅ', process: 'ដំណើរការ', keyScreens: 'អេក្រង់ និងស្នាដៃសំខាន់ៗ',
@@ -706,6 +712,13 @@
 
     document.getElementById('label-say-hello').textContent = t('sayHello');
     document.getElementById('label-lets-talk').textContent = t('letsTalk');
+    document.getElementById('label-ch-lets').textContent = t('chLets');
+    document.getElementById('label-ch-work').textContent = t('chWork');
+    document.getElementById('label-ch-together').textContent = t('chTogether');
+    document.getElementById('label-ch-you').textContent = t('chYou');
+    document.getElementById('label-ch-me').textContent = t('chMe');
+    document.getElementById('label-ch-note').innerHTML = t('chNote');
+    updateContactFormVisibility();
     document.getElementById('input-name').placeholder = t('placeholderName');
     document.getElementById('input-email').placeholder = t('placeholderEmail');
     document.getElementById('input-message').placeholder = t('placeholderMessage');
@@ -789,6 +802,9 @@
     var sheet = document.getElementById('contact-form-sheet');
     overlay.hidden = !state.contactFormOpen;
     sheet.hidden = !state.contactFormOpen;
+    var env = document.getElementById('ch-envelope');
+    env.setAttribute('aria-expanded', String(state.contactFormOpen));
+    env.setAttribute('aria-label', t(state.contactFormOpen ? 'chClose' : 'chOpen'));
   }
 
   function openContactForm() {
@@ -821,6 +837,9 @@
     });
 
     document.getElementById('say-hello-btn').addEventListener('click', openContactForm);
+    document.getElementById('ch-envelope').addEventListener('click', function () {
+      if (state.contactFormOpen) closeContactForm(); else openContactForm();
+    });
     document.getElementById('close-form-btn').addEventListener('click', closeContactForm);
     document.getElementById('contact-form-overlay').addEventListener('click', closeContactForm);
 
@@ -851,7 +870,9 @@
     if (initial) openProject(initial.id, { animate: false, push: false });
     window.addEventListener('popstate', onRouteChange);
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && detail.root) requestClose();
+      if (e.key !== 'Escape') return;
+      if (detail.root) requestClose();
+      else if (state.contactFormOpen) closeContactForm();
     });
 
     // Synced 10s autoplay across featured, home project groups, and work categories.

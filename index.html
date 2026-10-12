@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style-v91.css">
+<link rel="stylesheet" href="css/style-v92.css">
 </head>
 <body>
 
@@ -126,7 +126,7 @@
 
     <!-- ============ WORK VIEW ============ -->
     <section id="view-work" class="view" data-view-panel="work" hidden>
-      <!-- Folder drawer: built by js/main-v26.js from the projects in js/work-projects-v7.js -->
+      <!-- Folder drawer: built by js/main-v27.js from the projects in js/work-projects-v7.js -->
       <div id="work-stage" class="drawer-stage"></div>
     </section>
 
@@ -173,6 +173,39 @@
         <div class="card card-photo contact-card" id="contact-card" style="">
           <img class="photo-img" src="assets/img/portrait-contact-v4.jpg" alt="Sreyka Lach">
           <div class="contact-scrim"></div>
+
+          <!-- ===== CONTACT HERO: "Let's [envelope] Work / Together" =====
+               The envelope button toggles the existing contact form below
+               (same overlay + slide animation as "Say hello"). -->
+          <div class="contact-hero">
+            <h2 class="ch-title">
+              <span class="ch-line">
+                <span id="label-ch-lets">Let's</span>
+                <span class="ch-icon-wrap">
+                  <span class="ch-cursor ch-cursor--you" aria-hidden="true">
+                    <span class="ch-pill" id="label-ch-you">You</span>
+                    <svg class="ch-pointer" viewBox="0 0 12 12"><path d="M11 11 1.5 7.2 5.4 5.4 7.2 1.5Z"/></svg>
+                  </span>
+                  <button type="button" id="ch-envelope" class="ch-envelope" aria-label="Open contact form" aria-expanded="false" aria-controls="contact-form-sheet">
+                    <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 19l11 9 11-9" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <span class="ch-cursor ch-cursor--me" aria-hidden="true">
+                    <svg class="ch-pointer" viewBox="0 0 12 12"><path d="M1 1 10.5 4.8 6.6 6.6 4.8 10.5Z"/></svg>
+                    <span class="ch-pill" id="label-ch-me">Sreyka</span>
+                  </span>
+                </span>
+                <span id="label-ch-work">Work</span>
+              </span>
+              <span class="ch-line">
+                <span id="label-ch-together">Together</span>
+                <span class="ch-note">
+                  <span id="label-ch-note">Don't hesitate,<br>drop me a line</span>
+                  <!-- hand-drawn arrow curling back toward the envelope -->
+                  <svg class="ch-arrow" viewBox="0 0 120 70" aria-hidden="true"><path d="M104 6c6 22-10 40-32 38-16-2-14-20 0-18 14 2 4 28-30 30-12 1-24-3-32-10m0 0 10 1m-10-1 3-10" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </span>
+            </h2>
+          </div>
           <div class="corner-dot" style="top:-5px;left:-5px;"></div>
           <div class="corner-dot" style="top:-5px;right:-5px;"></div>
           <div class="corner-dot" style="bottom:-5px;left:-5px;"></div>
@@ -208,6 +241,6 @@
 </div>
 
 <script src="js/work-projects-v7.js"></script>
-<script src="js/main-v26.js"></script>
+<script src="js/main-v27.js"></script>
 </body>
 </html>

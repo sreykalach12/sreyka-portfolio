@@ -676,6 +676,69 @@ html.wd-lock, html.wd-lock body { overflow: hidden; }
 }
 .contact-card:hover { transform: none; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
 .contact-card .photo-img { object-fit: contain; object-position: center bottom; }
+/* ---------- CONTACT HERO ---------- */
+/* "Let's [envelope] Work / Together", top-left of the contact card; the
+   illustration sits to its right (desktop) or below it (phones). */
+.contact-card .photo-img { object-position: 92% bottom; }
+.contact-hero {
+  position: relative; z-index: 2; margin-bottom: auto;
+  padding: clamp(8px, 2vw, 28px) clamp(8px, 2.4vw, 32px) 0;
+  color: #111;
+}
+.ch-title {
+  margin: 0; font-weight: 700; line-height: 0.98; letter-spacing: -0.035em;
+  font-size: clamp(44px, 6.6vw, 112px);
+}
+html[lang="km"] .ch-title { letter-spacing: 0; line-height: 1.3; }
+.ch-line { display: flex; align-items: center; flex-wrap: wrap; column-gap: 0.18em; }
+.ch-icon-wrap { position: relative; display: inline-flex; }
+/* envelope: amber tile with a white flap chevron; breathes gently */
+.ch-envelope {
+  /* buttons don't inherit font-size; the em sizes below need the headline's */
+  font-size: inherit;
+  width: 1.18em; height: 0.84em; padding: 0; border: 0; cursor: pointer;
+  border-radius: 0.2em; background: #F5B942;
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 0.12em 0.3em rgba(245,185,66,0.35);
+  animation: chBreathe 2s ease-in-out infinite;
+  transition: transform 220ms ease, filter 220ms ease;
+}
+.ch-envelope svg { width: 62%; height: 62%; }
+/* the breathing animation would override transform, so hover drops it */
+.ch-envelope:hover, .ch-envelope:focus-visible { animation: none; transform: scale(1.1); filter: brightness(1.08); }
+.ch-envelope:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
+.ch-envelope[aria-expanded="true"] { animation: none; }
+@keyframes chBreathe {
+  0%, 100% { transform: scale(1); box-shadow: 0 0.12em 0.3em rgba(245,185,66,0.35); }
+  50% { transform: scale(1.05); box-shadow: 0 0.14em 0.6em rgba(245,185,66,0.65); }
+}
+/* floating "You" / "Sreyka" pills with cursor pointers aimed at the icon */
+.ch-cursor { position: absolute; display: flex; align-items: center; gap: 2px; pointer-events: none; z-index: 1; }
+.ch-cursor--you { right: 82%; bottom: 96%; }
+.ch-cursor--me { left: 88%; top: 82%; }
+.ch-pointer { width: 14px; height: 14px; }
+.ch-cursor--you .ch-pointer { align-self: flex-end; margin-bottom: -8px; fill: #2E9E6B; }
+.ch-cursor--me .ch-pointer { align-self: flex-start; margin-top: -8px; fill: #F26B3A; }
+.ch-pill {
+  font-size: clamp(10px, 0.95vw, 13px); font-weight: 600; letter-spacing: 0;
+  line-height: 1; white-space: nowrap; color: #FFFFFF;
+  padding: 6px 12px; border-radius: 999px;
+}
+.ch-cursor--you .ch-pill { background: #2E9E6B; }
+.ch-cursor--me .ch-pill { background: #F26B3A; }
+/* supporting note + hand-drawn arrow */
+.ch-note {
+  position: relative; align-self: center; margin-left: 0.25em;
+  font-size: clamp(13px, 1.25vw, 18px); font-weight: 700; letter-spacing: 0; line-height: 1.3;
+}
+.ch-arrow {
+  position: absolute; left: -10%; top: 100%; width: clamp(70px, 7vw, 120px); height: auto;
+  stroke: #F5B942; transform: rotate(-8deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ch-envelope { animation: none; }
+}
+
 .contact-scrim {
   position: absolute; inset: 0; pointer-events: none;
   /* Only darkens the bottom band behind the white social-link text - a
@@ -857,7 +920,12 @@ html.wd-lock, html.wd-lock body { overflow: hidden; }
   .bio-card { min-height: 0 !important; height: auto !important; align-self: start !important; }
   .corner-dot { display: none !important; }
   .contact-grid { height: auto !important; min-height: calc(100vh - 100px) !important; }
-  .contact-card .photo-img { object-fit: cover !important; }
+  /* contain + bottom so the illustration sits under the hero headline */
+  .contact-card .photo-img { object-fit: contain !important; object-position: center bottom !important; }
+  .ch-cursor--you { right: 80%; bottom: 86%; }
+  .ch-cursor--me { left: 80%; top: 86%; }
+  .ch-pill { padding: 4px 9px; }
+  .ch-pointer { width: 11px; height: 11px; }
 }
 
 /* Widened from 640px: at desktop tab sizing, the nav row (tabs + lang
