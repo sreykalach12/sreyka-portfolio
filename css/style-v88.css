@@ -387,12 +387,11 @@ img { max-width: 100%; display: block; }
 /* Folders styled like the top menu tabs: the same silhouette (rounded
    top-left, slanted curved right edge, scaled to the tab height), no
    outlines - each tab runs straight into its own body in one solid
-   colour - alternating black and white down the stack. Hover tints a
-   folder grey. Each .folder box is only its visible band; its body runs
+   colour - all white with black text. Hover tints a folder grey. Each .folder box is only its visible band; its body runs
    just far enough down to tuck under the next folder (or the shelf).
    On desktop the bands share the panel's height so everything fits
    without scrolling. Content comes from the js/work-projects-v*.js
-   data file; js/main-v*.js marks every other folder data-tone="dark". */
+   data file. */
 .drawer-stage { height: 100%; }
 .folder-stack {
   --band-max: 64px;    /* tallest a folder band gets when there's room */
@@ -413,13 +412,11 @@ img { max-width: 100%; display: block; }
   position: relative; display: block;
   flex: 1 1 0; min-height: 0; max-height: var(--band-max);
   color: var(--ink); text-decoration: none; outline: none; cursor: pointer;
-  /* soft shadow along the folder's top edge so a white folder still
-     reads as a separate sheet against its neighbours and the panel */
-  filter: drop-shadow(0 -2px 4px rgba(0,0,0,0.12));
+  /* soft shadow along the folder's top edge: with every folder white,
+     this is what separates each sheet from the one behind it */
+  filter: drop-shadow(0 -2px 5px rgba(0,0,0,0.16));
 }
-.folder[data-tone="dark"] { --shade: #111111; --ink: #FFFFFF; }
 .folder:hover, .folder:focus-visible { --shade: #ECECEC; }
-.folder[data-tone="dark"]:hover, .folder[data-tone="dark"]:focus-visible { --shade: #3A3A3A; }
 .folder.is-lifted { visibility: hidden; }
 .folder-body, .folder-tab { background: var(--shade); transition: background-color 200ms ease, color 200ms ease; }
 .folder-body {

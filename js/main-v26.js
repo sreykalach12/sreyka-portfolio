@@ -239,11 +239,9 @@
   function cssUrl(path) { return 'url("' + new URL(path, document.baseURI).href + '")'; }
   function isColorFill(p) { return p.fill !== 'plain' && p.fill !== 'photo'; }
 
-  // Folders alternate black and white down the stack, starting black so
-  // the top tab stands out on the white panel. A project's own colour and
-  // cover photo show once it opens.
-  function isDarkFolder(i) { return i % 2 === 0; }
-  function folderBg(p) { return isDarkFolder(projects.indexOf(p)) ? '#111111' : '#FFFFFF'; }
+  // Folders are all white; a project's own colour and cover photo show
+  // once it opens.
+  function folderBg() { return '#FFFFFF'; }
   function heroBg(p) {
     if (p.coverImage) return 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55)), ' + cssUrl(p.coverImage);
     if (p.fill === 'plain') return '#F2F2F2';
@@ -262,7 +260,6 @@
     var pos = typeof p.tabPosition === 'number' ? p.tabPosition : TAB_POSITIONS[i % TAB_POSITIONS.length];
     a.style.setProperty('--p-d', String(pos));
     a.style.setProperty('--p-m', i % 2 ? '1' : '0');
-    a.setAttribute('data-tone', isDarkFolder(i) ? 'dark' : 'light');
 
     var body = el('span', 'folder-body');
     var tab = el('span', 'folder-tab');
