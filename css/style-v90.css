@@ -418,11 +418,14 @@ img { max-width: 100%; display: block; }
 }
 .folder:hover, .folder:focus-visible { --shade: #ECECEC; }
 .folder.is-lifted { visibility: hidden; }
+/* Only the top (backmost) folder gets rounded top corners; the rest stay
+   square so the stack's sides read as one straight edge. Radius = --r,
+   so even an edge tab (inset by at least --r) starts clear of the curve. */
+.folder:first-child .folder-body { border-radius: var(--r) var(--r) 0 0; }
 .folder-body, .folder-tab { background: var(--shade); transition: background-color 200ms ease, color 200ms ease; }
 .folder-body {
   position: absolute; top: var(--th); left: 0; right: 0;
-  /* = --r, so even the edge tabs (inset by at least --r) start clear of the curve */
-  border-radius: var(--r) var(--r) 0 0;
+
   /* reaches one tab-height past the band: down to where the next
      folder's own body begins */
   bottom: calc(-1 * var(--th));
