@@ -421,6 +421,8 @@ img { max-width: 100%; display: block; }
 .folder-body, .folder-tab { background: var(--shade); transition: background-color 200ms ease, color 200ms ease; }
 .folder-body {
   position: absolute; top: var(--th); left: 0; right: 0;
+  /* = --r, so even the edge tabs (inset by at least --r) start clear of the curve */
+  border-radius: var(--r) var(--r) 0 0;
   /* reaches one tab-height past the band: down to where the next
      folder's own body begins */
   bottom: calc(-1 * var(--th));
