@@ -387,7 +387,8 @@ img { max-width: 100%; display: block; }
 /* Folders styled like the top menu tabs: the same silhouette (rounded
    top-left, slanted curved right edge, scaled to the tab height), no
    outlines - each tab runs straight into its own body in one solid
-   colour - all white with black text. Hover tints a folder grey. Each .folder box is only its visible band; its body runs
+   colour - all white with black text. Hover turns a folder black with
+   white text. Each .folder box is only its visible band; its body runs
    just far enough down to tuck under the next folder (or the shelf).
    On desktop the bands share the panel's height so everything fits
    without scrolling. Content comes from the js/work-projects-v*.js
@@ -416,7 +417,8 @@ img { max-width: 100%; display: block; }
      this is what separates each sheet from the one behind it */
   filter: drop-shadow(0 -2px 5px rgba(0,0,0,0.16));
 }
-.folder:hover, .folder:focus-visible { --shade: #ECECEC; }
+/* color set here too: the global a:hover rule would otherwise grey the text */
+.folder:hover, .folder:focus-visible { --shade: #111111; --ink: #FFFFFF; color: var(--ink); }
 .folder.is-lifted { visibility: hidden; }
 /* Only the top (backmost) folder gets rounded top corners; the rest stay
    square so the stack's sides read as one straight edge. Radius = --r,
