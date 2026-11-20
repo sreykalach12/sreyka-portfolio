@@ -854,11 +854,6 @@
 
     document.getElementById('nav-hamburger').addEventListener('click', toggleMobileNav);
 
-    document.querySelector('.brand').addEventListener('click', function (e) {
-      e.preventDefault();
-      setView('home');
-    });
-
     // Hidden (not removed) while the site is English-only - see KHMER_ENABLED.
     document.getElementById('lang-switch').hidden = !KHMER_ENABLED;
     document.getElementById('lang-switch').addEventListener('click', function () {
