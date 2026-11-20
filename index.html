@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style-v92.css">
+<link rel="stylesheet" href="css/style-v93.css">
 </head>
 <body>
 
@@ -16,6 +16,7 @@
 
   <!-- NAV -->
   <div class="nav-wrap">
+    <a href="./" class="brand" aria-label="Sreyka Lach, home"><span class="brand-dot"></span><span class="brand-name">Sreyka Lach</span></a>
     <button type="button" id="nav-hamburger" class="nav-hamburger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -25,10 +26,12 @@
       <button type="button" class="nav-btn" data-view="work" role="tab" aria-selected="false" tabindex="-1"><span class="nav-btn-label">Work</span></button>
       <button type="button" class="nav-btn" data-view="contact" role="tab" aria-selected="false" tabindex="-1"><span class="nav-btn-label">Contact</span></button>
     </nav>
-    <button type="button" id="lang-switch" class="lang-switch" data-lang="km" aria-label="Switch language">
-      <span class="lang-switch-opt" id="lang-opt-km">KH</span>
-      <span class="lang-switch-opt" id="lang-opt-en">EN</span>
-    </button>
+    <div class="nav-end">
+      <button type="button" id="lang-switch" class="lang-switch" data-lang="km" aria-label="Switch language">
+        <span class="lang-switch-opt" id="lang-opt-km">KH</span>
+        <span class="lang-switch-opt" id="lang-opt-en">EN</span>
+      </button>
+    </div>
   </div>
 
   <div class="folder-panel">
@@ -126,7 +129,7 @@
 
     <!-- ============ WORK VIEW ============ -->
     <section id="view-work" class="view" data-view-panel="work" hidden>
-      <!-- Folder drawer: built by js/main-v27.js from the projects in js/work-projects-v7.js -->
+      <!-- Folder drawer: built by js/main-v28.js from the projects in js/work-projects-v7.js -->
       <div id="work-stage" class="drawer-stage"></div>
     </section>
 
@@ -241,6 +244,6 @@
 </div>
 
 <script src="js/work-projects-v7.js"></script>
-<script src="js/main-v27.js"></script>
+<script src="js/main-v28.js"></script>
 </body>
 </html>
