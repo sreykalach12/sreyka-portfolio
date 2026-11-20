@@ -943,7 +943,7 @@ html[lang="km"] .ch-title { letter-spacing: 0; line-height: 1.3; }
   /* Wide enough to show a full short word (or the meaningful first word
      of a longer one) before the ellipsis - e.g. "ប្រវត្តិ..." - instead
      of clipping to 1-2 characters. */
-  .nav-btn { max-width: 76px; padding: 0 10px; font-size: 11.5px; height: 32px; }
+  .nav-btn { max-width: 96px; padding: 0 11px; font-size: 12px; height: 32px; }
   /* Floor, not a target: the longest label (Khmer "About",
      ប្រវត្តិសង្ខេប) needs ~131px of content+padding box at this
      font-size/padding - below that it truncates even with
@@ -957,7 +957,7 @@ html[lang="km"] .ch-title { letter-spacing: 0; line-height: 1.3; }
 @media (max-width: 480px) {
   /* max-width bumped up from 76px to match the added padding, same as
      the tier above, preserving the calibrated word-boundary truncation. */
-  .nav-btn { padding: 0 8px; font-size: 11px; max-width: 64px; height: 30px; }
+  .nav-btn { padding: 0 9px; font-size: 11.5px; max-width: 88px; height: 32px; }
   /* Same floor as the tier above, scaled to this smaller font/padding -
      the Khmer "About" label needs ~119px here; below that it truncates. */
   .nav-btn.is-active { max-width: 130px; }
@@ -977,3 +977,6 @@ html[lang="km"] .ch-title { letter-spacing: 0; line-height: 1.3; }
      short bio row doesn't leave a blank band at the bottom */
   #home-grid { grid-auto-rows: auto !important; }
 }
+
+/* KH/EN switch is hidden while the site is English-only (KHMER_ENABLED in js/main-v*.js) */
+.lang-switch[hidden] { display: none; }

@@ -152,9 +152,16 @@
 
   /* ---------------- STATE ---------------- */
 
+  /* ---------------- LANGUAGE ----------------
+     The site is English-only for now. Every Khmer string (STR.km and the
+     *Km fields in the data), the Noto Sans Khmer font and the
+     html[lang="km"] styles are all kept. To bring Khmer back, set this
+     to true: the KH/EN switch reappears and everything works as before. */
+  var KHMER_ENABLED = false;
+
   var state = {
     view: 'home',
-    lang: (localStorage.getItem('site-lang') === 'en') ? 'en' : 'km',
+    lang: (KHMER_ENABLED && localStorage.getItem('site-lang') === 'km') ? 'km' : 'en',
     featuredIndex: 0,
     homeProjIndices: { big: 0, small1: 0, small2: 0 },
     contactFormOpen: false,
@@ -844,6 +851,8 @@
       setView('home');
     });
 
+    // Hidden (not removed) while the site is English-only - see KHMER_ENABLED.
+    document.getElementById('lang-switch').hidden = !KHMER_ENABLED;
     document.getElementById('lang-switch').addEventListener('click', function () {
       setLang(state.lang === 'km' ? 'en' : 'km');
     });
