@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sreyka Lach — Creative UI/UX Designer (preview)</title>
+<meta name="description" content="Portfolio of Sreyka Lach, Creative UI/UX Designer based in Phnom Penh, Cambodia.">
+<!-- PREVIEW of the long-scroll layout. The live site (../index.html) is unchanged. -->
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="preview-v1.css">
+</head>
+<body>
+
+<header class="topbar">
+  <nav class="menu" aria-label="Sections">
+    <a href="#top" class="menu-link is-active" data-section="top">Home</a>
+    <a href="#work" class="menu-link" data-section="work">Work</a>
+    <a href="#about" class="menu-link" data-section="about">About me</a>
+    <a href="#contact" class="menu-link" data-section="contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ 1. INTRO: one screen, small bento ============ -->
+  <section id="top" class="intro" aria-label="Introduction">
+    <div class="card card-photo intro-avatar">
+      <span class="tab tab--dark">Profile</span>
+      <video class="cover" src="../assets/video/home-avatar-v1.mp4" poster="../assets/img/home-avatar-poster-v1.jpg" autoplay muted loop playsinline aria-label="Animated avatar of Sreyka Lach waving"></video>
+      <div class="scrim"></div>
+      <div class="intro-id">
+        <div class="intro-name">Sreyka Lach</div>
+        <div class="intro-loc">Phnom Penh, Cambodia</div>
+      </div>
+    </div>
+
+    <div class="card intro-text">
+      <span class="tab">Hello</span>
+      <p class="kicker">Creative UI/UX Designer</p>
+      <h1 class="intro-title">I design digital products where <em>systemic logic</em> meets bold visual craft.</h1>
+      <div class="intro-actions">
+        <a href="#work" class="btn btn--dark">See my work <span aria-hidden="true">↓</span></a>
+        <a href="#contact" class="btn">Say hello</a>
+      </div>
+    </div>
+
+    <a class="card card-photo intro-featured" id="intro-featured" href="#work">
+      <span class="tab tab--dark">Featured</span>
+      <div class="cover" id="intro-featured-img"></div>
+      <div class="scrim"></div>
+      <div class="intro-feat-text">
+        <span class="chip chip--glass" id="intro-featured-cat"></span>
+        <span class="intro-feat-title" id="intro-featured-title"></span>
+      </div>
+    </a>
+
+    <div class="card intro-tools">
+      <span class="tab">Tools</span>
+      <img src="../assets/img/tools-grid-v2.jpg" alt="Tools: Illustrator, Photoshop, Figma, Adobe XD, Procreate">
+    </div>
+  </section>
+
+  <!-- ============ 2. SELECTED WORK ============ -->
+  <section id="work" class="section" aria-labelledby="work-title">
+    <div class="section-head">
+      <p class="eyebrow">01 — Work</p>
+      <h2 id="work-title" class="section-title">Selected work</h2>
+      <div class="filters" id="work-filters" role="group" aria-label="Filter projects"></div>
+    </div>
+    <div class="work-grid" id="work-grid"></div>
+    <div class="work-more"><button type="button" class="btn" id="work-more">Show all projects</button></div>
+  </section>
+
+  <!-- ============ 3. ABOUT ============ -->
+  <section id="about" class="section" aria-labelledby="about-title">
+    <div class="section-head">
+      <p class="eyebrow">02 — About me</p>
+      <h2 id="about-title" class="section-title">From pencil to pixels</h2>
+    </div>
+    <div class="about">
+      <div class="about-photo-wrap">
+        <div class="card card-photo about-photo">
+          <span class="tab tab--dark">Portrait</span>
+          <img class="cover" src="../assets/img/portrait-about-v2.jpg" alt="Portrait of Sreyka Lach">
+        </div>
+      </div>
+      <div class="story" id="story"></div>
+    </div>
+
+    <div class="cv">
+      <div class="card cv-card">
+        <span class="tab">Experience</span>
+        <ol class="cv-list" id="experience"></ol>
+      </div>
+      <div class="card cv-card">
+        <span class="tab">Education</span>
+        <ol class="cv-list" id="education"></ol>
+      </div>
+      <div class="card cv-card cv-card--wide">
+        <span class="tab">Skills &amp; hobbies</span>
+        <div class="skills">
+          <div><p class="mini-label">Tools</p><div class="chips" id="tools"></div></div>
+          <div><p class="mini-label">Strengths</p><div class="chips" id="strengths"></div></div>
+          <div><p class="mini-label">Hobbies</p><div class="chips" id="hobbies"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. CONTACT ============ -->
+  <section id="contact" class="section section--last" aria-labelledby="contact-title">
+    <div class="card contact">
+      <span class="tab">Contact</span>
+      <div class="contact-text">
+        <p class="eyebrow">03 — Contact</p>
+        <h2 id="contact-title" class="contact-title">Let's work<br>together</h2>
+        <p class="contact-note">Have a project or a role in mind? Don't hesitate, drop me a line.</p>
+        <a class="btn btn--dark btn--big" href="mailto:sreyka.lach12@gmail.com">sreyka.lach12@gmail.com <span aria-hidden="true">→</span></a>
+        <ul class="socials" id="socials"></ul>
+      </div>
+      <img class="contact-img" src="../assets/img/portrait-contact-v4.jpg" alt="" aria-hidden="true">
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>© <span id="year">2026</span> Sreyka Lach</span>
+  <a href="#top">Back to top ↑</a>
+</footer>
+
+<script src="../js/work-projects-v7.js"></script>
+<script src="preview-v1.js"></script>
+</body>
+</html>

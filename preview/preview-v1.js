@@ -1,0 +1,195 @@
+/* Long-scroll PREVIEW. Reads the same project list as the live site
+   (../js/work-projects-v7.js); the About content is copied from
+   ../js/main-v31.js (English only, like the live site right now). */
+(function () {
+  'use strict';
+
+  var ROOT = '../';
+  var projects = window.WORK_PROJECTS || [];
+  var INITIAL_COUNT = 6;
+
+  var story = [
+    { title: 'The Spark', text: "Before code, there was the pencil. I grew up bound to sketchbooks, digital art, and the quiet thrill of creating something from nothing. When it came time to choose a path, logic won, and I chose technology, but the creative drive never left. It was simply waiting." },
+    { title: 'The Shift', text: "Technology was a bet on the future. I enrolled in Management Information Systems, driven by a desire to build things that mattered. At the time, I didn't realize it was only the foundation." },
+    { title: 'The Friction', text: "Internships and front-end roles brought an unexpected letdown. The work felt less like building and more like assembling: patching together CMS platforms, off-the-shelf templates, and minor customizations. Every project felt pre-boxed. My constant thought: If this were mine, I'd rebuild it from scratch." },
+    { title: 'The Craft', text: "That frustration became my leverage. I dove into UI/UX design, pairing rigorous self-study with formal training and high-growth roles. Today, I operate as a creative UI/UX designer, seamlessly bridging product design, brand identity, digital art, and graphic systems." },
+  ];
+  var experience = [
+    { title: 'Creative UI/UX Designer', place: 'Thortok', url: 'https://thortok.com/', years: 'Mar 2025 – Present' },
+    { title: 'Visual | Web | Branding Designer', place: 'Vector Studio · Freelance', years: 'Aug 2024 – Present' },
+    { title: 'Web Designer | UX/UI', place: 'Apsara Media Services · Full-time', years: 'Feb 2024 – Mar 2025' },
+    { title: 'Web designer | Digital Marketing Executive', place: 'Nafih Digital Marketing Agent Co., Ltd · Part-time', years: 'Nov 2021 – Jan 2024' },
+    { title: 'Home Monitor', place: "Toutes à l'école · Part-time", years: 'Nov 2020 – Oct 2021' },
+  ];
+  var education = [
+    { title: 'SETEC Institute', place: "Bachelor's degree, Management Information Systems", years: 'Oct 2019 – Present' },
+    { title: 'Future.bit Academy', place: 'UI/UX Design Course, Design and Visual Communications', years: 'Apr 2024 – Jun 2024' },
+    { title: 'American University of Phnom Penh', place: 'Soft Skill Program', years: '2017' },
+    { title: 'Australian Centre for Education (ACE)', place: 'English', years: '2016' },
+    { title: "Toutes à l'école", place: 'Khmer, English', years: '2007 – 2019' },
+  ];
+  var tools = ['Figma', 'Illustrator', 'Photoshop', 'Adobe XD', 'Procreate'];
+  var strengths = ['Attention to detail', 'Problem solving', 'Adaptability', 'Creativity'];
+  var hobbies = ['Anime & manga', 'Technology research', 'Design & creative books'];
+  var socials = [
+    { name: 'Behance', icon: 'icon-behance-v2.png', url: 'https://behance.net/sreyka-lach' },
+    { name: 'LinkedIn', icon: 'icon-linkedin-v2.png', url: 'https://www.linkedin.com/in/sreykalach' },
+    { name: 'Instagram', icon: 'icon-instagram-v2.png', url: 'https://www.instagram.com/hi_iam_meee' },
+    { name: 'Telegram', icon: 'icon-telegram-v2.png', url: 'https://t.me/sreykalach' },
+  ];
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function $(id) { return document.getElementById(id); }
+
+  /* ---------- intro: featured project rotates every few seconds ---------- */
+  var featured = projects.slice(0, 4);
+  var fi = 0;
+  function showFeatured() {
+    var p = featured[fi];
+    if (!p) return;
+    $('intro-featured-img').style.backgroundImage = 'url("' + ROOT + p.coverImage + '")';
+    $('intro-featured-cat').textContent = p.category;
+    $('intro-featured-title').textContent = p.title;
+    $('intro-featured').href = ROOT + '#work/' + p.id;
+  }
+  showFeatured();
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && featured.length > 1) {
+    setInterval(function () { fi = (fi + 1) % featured.length; showFeatured(); }, 4500);
+  }
+
+  /* ---------- work grid with category filters ---------- */
+  var filter = 'All';
+  var expanded = false;
+  var cats = ['All'];
+  projects.forEach(function (p) { if (cats.indexOf(p.category) < 0) cats.push(p.category); });
+  cats.forEach(function (c) {
+    var b = el('button', 'filter', c);
+    b.type = 'button';
+    b.setAttribute('aria-pressed', String(c === filter));
+    b.addEventListener('click', function () {
+      filter = c;
+      document.querySelectorAll('.filter').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      renderWork();
+    });
+    $('work-filters').appendChild(b);
+  });
+
+  function renderWork() {
+    var grid = $('work-grid');
+    grid.innerHTML = '';
+    var list = projects.filter(function (p) { return filter === 'All' || p.category === filter; });
+    var shown = expanded ? list : list.slice(0, INITIAL_COUNT);
+    shown.forEach(function (p, i) {
+      // opens the project's detail page on the live site
+      var a = el('a', 'card project');
+      a.href = ROOT + '#work/' + p.id;
+      a.appendChild(el('span', 'tab', String(i + 1).padStart(2, '0') + ' · ' + p.category));
+      var img = el('div', 'project-img');
+      img.style.backgroundImage = 'url("' + ROOT + p.coverImage + '")';
+      a.appendChild(img);
+      var meta = el('div', 'project-meta');
+      meta.appendChild(el('h3', 'project-title', p.title));
+      meta.appendChild(el('span', 'project-sub', [p.client, p.year].filter(Boolean).join(' · ')));
+      a.appendChild(meta);
+      grid.appendChild(a);
+    });
+    var more = $('work-more');
+    more.parentNode.hidden = list.length <= INITIAL_COUNT;
+    more.textContent = expanded ? 'Show fewer' : 'Show all ' + list.length + ' projects';
+  }
+  $('work-more').addEventListener('click', function () {
+    expanded = !expanded;
+    renderWork();
+    if (!expanded) $('work').scrollIntoView({ behavior: 'smooth' });
+  });
+  renderWork();
+
+  /* ---------- about ---------- */
+  story.forEach(function (s, i) {
+    var item = el('article', 'chapter');
+    item.appendChild(el('span', 'chapter-num', String(i + 1).padStart(2, '0')));
+    var body = el('div');
+    body.appendChild(el('h3', 'chapter-title', s.title));
+    body.appendChild(el('p', 'chapter-text', s.text));
+    item.appendChild(body);
+    $('story').appendChild(item);
+  });
+  function cvList(id, items) {
+    items.forEach(function (it) {
+      var li = el('li', 'cv-item');
+      li.appendChild(el('span', 'cv-years', it.years));
+      var body = el('div');
+      body.appendChild(el('div', 'cv-title', it.title));
+      if (it.url) {
+        var a = el('a', 'cv-place', it.place);
+        a.href = it.url; a.target = '_blank'; a.rel = 'noopener';
+        body.appendChild(a);
+      } else {
+        body.appendChild(el('div', 'cv-place', it.place));
+      }
+      li.appendChild(body);
+      $(id).appendChild(li);
+    });
+  }
+  cvList('experience', experience);
+  cvList('education', education);
+  function chips(id, items) { items.forEach(function (t) { $(id).appendChild(el('span', 'chip', t)); }); }
+  chips('tools', tools);
+  chips('strengths', strengths);
+  chips('hobbies', hobbies);
+
+  /* ---------- contact ---------- */
+  socials.forEach(function (s) {
+    var li = el('li');
+    var a = el('a', 'social');
+    a.href = s.url; a.target = '_blank'; a.rel = 'noopener';
+    var img = el('img');
+    img.src = ROOT + 'assets/img/' + s.icon; img.alt = '';
+    a.appendChild(img);
+    a.appendChild(el('span', null, s.name));
+    li.appendChild(a);
+    $('socials').appendChild(li);
+  });
+  $('year').textContent = new Date().getFullYear();
+
+  /* ---------- menu: highlight the section in view ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.menu-link'));
+  var sections = links.map(function (l) { return $(l.getAttribute('data-section')); });
+  function updateActive() {
+    var y = window.innerHeight * 0.35;
+    var current = sections[0];
+    sections.forEach(function (s) { if (s.getBoundingClientRect().top <= y) current = s; });
+    // at the very bottom the last section is current, even if it's short
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = sections[sections.length - 1];
+    links.forEach(function (l) {
+      var on = l.getAttribute('data-section') === current.id;
+      l.classList.toggle('is-active', on);
+      if (on) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current');
+    });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  window.addEventListener('resize', updateActive);
+  updateActive();
+
+  /* ---------- gentle reveal on scroll ---------- */
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.section-head, .project, .chapter, .cv-card, .about-photo, .contact').forEach(function (n) {
+      n.classList.add('reveal');
+      io.observe(n);
+    });
+    // cards added later by the filters
+    new MutationObserver(function () {
+      document.querySelectorAll('.project:not(.reveal)').forEach(function (n) { n.classList.add('reveal', 'is-in'); });
+    }).observe($('work-grid'), { childList: true });
+  }
+})();
