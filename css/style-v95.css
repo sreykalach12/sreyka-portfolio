@@ -980,3 +980,119 @@ html[lang="km"] .ch-title { letter-spacing: 0; line-height: 1.3; }
 
 /* KH/EN switch is hidden while the site is English-only (KHMER_ENABLED in js/main-v*.js) */
 .lang-switch[hidden] { display: none; }
+
+
+/* =================================================================
+   FOLDER TOUCHES
+   The site's signature: every card is a folder with a named tab on
+   top, and the current menu item is a small black folder. Tabs sit
+   above their card (bottom: 100%), so the cards don't clip
+   (photos and scrollers round/clip themselves instead), and the
+   grids leave a tab's height of room above each row.
+   ================================================================= */
+:root {
+  --tab-h: 28px;      /* card tab height */
+  --tab-lean: 16px;   /* how far the tab's right edge leans */
+}
+
+/* ---- menu: plain text links; the active one is a black folder ---- */
+#nav-pill { background: transparent; box-shadow: none; padding: 6px 0 0; gap: 4px; overflow: visible; }
+.nav-btn { border-radius: 12px; }
+.nav-btn.is-active {
+  background: var(--ink); color: #FFFFFF;
+  border-top-left-radius: 0;
+}
+/* folder tab on the active item: rounded top-left, leaning right edge */
+.nav-btn.is-active::before, .nav-btn.is-active::after {
+  content: ''; position: absolute; bottom: 100%; height: 7px; background: var(--ink);
+}
+.nav-btn.is-active::before { left: 0; width: 42%; border-radius: 6px 0 0 0; }
+.nav-btn.is-active::after {
+  left: calc(42% - 6px); width: 12px; border-radius: 0 6px 0 0;
+  transform: skewX(40deg); transform-origin: bottom left;
+}
+.nav-btn:not(.is-active):hover { background: rgba(0,0,0,0.05); }
+
+/* ---- card tabs ---- */
+.card-tab {
+  position: absolute; left: 0; bottom: 100%; z-index: 3;
+  height: var(--tab-h); max-width: calc(100% - 40px);
+  display: flex; align-items: center;
+  padding: 2px 12px 0 16px;
+  background: var(--tab-bg, #FFFFFF); color: var(--tab-ink, var(--ink));
+  border-radius: 12px 0 0 0;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  white-space: nowrap;
+  /* overlaps the card by 1px so no seam shows */
+  margin-bottom: -1px;
+}
+/* the leaning right edge */
+.card-tab::after {
+  content: ''; position: absolute; top: 0; bottom: 0; left: calc(100% - 8px);
+  width: calc(var(--tab-lean) + 12px);
+  background: inherit; border-radius: 0 10px 0 0;
+  transform: skewX(30deg); transform-origin: bottom left;
+  z-index: -1; /* behind the label text */
+}
+html[lang="km"] .card-tab { letter-spacing: 0; text-transform: none; font-size: 12px; }
+/* About cards: their existing section label becomes the tab */
+.about-col > .label-sm {
+  position: absolute; left: 0; bottom: 100%; z-index: 3;
+  height: var(--tab-h); margin: 0 0 -1px;
+  display: flex; align-items: center; padding: 2px 12px 0 16px;
+  background: #FFFFFF; color: var(--ink); border-radius: 12px 0 0 0;
+}
+.about-col > .label-sm::after {
+  content: ''; position: absolute; top: 0; bottom: 0; left: calc(100% - 8px);
+  width: calc(var(--tab-lean) + 12px);
+  background: inherit; border-radius: 0 10px 0 0;
+  transform: skewX(30deg); transform-origin: bottom left;
+  z-index: -1; /* behind the label text */
+}
+
+/* the corner under the tab is square, like a real folder */
+.card { border-top-left-radius: 0 !important; }
+
+/* white cards: one soft shadow around card + tab together */
+.card-white, .contact-card {
+  box-shadow: none; border: none;
+  filter: drop-shadow(0 1px 1.5px rgba(0,0,0,0.07)) drop-shadow(0 6px 18px rgba(0,0,0,0.04));
+}
+.card-white:hover { box-shadow: none; }
+
+/* photo cards: dark tab; the card can't clip, so the photo layers round themselves */
+.card-photo { --tab-bg: #111111; --tab-ink: #FFFFFF; overflow: visible; }
+.card-photo > .photo-underlay, .card-photo > .photo-img, .card-photo > .photo-scrim,
+.contact-scrim { border-radius: inherit; }
+.card-photo:hover .photo-underlay, .card-photo:not(.contact-card):hover .photo-img { transform: none; }
+.contact-card { --tab-bg: #FFFFFF; --tab-ink: var(--ink); }
+
+/* About: content scrolls inside, under the tab */
+.about-col { overflow: visible !important; }
+.col-scroll { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; }
+
+/* contact form keeps sliding up inside the card's rounded shape */
+.contact-form-clip {
+  position: absolute; inset: 0; z-index: 50; overflow: hidden;
+  border-radius: inherit; pointer-events: none;
+}
+.contact-form-clip > * { pointer-events: auto; }
+
+/* room for the tabs: above the first row and between rows */
+#page-root { gap: 10px; }
+.bento-grid { padding-top: var(--tab-h); row-gap: calc(var(--tab-h) + 10px); }
+.contact-grid { padding-top: var(--tab-h); }
+
+@media (max-width: 1100px) {
+  #home-grid, .about-grid { row-gap: calc(var(--tab-h) + 10px) !important; }
+}
+@media (max-width: 900px) {
+  #home-grid, .about-grid { row-gap: calc(var(--tab-h) + 8px) !important; }
+  #home-grid > div, .about-grid > div { border-top-left-radius: 0 !important; }
+  .about-col .col-scroll { overflow: visible; }
+}
+@media (max-width: 640px) {
+  :root { --tab-h: 26px; }
+  .card-tab, .about-col > .label-sm { font-size: 10px; padding-left: 14px; }
+  .nav-btn.is-active::before, .nav-btn.is-active::after { height: 6px; }
+}

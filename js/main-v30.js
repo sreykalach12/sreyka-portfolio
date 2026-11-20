@@ -29,6 +29,8 @@
       chLets: "Let's", chWork: 'Work', chTogether: 'Together',
       chYou: 'You', chMe: 'Sreyka', chNote: "Don't hesitate,<br>drop me a line",
       chOpen: 'Open contact form', chClose: 'Close contact form',
+      tabProfile: 'Profile', tabFeatured: 'Featured', tabTools: 'Tools', tabUiux: 'UI/UX',
+      tabBranding: 'Branding', tabGraphic: 'Graphic', tabAbout: 'About me', tabPortrait: 'Portrait', tabContact: 'Contact',
       backToFolders: 'Back to folders',
       client: 'Client', role: 'Role', year: 'Year', category: 'Category',
       problem: 'Problem / Goal', process: 'Process', keyScreens: 'Key screens & deliverables',
@@ -58,6 +60,8 @@
       chLets: 'តោះ', chWork: 'ធ្វើការ', chTogether: 'ជាមួយគ្នា',
       chYou: 'អ្នក', chMe: 'ស្រីកា', chNote: 'កុំស្ទាក់ស្ទើរ<br>ផ្ញើសារមកខ្ញុំបាន',
       chOpen: 'បើកទម្រង់ទំនាក់ទំនង', chClose: 'បិទទម្រង់ទំនាក់ទំនង',
+      tabProfile: 'ប្រវត្តិរូប', tabFeatured: 'ពិសេស', tabTools: 'ឧបករណ៍', tabUiux: 'UI/UX',
+      tabBranding: 'ម៉ាកយីហោ', tabGraphic: 'ក្រាហ្វិក', tabAbout: 'អំពីខ្ញុំ', tabPortrait: 'រូបថត', tabContact: 'ទំនាក់ទំនង',
       backToFolders: 'ត្រឡប់ទៅថតឯកសារ',
       client: 'អតិថិជន', role: 'តួនាទី', year: 'ឆ្នាំ', category: 'ប្រភេទ',
       problem: 'បញ្ហា / គោលដៅ', process: 'ដំណើរការ', keyScreens: 'អេក្រង់ និងស្នាដៃសំខាន់ៗ',
@@ -708,6 +712,10 @@
   /* ---------------- STATIC LABELS / LANGUAGE ---------------- */
 
   function applyStaticLabels() {
+    // folder-tab labels on the cards: <span data-i18n="key">
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      el.textContent = t(el.getAttribute('data-i18n'));
+    });
     document.documentElement.setAttribute('lang', state.lang);
 
     document.querySelector('.nav-btn[data-view="home"] .nav-btn-label').textContent = t('navHome');

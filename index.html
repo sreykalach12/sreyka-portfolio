@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style-v94.css">
+<link rel="stylesheet" href="css/style-v95.css">
 </head>
 <body>
 
@@ -43,6 +43,7 @@
 
         <!-- profile 2x2 -->
         <div class="card card-photo" data-span="2" style="grid-column:1/3;grid-row:1/3;">
+          <span class="card-tab" data-i18n="tabProfile">Profile</span>
           <div class="photo-underlay" style="background:linear-gradient(150deg,#141414,#3a3a3a 55%,#8a8a8a);"></div>
           <video class="photo-img" src="assets/video/home-avatar-v1.mp4" poster="assets/img/home-avatar-poster-v1.jpg" autoplay muted loop playsinline preload="auto" aria-label="Animated avatar of Sreyka Lach waving"></video>
           <div class="photo-scrim"></div>
@@ -56,6 +57,7 @@
 
         <!-- featured showcase 2x1 -->
         <div class="card card-photo" id="featured-card" data-span="2" style="grid-column:3/5;grid-row:1/2;">
+          <span class="card-tab" data-i18n="tabFeatured">Featured</span>
           <div class="photo-underlay" id="featured-bg"></div>
           <div class="photo-scrim photo-scrim--soft"></div>
           <div class="photo-content photo-content--between">
@@ -69,6 +71,7 @@
 
         <!-- skills 1x1 -->
         <div class="card card-white tools-card" data-span="1" style="grid-column:3/4;grid-row:3/4;">
+          <span class="card-tab" data-i18n="tabTools">Tools</span>
           <div class="select-frame"></div>
           <div class="select-dot" style="top:0;left:0;"></div>
           <div class="select-dot" style="top:0;right:0;"></div>
@@ -79,6 +82,7 @@
 
         <!-- project showcase 2x2 -->
         <div class="card card-photo" id="proj-big-card" data-span="2" style="grid-column:1/3;grid-row:3/5;">
+          <span class="card-tab" data-i18n="tabUiux">UI/UX</span>
           <div class="photo-underlay" id="proj-big-bg"></div>
           <div class="photo-scrim photo-scrim--soft"></div>
           <div class="photo-content photo-content--between">
@@ -95,6 +99,7 @@
 
         <!-- project showcase 1x1 -->
         <div class="card card-photo" id="proj-small1-card" data-span="1" style="grid-column:3/4;grid-row:2/3;">
+          <span class="card-tab" data-i18n="tabBranding">Branding</span>
           <div class="photo-underlay" id="proj-small1-bg"></div>
           <div class="photo-scrim photo-scrim--soft"></div>
           <div class="photo-content photo-content--between">
@@ -108,6 +113,7 @@
 
         <!-- project showcase 1x1 -->
         <div class="card card-photo" id="proj-small2-card" data-span="1" style="grid-column:4/5;grid-row:2/4;">
+          <span class="card-tab" data-i18n="tabGraphic">Graphic</span>
           <div class="photo-underlay" id="proj-small2-bg"></div>
           <div class="photo-scrim photo-scrim--soft"></div>
           <div class="photo-content photo-content--between">
@@ -121,6 +127,7 @@
 
         <!-- about 2x1 -->
         <div class="card card-white bio-card" data-span="2" style="grid-column:3/5;grid-row:4/5;flex-direction:row;align-items:center;">
+          <span class="card-tab" data-i18n="tabAbout">About me</span>
           <div class="bio-text" id="label-bio">I design digital products where systemic logic meets bold visual craft. Blending a background in systems, development, and multi-disciplinary creative design, I translate complex technical structures into intuitive UI/UX, distinct brand identities, and refined visual systems. For me, design isn't just interface polish; it's shaping how people experience and remember a product.</div>
         </div>
 
@@ -129,7 +136,7 @@
 
     <!-- ============ WORK VIEW ============ -->
     <section id="view-work" class="view" data-view-panel="work" hidden>
-      <!-- Folder drawer: built by js/main-v29.js from the projects in js/work-projects-v7.js -->
+      <!-- Folder drawer: built by js/main-v30.js from the projects in js/work-projects-v7.js -->
       <div id="work-stage" class="drawer-stage"></div>
     </section>
 
@@ -138,33 +145,36 @@
       <div id="about-grid" class="bento-grid about-grid">
 
         <div class="card card-photo about-portrait" style="grid-column:1/2;grid-row:1/4;">
+          <span class="card-tab" data-i18n="tabPortrait">Portrait</span>
           <img class="photo-img" src="assets/img/portrait-about-v2.jpg" alt="Portrait of Sreyka Lach" style="object-position: center 12%;">
         </div>
 
-        <div class="card card-white about-col" style="grid-column:2/3;grid-row:1/4;overflow-y:auto;">
-          <div class="label-sm" style="margin-bottom:6px;" id="label-personal-story">Personal Story</div>
-          <div id="personal-story" class="timeline"></div>
+        <div class="card card-white about-col" style="grid-column:2/3;grid-row:1/4;">
+          <div class="label-sm" id="label-personal-story">Personal Story</div>
+          <div class="col-scroll"><div id="personal-story" class="timeline"></div></div>
         </div>
 
         <div class="card card-white about-col" style="grid-column:3/4;grid-row:1/3;">
           <div class="label-sm" id="label-education">Education</div>
-          <div id="education" class="timeline timeline--sm"></div>
+          <div class="col-scroll"><div id="education" class="timeline timeline--sm"></div></div>
         </div>
 
-        <div class="card card-white about-col" id="skills-card" style="grid-column:3/4;grid-row:3/4;overflow-y:auto;">
+        <div class="card card-white about-col" id="skills-card" style="grid-column:3/4;grid-row:3/4;">
           <div class="label-sm" id="label-skills">Skills</div>
-          <div class="chip-row chip-row--sm" id="about-tools"></div>
-          <div class="soft-skills" id="soft-skills"></div>
+          <div class="col-scroll">
+            <div class="chip-row chip-row--sm" id="about-tools"></div>
+            <div class="soft-skills" id="soft-skills"></div>
+          </div>
         </div>
 
         <div class="card card-white about-col" style="grid-column:4/5;grid-row:1/3;">
           <div class="label-sm" id="label-experience">Experience</div>
-          <div id="experience" class="timeline timeline--sm"></div>
+          <div class="col-scroll"><div id="experience" class="timeline timeline--sm"></div></div>
         </div>
 
-        <div class="card card-white about-col" style="grid-column:4/5;grid-row:3/4;overflow-y:auto;">
-          <div class="label-sm" style="margin-bottom:6px;" id="label-hobbies">Hobbies</div>
-          <div class="chip-row" id="hobbies-row"></div>
+        <div class="card card-white about-col" style="grid-column:4/5;grid-row:3/4;">
+          <div class="label-sm" id="label-hobbies">Hobbies</div>
+          <div class="col-scroll"><div class="chip-row" id="hobbies-row"></div></div>
         </div>
 
       </div>
@@ -173,7 +183,8 @@
     <!-- ============ CONTACT VIEW ============ -->
     <section id="view-contact" class="view" data-view-panel="contact" hidden>
       <div id="contact-grid" class="bento-grid contact-grid">
-        <div class="card card-photo contact-card" id="contact-card" style="">
+        <div class="card card-photo contact-card" id="contact-card">
+          <span class="card-tab" data-i18n="tabContact">Contact</span>
           <img class="photo-img" src="assets/img/portrait-contact-v4.jpg" alt="Sreyka Lach">
           <div class="contact-scrim"></div>
 
@@ -219,6 +230,9 @@
             <div class="social-row" id="contact-socials"></div>
           </div>
 
+          <!-- clips the slide-up form to the card's rounded shape (the card
+               itself can't clip, or its folder tab would be cut off) -->
+          <div class="contact-form-clip">
           <div id="contact-form-overlay" class="contact-form-overlay" hidden></div>
           <div id="contact-form-sheet" class="contact-form-sheet" hidden>
             <div class="contact-form-inner">
@@ -235,6 +249,7 @@
               </form>
             </div>
           </div>
+          </div>
         </div>
       </div>
     </section>
@@ -244,6 +259,6 @@
 </div>
 
 <script src="js/work-projects-v7.js"></script>
-<script src="js/main-v29.js"></script>
+<script src="js/main-v30.js"></script>
 </body>
 </html>
