@@ -287,24 +287,25 @@ a.cv-place { text-decoration: underline; text-underline-offset: 3px; }
 
 /* avatar video, blended into the gradient (its light-grey backdrop disappears) */
 .hero-avatar {
-  position: absolute; z-index: 1; left: 50%; bottom: calc(var(--hero-bottom-h, 170px) - 16px); transform: translateX(-50%);
-  height: var(--avatar-h, 64%); aspect-ratio: 926 / 702; pointer-events: none;
+  position: absolute; z-index: 1; left: 50%; bottom: calc(var(--hero-bottom-h, 170px) + 6px); transform: translateX(-50%);
+  height: var(--avatar-h, 64%); aspect-ratio: 1; pointer-events: none;
 }
 
-.hero-avatar video, .hero-avatar img {
-  display: block; width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%;
-  filter: drop-shadow(0 24px 40px rgba(15,42,74,0.18));
-  /* the source frame ends mid-body: fade the bottom edge into the page */
-  -webkit-mask-image: linear-gradient(0deg, transparent 0, #000 14%);
-          mask-image: linear-gradient(0deg, transparent 0, #000 14%);
+.hero-avatar video {
+  display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%;
+  background: #EDEDEF;
+  /* arch-shaped window with a soft white rim and a sky-tinted shadow */
+  border-radius: 999px 999px 36px 36px;
+  border: 6px solid rgba(255,255,255,0.85);
+  box-shadow: 0 30px 60px rgba(47,111,176,0.22), 0 0 0 1px rgba(15,42,74,0.05);
   animation: avatarIn 1.2s .35s cubic-bezier(.2,.7,.2,1) both;
 }
 @keyframes avatarIn { from { opacity: 0; transform: translateY(40px) scale(0.96); } to { opacity: 1; transform: none; } }
 
 /* floating creator stickers, placed around the avatar */
 .stickers {
-  position: absolute; z-index: 2; left: 50%; bottom: calc(var(--hero-bottom-h, 170px) - 16px); transform: translateX(-50%);
-  height: var(--avatar-h, 64%); aspect-ratio: 926 / 702; pointer-events: none;
+  position: absolute; z-index: 2; left: 50%; bottom: calc(var(--hero-bottom-h, 170px) + 6px); transform: translateX(-50%);
+  height: var(--avatar-h, 64%); aspect-ratio: 1; pointer-events: none;
 }
 
 .sticker {
@@ -314,15 +315,15 @@ a.cv-place { text-decoration: underline; text-underline-offset: 3px; }
   box-shadow: 0 10px 30px rgba(15,40,70,0.12);
   animation: pop .6s cubic-bezier(.3,1.6,.5,1) both, bob 5s ease-in-out infinite;
 }
-.sticker--uiux { left: 12%; top: 26%; background: #FFFFFF; color: var(--ink); rotate: -8deg; animation-delay: .9s, 1.5s; }
-.sticker--brand { right: 14%; top: 14%; background: var(--ink); color: #FFFFFF; rotate: 7deg; animation-delay: 1.05s, 0s; }
-.sticker--art { right: 8%; top: 50%; background: #BFE3FF; color: #0F2A4A; rotate: -5deg; animation-delay: 1.2s, .8s; }
-.sticker--cursor { left: 16%; top: 60%; padding: 0; box-shadow: none; gap: 2px; animation-delay: 1.35s, 2.2s; }
+.sticker--uiux { left: -16%; top: 30%; background: #FFFFFF; color: var(--ink); rotate: -8deg; animation-delay: .9s, 1.5s; }
+.sticker--brand { right: -14%; top: 14%; background: var(--ink); color: #FFFFFF; rotate: 7deg; animation-delay: 1.05s, 0s; }
+.sticker--art { right: -20%; top: 56%; background: #BFE3FF; color: #0F2A4A; rotate: -5deg; animation-delay: 1.2s, .8s; }
+.sticker--cursor { left: -12%; top: 70%; padding: 0; box-shadow: none; gap: 2px; animation-delay: 1.35s, 2.2s; }
 .sticker--cursor svg { width: 16px; height: 16px; fill: #F26B3A; align-self: flex-start; margin-top: -10px; }
 .sticker--cursor span { padding: 7px 14px; border-radius: 999px; background: #F26B3A; color: #FFFFFF; font-size: 13px; box-shadow: 0 8px 20px rgba(242,107,58,0.3); }
 .sparkle { position: absolute; width: clamp(18px, 2vw, 28px); animation: pop .6s 1.4s both, twinkle 3s 2s ease-in-out infinite; }
-.sparkle--1 { left: 22%; top: 8%; fill: #3FA2F0; }
-.sparkle--2 { right: 18%; top: 38%; width: clamp(12px, 1.3vw, 18px); fill: var(--ink); animation-delay: 1.5s, 2.6s; }
+.sparkle--1 { left: -10%; top: 6%; fill: #3FA2F0; }
+.sparkle--2 { right: -12%; top: 40%; width: clamp(12px, 1.3vw, 18px); fill: var(--ink); animation-delay: 1.5s, 2.6s; }
 @keyframes pop { from { opacity: 0; scale: 0.4; } to { opacity: 1; scale: 1; } }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @keyframes twinkle { 0%, 100% { opacity: 1; scale: 1; } 50% { opacity: 0.5; scale: 0.8; } }
@@ -340,7 +341,7 @@ a.cv-place { text-decoration: underline; text-underline-offset: 3px; }
 
 @media (prefers-reduced-motion: reduce) {
   .blob, .sticker, .sparkle, .scroll-cue-line { animation: none !important; }
-  .hero-word, .hero-avatar video, .hero-avatar img, .hero-kicker, .hero-intro, .scroll-cue { animation: none !important; }
+  .hero-word, .hero-avatar video, .hero-kicker, .hero-intro, .scroll-cue { animation: none !important; }
 }
 
 /* ---------- tablet & phone: menu becomes a floating bottom bar ---------- */
@@ -360,7 +361,7 @@ a.cv-place { text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 700px) {
   .hero { padding-top: 18px; }
   .hero-word-inner { font-size: 24vw; }
-  .hero { --hero-bottom-h: 250px; --avatar-h: 46%; --center-lift: 46%; }
+  .hero { --hero-bottom-h: 250px; --avatar-h: 40%; --center-lift: 40%; }
   .hero-kicker { font-size: 12px; padding: 6px 12px; }
   /* the avatar frame is wider than a phone: place the stickers across the screen instead */
   .stickers { aspect-ratio: auto; width: 100vw; }
@@ -369,8 +370,12 @@ a.cv-place { text-decoration: underline; text-underline-offset: 3px; }
   .hero-actions .btn--hero { flex: 1; justify-content: center; }
   .scroll-cue { display: none; }
   .sticker { padding: 7px 12px; font-size: 11px; }
-  .sticker--art { right: 2%; }
+  .sticker--art { right: 4%; top: 58%; }
   .sticker--uiux { left: 4%; }
+  .sticker--brand { right: 6%; }
+  .sticker--cursor { left: 6%; }
+  .sparkle--1 { left: 12%; }
+  .sparkle--2 { right: 10%; }
   .rail-link { padding: 8px 11px; font-size: 12px; }
 }
 @media (max-width: 360px) { .rail-link { padding: 8px 8px; } }

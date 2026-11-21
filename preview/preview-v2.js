@@ -46,17 +46,6 @@
   }
   function $(id) { return document.getElementById(id); }
 
-  /* ---------- hero avatar: Safari can't show transparent WebM video,
-     so it gets the animated transparent WebP of the same clip ---------- */
-  var isSafari = /^((?!chrome|chromium|crios|fxios|android|edg).)*safari/i.test(navigator.userAgent);
-  var heroVideo = $('hero-video');
-  if (isSafari && heroVideo) {
-    var still = document.createElement('img');
-    still.src = ROOT + 'assets/img/home-avatar-cutout-v1.webp';
-    still.alt = heroVideo.getAttribute('aria-label');
-    heroVideo.replaceWith(still);
-  }
-
   /* ---------- work grid with category filters ---------- */
   var filter = 'All';
   var expanded = false;
