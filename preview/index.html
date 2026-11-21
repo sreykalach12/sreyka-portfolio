@@ -9,59 +9,68 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="preview-v1.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="preview-v2.css">
 </head>
 <body>
 
-<header class="topbar">
-  <nav class="menu" aria-label="Sections">
-    <a href="#top" class="menu-link is-active" data-section="top">Home</a>
-    <a href="#work" class="menu-link" data-section="work">Work</a>
-    <a href="#about" class="menu-link" data-section="about">About me</a>
-    <a href="#contact" class="menu-link" data-section="contact">Contact</a>
-  </nav>
-</header>
+<!-- Sticky side menu: follows the scroll, and each item jumps to its section.
+     On phones it becomes a small floating bar at the bottom. -->
+<nav class="rail" aria-label="Sections">
+  <div class="rail-track" aria-hidden="true"><div class="rail-fill" id="rail-fill"></div></div>
+  <ol class="rail-list">
+    <li><a href="#top" class="rail-link is-active" data-section="top"><span class="rail-num">00</span><span class="rail-label">Home</span></a></li>
+    <li><a href="#work" class="rail-link" data-section="work"><span class="rail-num">01</span><span class="rail-label">Work</span></a></li>
+    <li><a href="#about" class="rail-link" data-section="about"><span class="rail-num">02</span><span class="rail-label">About me</span></a></li>
+    <li><a href="#contact" class="rail-link" data-section="contact"><span class="rail-num">03</span><span class="rail-label">Contact</span></a></li>
+  </ol>
+</nav>
+
+<!-- back to top: appears once you scroll past the hero; the ring shows how far down the page you are -->
+<a href="#top" class="to-top" id="to-top" aria-label="Back to top">
+  <svg class="to-top-ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" pathLength="100" class="ring-bg"/><circle cx="24" cy="24" r="22" pathLength="100" class="ring-fill" id="to-top-ring"/></svg>
+  <svg class="to-top-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a>
+
+<!-- ============ HERO ============
+     Light sky-blue gradient; giant bold name behind; the avatar video in
+     front (blended into the background), with floating creator stickers. -->
+<section id="top" class="hero" aria-label="Introduction">
+  <div class="hero-bg" aria-hidden="true"><span class="blob blob--1"></span><span class="blob blob--2"></span><span class="blob blob--3"></span></div>
+
+  <p class="hero-kicker"><span class="hero-dot" aria-hidden="true"></span>Creative UI/UX Designer · Phnom Penh</p>
+
+  <h1 class="hero-word" aria-label="Sreyka Lach"><span class="hero-word-inner" id="hero-word" aria-hidden="true">SREYKA</span></h1>
+
+  <div class="hero-avatar" id="hero-avatar">
+    <!-- background-removed cut-out of the avatar video (transparent WebM);
+         Safari can't show transparent WebM, so the script swaps in an
+         animated transparent WebP there -->
+    <video id="hero-video" src="../assets/video/home-avatar-cutout-v1.webm" poster="../assets/img/home-avatar-cutout-v1-poster.webp" autoplay muted loop playsinline aria-label="Animated avatar of Sreyka Lach waving"></video>
+  </div>
+
+  <div class="stickers" aria-hidden="true">
+    <span class="sticker sticker--uiux">UI/UX ✦</span>
+    <span class="sticker sticker--brand">Branding</span>
+    <span class="sticker sticker--art">Digital art</span>
+    <span class="sticker sticker--cursor"><svg viewBox="0 0 12 12"><path d="M1 1 10.5 4.8 6.6 6.6 4.8 10.5Z"/></svg><span>Sreyka</span></span>
+    <svg class="sparkle sparkle--1" viewBox="0 0 24 24"><path d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12C7 11 11 7 12 0Z"/></svg>
+    <svg class="sparkle sparkle--2" viewBox="0 0 24 24"><path d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12C7 11 11 7 12 0Z"/></svg>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-intro">
+      <p class="hero-lead">I design digital products where systemic logic meets bold visual craft.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn--dark btn--hero">Let's talk <span aria-hidden="true">→</span></a>
+        <a href="#work" class="btn btn--glass btn--hero">See my work</a>
+      </div>
+    </div>
+    <a href="#work" class="scroll-cue" aria-label="Scroll to work"><span>Scroll</span><span class="scroll-cue-line" aria-hidden="true"></span></a>
+  </div>
+</section>
 
 <main>
-
-  <!-- ============ 1. INTRO: one screen, small bento ============ -->
-  <section id="top" class="intro" aria-label="Introduction">
-    <div class="card card-photo intro-avatar">
-      <span class="tab tab--dark">Profile</span>
-      <video class="cover" src="../assets/video/home-avatar-v1.mp4" poster="../assets/img/home-avatar-poster-v1.jpg" autoplay muted loop playsinline aria-label="Animated avatar of Sreyka Lach waving"></video>
-      <div class="scrim"></div>
-      <div class="intro-id">
-        <div class="intro-name">Sreyka Lach</div>
-        <div class="intro-loc">Phnom Penh, Cambodia</div>
-      </div>
-    </div>
-
-    <div class="card intro-text">
-      <span class="tab">Hello</span>
-      <p class="kicker">Creative UI/UX Designer</p>
-      <h1 class="intro-title">I design digital products where <em>systemic logic</em> meets bold visual craft.</h1>
-      <div class="intro-actions">
-        <a href="#work" class="btn btn--dark">See my work <span aria-hidden="true">↓</span></a>
-        <a href="#contact" class="btn">Say hello</a>
-      </div>
-    </div>
-
-    <a class="card card-photo intro-featured" id="intro-featured" href="#work">
-      <span class="tab tab--dark">Featured</span>
-      <div class="cover" id="intro-featured-img"></div>
-      <div class="scrim"></div>
-      <div class="intro-feat-text">
-        <span class="chip chip--glass" id="intro-featured-cat"></span>
-        <span class="intro-feat-title" id="intro-featured-title"></span>
-      </div>
-    </a>
-
-    <div class="card intro-tools">
-      <span class="tab">Tools</span>
-      <img src="../assets/img/tools-grid-v2.jpg" alt="Tools: Illustrator, Photoshop, Figma, Adobe XD, Procreate">
-    </div>
-  </section>
 
   <!-- ============ 2. SELECTED WORK ============ -->
   <section id="work" class="section" aria-labelledby="work-title">
@@ -129,10 +138,10 @@
 
 <footer class="footer">
   <span>© <span id="year">2026</span> Sreyka Lach</span>
-  <a href="#top">Back to top ↑</a>
+  <span>Made with care in Phnom Penh</span>
 </footer>
 
 <script src="../js/work-projects-v7.js"></script>
-<script src="preview-v1.js"></script>
+<script src="preview-v2.js"></script>
 </body>
 </html>

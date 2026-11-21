@@ -46,20 +46,15 @@
   }
   function $(id) { return document.getElementById(id); }
 
-  /* ---------- intro: featured project rotates every few seconds ---------- */
-  var featured = projects.slice(0, 4);
-  var fi = 0;
-  function showFeatured() {
-    var p = featured[fi];
-    if (!p) return;
-    $('intro-featured-img').style.backgroundImage = 'url("' + ROOT + p.coverImage + '")';
-    $('intro-featured-cat').textContent = p.category;
-    $('intro-featured-title').textContent = p.title;
-    $('intro-featured').href = ROOT + '#work/' + p.id;
-  }
-  showFeatured();
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && featured.length > 1) {
-    setInterval(function () { fi = (fi + 1) % featured.length; showFeatured(); }, 4500);
+  /* ---------- hero avatar: Safari can't show transparent WebM video,
+     so it gets the animated transparent WebP of the same clip ---------- */
+  var isSafari = /^((?!chrome|chromium|crios|fxios|android|edg).)*safari/i.test(navigator.userAgent);
+  var heroVideo = $('hero-video');
+  if (isSafari && heroVideo) {
+    var still = document.createElement('img');
+    still.src = ROOT + 'assets/img/home-avatar-cutout-v1.webp';
+    still.alt = heroVideo.getAttribute('aria-label');
+    heroVideo.replaceWith(still);
   }
 
   /* ---------- work grid with category filters ---------- */
@@ -157,24 +152,55 @@
   });
   $('year').textContent = new Date().getFullYear();
 
-  /* ---------- menu: highlight the section in view ---------- */
-  var links = Array.prototype.slice.call(document.querySelectorAll('.menu-link'));
+  /* ---------- side menu + back-to-top: both follow the scroll ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.rail-link'));
   var sections = links.map(function (l) { return $(l.getAttribute('data-section')); });
-  function updateActive() {
-    var y = window.innerHeight * 0.35;
+  var toTop = $('to-top');
+  var ring = $('to-top-ring');
+  var railFill = $('rail-fill');
+  var hero = $('top');
+  var word = $('hero-word');
+  var avatar = $('hero-avatar');
+  var stickers = document.querySelector('.stickers');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ticking = false;
+
+  function onScroll() {
+    ticking = false;
+    var y = window.scrollY;
+    var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    var progress = Math.min(1, y / max);
+
+    // which section is in view
+    var mark = window.innerHeight * 0.4;
     var current = sections[0];
-    sections.forEach(function (s) { if (s.getBoundingClientRect().top <= y) current = s; });
-    // at the very bottom the last section is current, even if it's short
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = sections[sections.length - 1];
+    sections.forEach(function (s) { if (s.getBoundingClientRect().top <= mark) current = s; });
+    if (y >= max - 4) current = sections[sections.length - 1];
     links.forEach(function (l) {
       var on = l.getAttribute('data-section') === current.id;
       l.classList.toggle('is-active', on);
       if (on) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current');
     });
+    railFill.style.transform = 'scaleY(' + progress + ')';
+
+    // back-to-top shows once the hero is mostly scrolled past
+    toTop.classList.toggle('is-visible', y > window.innerHeight * 0.6);
+    ring.style.strokeDashoffset = String(100 - progress * 100);
+
+    // hero parallax: the big name drifts up slower, the avatar slightly faster
+    if (!reduceMotion && y < window.innerHeight * 1.2) {
+      word.style.transform = 'translate3d(0,' + (y * 0.25) + 'px,0)';
+      avatar.style.transform = stickers.style.transform = 'translate3d(-50%,' + (y * -0.08) + 'px,0)';
+      hero.style.setProperty('--hero-fade', String(Math.max(0, 1 - y / (window.innerHeight * 0.8))));
+    }
   }
-  window.addEventListener('scroll', updateActive, { passive: true });
-  window.addEventListener('resize', updateActive);
-  updateActive();
+  function requestTick() { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }
+  window.addEventListener('scroll', requestTick, { passive: true });
+  window.addEventListener('resize', requestTick);
+  onScroll();
+
+  // hero entrance animation starts once the page has painted
+  requestAnimationFrame(function () { document.documentElement.classList.add('hero-ready'); });
 
   /* ---------- gentle reveal on scroll ---------- */
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
