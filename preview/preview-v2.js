@@ -150,7 +150,6 @@
   var hero = $('top');
   var word = $('hero-word');
   var avatar = $('hero-avatar');
-  var stickers = document.querySelector('.stickers');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ticking = false;
 
@@ -179,7 +178,7 @@
     // hero parallax: the big name drifts up slower, the avatar slightly faster
     if (!reduceMotion && y < window.innerHeight * 1.2) {
       word.style.transform = 'translate3d(0,' + (y * 0.25) + 'px,0)';
-      avatar.style.transform = stickers.style.transform = 'translate3d(-50%,' + (y * -0.08) + 'px,0)';
+      avatar.style.transform = 'translate3d(0,' + (y * -0.08) + 'px,0)';
       hero.style.setProperty('--hero-fade', String(Math.max(0, 1 - y / (window.innerHeight * 0.8))));
     }
   }
