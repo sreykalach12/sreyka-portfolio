@@ -72,9 +72,9 @@
       // opens the project's detail page on the live site
       var a = el('a', 'card project');
       a.href = ROOT + '#work/' + p.id;
-      a.appendChild(el('span', 'tab', String(i + 1).padStart(2, '0') + ' · ' + p.category));
       var img = el('div', 'project-img');
       img.style.backgroundImage = 'url("' + ROOT + p.coverImage + '")';
+      img.appendChild(el('span', 'chip chip--glass project-cat', p.category));
       a.appendChild(img);
       var meta = el('div', 'project-meta');
       meta.appendChild(el('h3', 'project-title', p.title));
@@ -148,7 +148,6 @@
   var ring = $('to-top-ring');
   var railFill = $('rail-fill');
   var hero = $('top');
-  var word = $('hero-word');
   var avatar = $('hero-avatar');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ticking = false;
@@ -177,8 +176,7 @@
 
     // hero parallax: the big name drifts up slower, the avatar slightly faster
     if (!reduceMotion && y < window.innerHeight * 1.2) {
-      word.style.transform = 'translate3d(0,' + (y * 0.25) + 'px,0)';
-      avatar.style.transform = 'translate3d(0,' + (y * -0.08) + 'px,0)';
+      avatar.style.transform = 'translate3d(0,' + (y * 0.18) + 'px,0) scale(' + (1 + y / 6000) + ')';
       hero.style.setProperty('--hero-fade', String(Math.max(0, 1 - y / (window.innerHeight * 0.8))));
     }
   }
