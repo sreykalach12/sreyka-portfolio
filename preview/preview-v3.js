@@ -143,6 +143,22 @@
   });
   $('year').textContent = new Date().getFullYear();
 
+  // copy email to the clipboard, with a short "Copied!" confirmation
+  var copyBtn = $('copy-email');
+  copyBtn.addEventListener('click', function () {
+    var email = copyBtn.getAttribute('data-email');
+    var done = function () {
+      copyBtn.textContent = 'Copied!';
+      copyBtn.classList.add('is-copied');
+      setTimeout(function () { copyBtn.textContent = 'Copy email'; copyBtn.classList.remove('is-copied'); }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(done, function () { window.prompt('Copy my email:', email); });
+    } else {
+      window.prompt('Copy my email:', email);
+    }
+  });
+
   /* ---------- side menu + back-to-top: both follow the scroll ---------- */
   var links = Array.prototype.slice.call(document.querySelectorAll('.rail-link'));
   var sections = links.map(function (l) { return $(l.getAttribute('data-section')); });
@@ -190,7 +206,7 @@
   requestAnimationFrame(function () { document.documentElement.classList.add('hero-ready'); });
 
   /* ---------- about: chapters follow the scroll both ways ---------- */
-  var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
+  var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter, .cv-card'));
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     chapters.forEach(function (c) { c.classList.add('chapter--anim'); c.setAttribute('data-from', 'below'); });
     var cio = new IntersectionObserver(function (entries) {
@@ -199,7 +215,7 @@
         e.target.setAttribute('data-from', below ? 'below' : 'above');
         e.target.classList.toggle('is-in', e.isIntersecting);
       });
-    }, { threshold: 0.25 });
+    }, { threshold: 0, rootMargin: '-8% 0px -8% 0px' });
     chapters.forEach(function (c) { cio.observe(c); });
   }
 
@@ -210,7 +226,7 @@
         if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
       });
     }, { rootMargin: '0px 0px -8% 0px' });
-    document.querySelectorAll('.section-head, .project, .cv-card, .cv-item, .about-photo, .contact-text, .contact-img, .work-more').forEach(function (n) {
+    document.querySelectorAll('.section-head, .project, .about-photo, .contact, .work-more').forEach(function (n) {
       n.classList.add('reveal');
       io.observe(n);
     });

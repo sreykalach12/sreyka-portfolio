@@ -477,3 +477,56 @@ a.cv-place { color: var(--sky); text-decoration-color: rgba(47,149,232,0.4); }
 @media (prefers-reduced-motion: reduce) {
   .section-head.reveal .eyebrow > span, .section-head.reveal .section-title, .section-head.reveal .filters { transform: none; opacity: 1; clip-path: none; }
 }
+
+
+/* =================================================================
+   ROUND 8
+   ================================================================= */
+/* section labels: plain text now (no black tab box) */
+.section-head .eyebrow > span, .contact .eyebrow > span {
+  height: auto; padding: 0; background: none; color: var(--muted); border-radius: 0; box-shadow: none;
+  font-size: 12px; letter-spacing: 0.14em;
+}
+.section-head .eyebrow > span::after, .contact .eyebrow > span::after { content: none; }
+.section-head .eyebrow > span::first-letter { color: var(--sky); }
+
+/* About: tighter story parts; the CV continues in the same scrolling column */
+.chapter { min-height: 0; padding: 7svh 0; }
+.story-col { min-width: 0; }
+.story-col .cv { grid-template-columns: 1fr; gap: 48px; margin-top: 6svh; padding-bottom: 8svh; }
+.story-col .cv-card--wide { margin-top: 0; }
+.story-col .cv-item { grid-template-columns: 130px 1fr; }
+.story-col .skills { grid-template-columns: 1fr; gap: 18px; }
+
+/* Contact: centred, no illustration */
+.contact {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px;
+  padding: clamp(40px, 8vw, 96px) 0 clamp(24px, 4vw, 48px);
+}
+.contact .eyebrow { width: auto; }
+.contact-title {
+  font-size: clamp(48px, 9vw, 132px); line-height: 0.95; letter-spacing: -0.045em;
+  background: none; color: var(--ink); max-width: 12ch;
+}
+.contact-title-accent { color: var(--sky); }
+.contact-note { max-width: 40ch; margin: 0 auto; }
+.contact-mail { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 6px; }
+.copy-btn.is-copied { background: var(--sky); color: #FFFFFF; box-shadow: none; }
+.socials { justify-content: center; margin-top: 4px; }
+.contact-meta { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+.contact.reveal { transform: translateY(40px); }
+.contact.reveal.is-in { transform: none; }
+
+@media (max-width: 700px) {
+  .chapter { padding: 20px 0; }
+  .story-col .cv-item { grid-template-columns: 1fr; }
+  .contact-mail { width: 100%; }
+  .contact-mail .btn { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 700px) {
+  .about { grid-template-columns: 1fr; }
+  .story-col .skills { gap: 14px; }
+}
+
+@media (max-width: 700px) { .footer { flex-direction: column; gap: 6px; align-items: center; text-align: center; } }
