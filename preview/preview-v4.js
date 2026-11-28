@@ -123,8 +123,9 @@
     close.innerHTML = '<span aria-hidden="true">←</span> Back to work';
     close.className = 'pd-close';
     close.addEventListener('click', function () { closeProject(true); });
-    var oldClose = pd.querySelector('.pd-close'); if (oldClose) oldClose.remove();
-    pd.insertBefore(close, pdSheet);
+    var oldClose = pd.querySelector('.pd-bar'); if (oldClose) oldClose.remove();
+    var bar = el('div', 'pd-bar'); bar.appendChild(close);
+    pdSheet.appendChild(bar);
 
     var hero = el('div', 'pd-hero');
     hero.style.backgroundImage = 'url("' + ROOT + p.coverImage + '")';
