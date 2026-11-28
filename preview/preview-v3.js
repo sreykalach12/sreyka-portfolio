@@ -72,6 +72,7 @@
       // opens the project's detail page on the live site
       var a = el('a', 'card project');
       a.href = ROOT + '#work/' + p.id;
+      a.style.setProperty('--i', String(i % 2));
       var img = el('div', 'project-img');
       img.style.backgroundImage = 'url("' + ROOT + p.coverImage + '")';
       img.appendChild(el('span', 'chip chip--glass project-cat', p.category));
@@ -106,6 +107,7 @@
   function cvList(id, items) {
     items.forEach(function (it) {
       var li = el('li', 'cv-item');
+      li.style.setProperty('--i', String($(id).children.length));
       li.appendChild(el('span', 'cv-years', it.years));
       var body = el('div');
       body.appendChild(el('div', 'cv-title', it.title));
@@ -177,7 +179,6 @@
     // hero parallax: the big name drifts up slower, the avatar slightly faster
     if (!reduceMotion && y < window.innerHeight * 1.2) {
       avatar.style.transform = 'translate3d(0,' + (y * 0.18) + 'px,0) scale(' + (1 + y / 6000) + ')';
-      hero.style.setProperty('--hero-fade', String(Math.max(0, 1 - y / (window.innerHeight * 0.8))));
     }
   }
   function requestTick() { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }
@@ -188,6 +189,20 @@
   // hero entrance animation starts once the page has painted
   requestAnimationFrame(function () { document.documentElement.classList.add('hero-ready'); });
 
+  /* ---------- about: chapters follow the scroll both ways ---------- */
+  var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    chapters.forEach(function (c) { c.classList.add('chapter--anim'); c.setAttribute('data-from', 'below'); });
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var below = e.boundingClientRect.top > 0;   // is it entering/leaving at the bottom edge?
+        e.target.setAttribute('data-from', below ? 'below' : 'above');
+        e.target.classList.toggle('is-in', e.isIntersecting);
+      });
+    }, { threshold: 0.25 });
+    chapters.forEach(function (c) { cio.observe(c); });
+  }
+
   /* ---------- gentle reveal on scroll ---------- */
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     var io = new IntersectionObserver(function (entries) {
@@ -195,7 +210,7 @@
         if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
       });
     }, { rootMargin: '0px 0px -8% 0px' });
-    document.querySelectorAll('.section-head, .project, .chapter, .cv-card, .about-photo, .contact').forEach(function (n) {
+    document.querySelectorAll('.section-head, .project, .cv-card, .cv-item, .about-photo, .contact-text, .contact-img, .work-more').forEach(function (n) {
       n.classList.add('reveal');
       io.observe(n);
     });

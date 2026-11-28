@@ -373,7 +373,107 @@ a.cv-place { text-decoration: underline; text-underline-offset: 3px; }
    ================================================================= */
 body {
   background-color: var(--page);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88' viewBox='0 0 88 88'%3E%3Cg fill='none' stroke='%2317181A'%3E%3Cpath d='M0 .5H88M.5 0V88' stroke-opacity='.012'/%3E%3Cpath d='M-5 .5H6M.5-5V6M82 .5H93M88.5-5V6M-5 88.5H6M.5 83V94M82 88.5H93M88.5 83V94' stroke-opacity='.028'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88' viewBox='0 0 88 88'%3E%3Cg fill='none' stroke='%2317181A'%3E%3Cpath d='M0 .5H88M.5 0V88' stroke-opacity='.024'/%3E%3Cpath d='M-5 .5H6M.5-5V6M82 .5H93M88.5-5V6M-5 88.5H6M.5 83V94M82 88.5H93M88.5 83V94' stroke-opacity='.056'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 88px 88px;
   background-position: center top;
+}
+
+
+/* =================================================================
+   ROUND 7
+   ================================================================= */
+:root { --sky: #2F95E8; --sky-soft: #E4F2FD; }
+::selection { background: #CDE6FB; }
+
+/* ---------- hero: video only, filling the whole section ---------- */
+.hero { padding: 0; background: #ECECEE; }
+.hero-video {
+  position: absolute; inset: 0; height: auto; aspect-ratio: auto; max-width: none;
+}
+.hero-video video {
+  object-position: 50% 20%;
+  /* only the bottom edge fades, into the page */
+  -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 78%, transparent 100%);
+  -webkit-mask-composite: source-over; mask-composite: add;
+}
+.stickers { top: 8%; height: 80%; }
+@media (max-width: 700px) {
+  .hero { height: 72svh; min-height: 480px; }
+  .hero-video { height: auto; width: auto; }
+  .stickers { top: 6%; height: 84%; }
+}
+
+/* ---------- boxes only for the work showcase ---------- */
+.cv-card { background: none; box-shadow: none; padding: 24px 0 0; border-top: 2px solid var(--ink); border-radius: 0; }
+.cv { gap: 56px; }
+.cv-card--wide { margin-top: 8px; }
+.contact { background: none; box-shadow: none; border-radius: 0; min-height: 0; }
+.contact-text { padding: 0; }
+.contact-img { mix-blend-mode: multiply; border-radius: 0; max-height: 520px; }
+
+/* ---------- about: full-height portrait stays put while the story scrolls ---------- */
+.about { align-items: start; grid-template-columns: 0.9fr 1.1fr; }
+.about-photo-wrap {
+  position: sticky; top: 0; height: 100svh; display: flex; align-items: center;
+  /* sticky makes its own layer, so the blend goes here: the photo's white
+     backdrop melts into the page */
+  mix-blend-mode: multiply;
+}
+.about-photo { width: 100%; height: calc(100svh - 64px); aspect-ratio: auto; }
+.about-photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%;
+}
+.story { gap: 0; }
+.chapter { min-height: 62svh; align-items: start; align-content: center; }
+.chapter-num { padding-top: 14px; }
+.chapter-num { color: var(--sky); font-size: 14px; }
+.chapter-title { font-size: clamp(26px, 3vw, 40px); }
+.chapter-text { font-size: clamp(16px, 1.4vw, 19px); }
+/* rises in from below when scrolling down, drops in from above when scrolling up */
+.chapter--anim { opacity: 0; transition: opacity .6s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.chapter--anim[data-from="below"] { transform: translateY(70px); }
+.chapter--anim[data-from="above"] { transform: translateY(-70px); }
+.chapter--anim.is-in { opacity: 1; transform: none; }
+
+/* ---------- scroll animations for every section ---------- */
+.section-head.reveal .eyebrow > span { transform: translateX(-24px); opacity: 0; transition: transform .6s cubic-bezier(.2,.7,.2,1), opacity .6s ease; }
+.section-head.reveal .section-title { clip-path: inset(0 0 100% 0); transform: translateY(40px); transition: clip-path .8s .1s cubic-bezier(.2,.7,.2,1), transform .8s .1s cubic-bezier(.2,.7,.2,1); }
+.section-head.reveal .filters { opacity: 0; transition: opacity .6s .35s ease; }
+.section-head.is-in .eyebrow > span, .section-head.is-in .filters { transform: none; opacity: 1; }
+.section-head.is-in .section-title { clip-path: inset(0 0 -20% 0); transform: none; }
+.section-head.reveal { opacity: 1; transform: none; }
+.project.reveal { transform: translateY(40px) scale(0.97); transition-delay: calc(var(--i, 0) * 120ms); }
+.project.reveal.is-in { transform: none; }
+.cv-item.reveal { transform: translateX(-20px); transition-delay: calc(var(--i, 0) * 80ms); }
+.cv-item.reveal.is-in { transform: none; }
+.about-photo.reveal { transform: scale(0.94); }
+.about-photo.reveal.is-in { transform: none; }
+.contact-text.reveal { transform: translateY(50px); }
+.contact-img.reveal { transform: translateX(60px); transition-delay: .15s; }
+.contact-text.reveal.is-in, .contact-img.reveal.is-in { transform: none; }
+
+/* ---------- small touches of sky blue ---------- */
+.rail-fill { background: var(--sky); }
+.ring-fill { stroke: var(--sky); }
+.to-top:hover { background: var(--sky); color: #FFFFFF; }
+.filter:hover { color: var(--sky); }
+.project:hover .project-title { color: var(--sky); }
+.project-title { transition: color .2s ease; }
+a.cv-place { color: var(--sky); text-decoration-color: rgba(47,149,232,0.4); }
+.social:hover { background: var(--sky-soft); color: var(--sky); }
+.btn--dark:hover { background: var(--sky); }
+.btn:not(.btn--dark):hover { background: var(--sky); color: #FFFFFF; }
+.eyebrow > span { box-shadow: inset 3px 0 0 var(--sky); }
+.contact-title { background: linear-gradient(90deg, var(--ink) 55%, var(--sky)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- phones ---------- */
+@media (max-width: 700px) {
+  .about-photo-wrap { position: static; height: auto; }
+  .about-photo { height: 60svh; }
+  .chapter { min-height: 0; padding: 22px 0; }
+  .cv { gap: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-head.reveal .eyebrow > span, .section-head.reveal .section-title, .section-head.reveal .filters { transform: none; opacity: 1; clip-path: none; }
 }
