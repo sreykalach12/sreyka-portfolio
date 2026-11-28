@@ -686,3 +686,20 @@ html.pd-lock, html.pd-lock body { overflow: hidden; }
 
 .story-col .cv-item { grid-template-columns: 170px 1fr; }
 @media (max-width: 700px) { .story-col .cv-item { grid-template-columns: 1fr; } }
+
+/* ---------- round 10: drawer fixes ---------- */
+/* sheets reach well past the folder in front, so a lifted folder never shows a gap */
+.dfolder-sheet { height: calc(var(--band) + var(--peek) + var(--tab-h) + 60px); }
+/* no floating: the hovered folder stays put, only the ones in front slide down */
+@media (hover: hover) {
+  .dfolder:hover .dfolder-sheet, .dfolder:focus-visible .dfolder-sheet { transform: none; }
+  .dfolder:hover ~ .cabinet-shelf, .dfolder:focus-visible ~ .cabinet-shelf { transform: translateY(var(--peek)); }
+}
+/* simple rounded base instead of the drawer handle */
+.cabinet-shelf {
+  height: 28px; box-shadow: none; border-radius: 0 0 var(--radius) var(--radius);
+  transition: transform .55s cubic-bezier(.2,.7,.2,1);
+}
+.cabinet-shelf::after { content: none; }
+.cabinet { padding-top: 8px; }
+.cabinet { border-radius: 0 0 var(--radius) var(--radius); }
