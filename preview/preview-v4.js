@@ -121,8 +121,10 @@
     var close = el('button', 'pd-close');
     close.type = 'button';
     close.innerHTML = '<span aria-hidden="true">←</span> Back to work';
+    close.className = 'pd-close';
     close.addEventListener('click', function () { closeProject(true); });
-    pdSheet.appendChild(close);
+    var oldClose = pd.querySelector('.pd-close'); if (oldClose) oldClose.remove();
+    pd.insertBefore(close, pdSheet);
 
     var hero = el('div', 'pd-hero');
     hero.style.backgroundImage = 'url("' + ROOT + p.coverImage + '")';
@@ -163,7 +165,7 @@
       var q = list[(i + d[0] + list.length) % list.length];
       var b = el('button', 'pd-next'); b.type = 'button';
       b.appendChild(el('small', null, d[1])); b.appendChild(el('strong', null, q.title));
-      b.addEventListener('click', function () { openProject(q.id, true); pd.scrollTop = 0; });
+      b.addEventListener('click', function () { openProject(q.id, true); pdSheet.scrollTop = 0; });
       pager.appendChild(b);
     });
     body.appendChild(pager);
@@ -172,7 +174,7 @@
     var wasHidden = pd.hidden;
     pd.hidden = false;
     document.documentElement.classList.add('pd-lock');
-    if (wasHidden) { pd.scrollTop = 0; requestAnimationFrame(function () { requestAnimationFrame(function () { pd.classList.add('is-open'); }); }); }
+    if (wasHidden) { pdSheet.scrollTop = 0; requestAnimationFrame(function () { requestAnimationFrame(function () { pd.classList.add('is-open'); }); }); }
     if (push && location.hash !== '#work/' + id) history.pushState({ project: id }, '', '#work/' + id);
     close.focus({ preventScroll: true });
   }
@@ -188,6 +190,7 @@
     var m = location.hash.match(/^#work\/(.+)$/);
     if (m) openProject(decodeURIComponent(m[1]), false); else closeProject(false);
   }
+  pd.addEventListener('click', function (e) { if (e.target === pd) closeProject(true); });
   window.addEventListener('popstate', fromHash);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !pd.hidden) closeProject(true); });
   if (/^#work\//.test(location.hash)) fromHash();
@@ -293,7 +296,7 @@
 
     // hero parallax: the big name drifts up slower, the avatar slightly faster
     if (!reduceMotion && y < window.innerHeight * 1.2) {
-      avatar.style.transform = 'translate3d(0,' + (y * 0.18) + 'px,0) scale(' + (1 + y / 6000) + ')';
+      avatar.style.transform = 'translate3d(0,' + (y * -0.12) + 'px,0)';  // drifts up, so its soft bottom fade stays visible
     }
   }
   function requestTick() { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }
