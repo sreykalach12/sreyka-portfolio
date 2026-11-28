@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="preview-v3.css">
+<link rel="stylesheet" href="preview-v4.css">
 </head>
 <body>
 
@@ -61,8 +61,8 @@
       <h2 id="work-title" class="section-title">Selected work</h2>
       <div class="filters" id="work-filters" role="group" aria-label="Filter projects"></div>
     </div>
-    <div class="work-grid" id="work-grid"></div>
-    <div class="work-more"><button type="button" class="btn" id="work-more">Show all projects</button></div>
+    <!-- folder drawer: hover a folder to lift it and peek at the project, click to open it -->
+    <div class="cabinet" id="cabinet"></div>
   </section>
 
   <!-- ============ 3. ABOUT ============ -->
@@ -79,7 +79,9 @@
       </div>
       <!-- right column scrolls past the sticky photo: the 4 story parts, then the CV -->
       <div class="story-col">
-        <div class="story" id="story"></div>
+        <div class="cv-card" data-title="My story">
+          <ol class="cv-list" id="story"></ol>
+        </div>
         <div class="cv">
           <div class="cv-card" data-title="Experience">
             <ol class="cv-list" id="experience"></ol>
@@ -116,12 +118,17 @@
 
 </main>
 
+<!-- full project view (opened from a folder; URL #work/<id>) -->
+<div class="pd" id="pd" role="dialog" aria-modal="true" aria-labelledby="pd-title" hidden>
+  <div class="pd-sheet" id="pd-sheet"></div>
+</div>
+
 <footer class="footer">
   <span>© <span id="year">2026</span> Sreyka Lach</span>
   <span>Made with care in Phnom Penh</span>
 </footer>
 
 <script src="../js/work-projects-v7.js"></script>
-<script src="preview-v3.js"></script>
+<script src="preview-v4.js"></script>
 </body>
 </html>

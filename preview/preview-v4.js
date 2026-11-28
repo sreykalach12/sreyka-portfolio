@@ -6,7 +6,6 @@
 
   var ROOT = '../';
   var projects = window.WORK_PROJECTS || [];
-  var INITIAL_COUNT = 6;
 
   var story = [
     { title: 'The Spark', text: "Before code, there was the pencil. I grew up bound to sketchbooks, digital art, and the quiet thrill of creating something from nothing. When it came time to choose a path, logic won, and I chose technology, but the creative drive never left. It was simply waiting." },
@@ -48,7 +47,6 @@
 
   /* ---------- work grid with category filters ---------- */
   var filter = 'All';
-  var expanded = false;
   var cats = ['All'];
   projects.forEach(function (p) { if (cats.indexOf(p.category) < 0) cats.push(p.category); });
   cats.forEach(function (c) {
@@ -63,46 +61,147 @@
     $('work-filters').appendChild(b);
   });
 
-  function renderWork() {
-    var grid = $('work-grid');
-    grid.innerHTML = '';
-    var list = projects.filter(function (p) { return filter === 'All' || p.category === filter; });
-    var shown = expanded ? list : list.slice(0, INITIAL_COUNT);
-    shown.forEach(function (p, i) {
-      // opens the project's detail page on the live site
-      var a = el('a', 'card project');
-      a.href = ROOT + '#work/' + p.id;
-      a.style.setProperty('--i', String(i % 2));
-      var img = el('div', 'project-img');
-      img.style.backgroundImage = 'url("' + ROOT + p.coverImage + '")';
-      img.appendChild(el('span', 'chip chip--glass project-cat', p.category));
-      a.appendChild(img);
-      var meta = el('div', 'project-meta');
-      meta.appendChild(el('h3', 'project-title', p.title));
-      meta.appendChild(el('span', 'project-sub', [p.client, p.year].filter(Boolean).join(' · ')));
-      a.appendChild(meta);
-      grid.appendChild(a);
-    });
-    var more = $('work-more');
-    more.parentNode.hidden = list.length <= INITIAL_COUNT;
-    more.textContent = expanded ? 'Show fewer' : 'Show all ' + list.length + ' projects';
+  /* ---------- work: folder drawer ---------- */
+  var TAB_POS = [0, 1 / 3, 2 / 3, 1];
+  var cabinet = $('cabinet');
+  function currentList() {
+    return projects.filter(function (p) { return filter === 'All' || p.category === filter; });
   }
-  $('work-more').addEventListener('click', function () {
-    expanded = !expanded;
-    renderWork();
-    if (!expanded) $('work').scrollIntoView({ behavior: 'smooth' });
-  });
+  function renderWork() {
+    cabinet.innerHTML = '';
+    currentList().forEach(function (p, i) {
+      var f = el('a', 'dfolder');
+      f.href = '#work/' + p.id;
+      f.style.setProperty('--p', String(TAB_POS[i % 4]));
+      f.style.zIndex = String(i + 1);
+      f.setAttribute('aria-label', p.title + ', ' + p.category + '. Open project');
+      var sheet = el('div', 'dfolder-sheet');
+      var tab = el('div', 'dfolder-tab');
+      tab.appendChild(el('span', 'dfolder-title', p.title));
+      tab.appendChild(el('span', 'dfolder-cat', p.category));
+      sheet.appendChild(tab);
+      // what shows when the folder is lifted
+      var body = el('div', 'dfolder-body');
+      var img = el('div', 'dfolder-img');
+      img.style.backgroundImage = 'url("' + ROOT + p.coverImage + '")';
+      body.appendChild(img);
+      var info = el('div', 'dfolder-info');
+      info.appendChild(el('span', 'dfolder-meta', [p.client, p.year].filter(Boolean).join(' · ')));
+      info.appendChild(el('p', 'dfolder-text', p.overview || ''));
+      info.appendChild(el('span', 'dfolder-open', 'Open project →'));
+      body.appendChild(info);
+      sheet.appendChild(body);
+      f.appendChild(sheet);
+      f.addEventListener('click', function (e) { e.preventDefault(); openProject(p.id, true); });
+      cabinet.appendChild(f);
+    });
+    cabinet.appendChild(el('div', 'cabinet-shelf'));
+  }
   renderWork();
 
+  /* ---------- full project view ---------- */
+  var pd = $('pd'), pdSheet = $('pd-sheet');
+  var toolIcons = window.WORK_TOOL_ICONS || {};
+  var lastFocus = null;
+  function section(title, text) {
+    if (!text) return null;
+    var d = el('div', 'pd-section');
+    d.appendChild(el('h3', 'pd-h', title));
+    d.appendChild(el('p', 'pd-text', text));
+    return d;
+  }
+  function openProject(id, push) {
+    var list = projects;
+    var i = -1;
+    list.forEach(function (p, k) { if (p.id === id) i = k; });
+    if (i < 0) return;
+    var p = list[i];
+    if (pd.hidden) lastFocus = document.activeElement;
+    pdSheet.innerHTML = '';
+    var close = el('button', 'pd-close');
+    close.type = 'button';
+    close.innerHTML = '<span aria-hidden="true">←</span> Back to work';
+    close.addEventListener('click', function () { closeProject(true); });
+    pdSheet.appendChild(close);
+
+    var hero = el('div', 'pd-hero');
+    hero.style.backgroundImage = 'url("' + ROOT + p.coverImage + '")';
+    pdSheet.appendChild(hero);
+
+    var body = el('div', 'pd-body');
+    body.appendChild(el('span', 'pd-cat', p.category));
+    var h = el('h2', 'pd-title', p.title); h.id = 'pd-title';
+    body.appendChild(h);
+    var meta = el('dl', 'pd-meta');
+    [['Client', p.client], ['Role', p.role], ['Year', p.year], ['Category', p.category]].forEach(function (m) {
+      if (!m[1]) return;
+      var d = el('div'); d.appendChild(el('dt', null, m[0])); d.appendChild(el('dd', null, m[1])); meta.appendChild(d);
+    });
+    body.appendChild(meta);
+    if (p.overview) body.appendChild(el('p', 'pd-lead', p.overview));
+    var two = el('div', 'pd-two');
+    [section('The problem', p.problem), section('The process', p.process)].forEach(function (x) { if (x) two.appendChild(x); });
+    body.appendChild(two);
+    var shots = el('div', 'pd-shots');
+    (p.detailImages || []).forEach(function (src) {
+      var im = el('img'); im.src = ROOT + src; im.alt = p.title + ' screen'; im.loading = 'lazy'; shots.appendChild(im);
+    });
+    if (shots.children.length) body.appendChild(shots);
+    var out = section('The outcome', p.outcome); if (out) body.appendChild(out);
+    if (p.tools && p.tools.length) {
+      var tl = el('div', 'pd-tools');
+      p.tools.forEach(function (t) {
+        var c = el('span', 'chip pd-tool');
+        c.innerHTML = (toolIcons[t] || '') + '<span></span>';
+        c.lastChild.textContent = t;
+        tl.appendChild(c);
+      });
+      body.appendChild(tl);
+    }
+    var pager = el('nav', 'pd-pager'); pager.setAttribute('aria-label', 'More projects');
+    [[-1, '← Previous'], [1, 'Next →']].forEach(function (d) {
+      var q = list[(i + d[0] + list.length) % list.length];
+      var b = el('button', 'pd-next'); b.type = 'button';
+      b.appendChild(el('small', null, d[1])); b.appendChild(el('strong', null, q.title));
+      b.addEventListener('click', function () { openProject(q.id, true); pd.scrollTop = 0; });
+      pager.appendChild(b);
+    });
+    body.appendChild(pager);
+    pdSheet.appendChild(body);
+
+    var wasHidden = pd.hidden;
+    pd.hidden = false;
+    document.documentElement.classList.add('pd-lock');
+    if (wasHidden) { pd.scrollTop = 0; requestAnimationFrame(function () { requestAnimationFrame(function () { pd.classList.add('is-open'); }); }); }
+    if (push && location.hash !== '#work/' + id) history.pushState({ project: id }, '', '#work/' + id);
+    close.focus({ preventScroll: true });
+  }
+  function closeProject(push) {
+    if (pd.hidden) return;
+    pd.classList.remove('is-open');
+    document.documentElement.classList.remove('pd-lock');
+    setTimeout(function () { if (!pd.classList.contains('is-open')) { pd.hidden = true; pdSheet.innerHTML = ''; } }, 350);
+    if (push && /^#work\//.test(location.hash)) history.pushState({}, '', location.pathname + location.search + '#work');
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  function fromHash() {
+    var m = location.hash.match(/^#work\/(.+)$/);
+    if (m) openProject(decodeURIComponent(m[1]), false); else closeProject(false);
+  }
+  window.addEventListener('popstate', fromHash);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !pd.hidden) closeProject(true); });
+  if (/^#work\//.test(location.hash)) fromHash();
+
   /* ---------- about ---------- */
+  // story parts use the same row layout as Experience / Education
   story.forEach(function (s, i) {
-    var item = el('article', 'chapter');
-    item.appendChild(el('span', 'chapter-num', String(i + 1).padStart(2, '0')));
+    var li = el('li', 'cv-item');
+    li.appendChild(el('span', 'cv-years cv-num', String(i + 1).padStart(2, '0')));
     var body = el('div');
-    body.appendChild(el('h3', 'chapter-title', s.title));
-    body.appendChild(el('p', 'chapter-text', s.text));
-    item.appendChild(body);
-    $('story').appendChild(item);
+    body.appendChild(el('div', 'cv-title', s.title));
+    body.appendChild(el('p', 'cv-place', s.text));
+    li.appendChild(body);
+    $('story').appendChild(li);
   });
   function cvList(id, items) {
     items.forEach(function (it) {
@@ -206,7 +305,7 @@
   requestAnimationFrame(function () { document.documentElement.classList.add('hero-ready'); });
 
   /* ---------- about: chapters follow the scroll both ways ---------- */
-  var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter, .cv-card'));
+  var chapters = Array.prototype.slice.call(document.querySelectorAll('.cv-item, .cv-card--wide'));
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     chapters.forEach(function (c) { c.classList.add('chapter--anim'); c.setAttribute('data-from', 'below'); });
     var cio = new IntersectionObserver(function (entries) {
@@ -226,13 +325,10 @@
         if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
       });
     }, { rootMargin: '0px 0px -8% 0px' });
-    document.querySelectorAll('.section-head, .project, .about-photo, .contact, .work-more').forEach(function (n) {
+    document.querySelectorAll('.section-head, .cabinet, .about-photo, .contact').forEach(function (n) {
       n.classList.add('reveal');
       io.observe(n);
     });
-    // cards added later by the filters
-    new MutationObserver(function () {
-      document.querySelectorAll('.project:not(.reveal)').forEach(function (n) { n.classList.add('reveal', 'is-in'); });
-    }).observe($('work-grid'), { childList: true });
+
   }
 })();
